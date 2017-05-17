@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "XTFMDB.h"
+#import "XTReq.h"
 
 @interface AppDelegate ()
 
@@ -15,8 +17,12 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     // Override point for customization after application launch.
+    [[XTFMDBBase sharedInstance] configureDB:@"teason"] ;
+    [XTResponseDBModel xt_createTable] ;
+    
     return YES;
 }
 

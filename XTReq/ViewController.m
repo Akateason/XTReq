@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "XTReq.h"
 
 @interface ViewController ()
 
@@ -14,9 +15,36 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    int random = arc4random() % 100 ;
+    NSString *urlStr = [NSString stringWithFormat:@"https://api.douban.com/v2/book/%@",@(1220562+random)] ;
+    
+    
+    //1
+    [XTRequest GETWithUrl:urlStr
+               parameters:nil
+                  success:^(id json) {
+                      NSLog(@"async") ;
+                  } fail:^{
+                      
+                  }] ;
+    
+    //2
+    id jsonObj = [XTRequest getJsonObjectWithURLstr:urlStr
+                                              param:nil
+                                               mode:XTRequestMode_GET_MODE] ;
+    NSLog(@"sync") ;
+    
+    //3
+    [XTCacheRequest cacheGET:urlStr
+                  parameters:nil
+                  completion:^(id json) {
+                      NSLog(@"cache") ;
+                  }] ;
 }
 
 
