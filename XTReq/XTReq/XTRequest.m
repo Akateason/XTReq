@@ -8,8 +8,6 @@
 #import "XTRequest.h"
 //#import "UrlRequestHeader.h"
 #import "AFNetworking.h"
-#import "ASIFormDataRequest.h"
-#import "ASIHTTPRequest.h"
 #import "SVProgressHUD.h"
 #import "YYModel.h"
 //#import "XTJson.h"
