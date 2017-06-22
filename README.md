@@ -1,5 +1,5 @@
 # XTReq
-* GET/POST同步异步请求
+* GET/POST
 * 请求缓存
 
 
@@ -68,25 +68,6 @@ XTRequest
          parameters:(NSDictionary *)dict
         taskSuccess:(void (^)(NSURLSessionDataTask * task ,id json))success
                fail:(void (^)())fail ;
-
-//  sync
-+ (XTReqResonse *)getResultWithURLstr:(NSString *)urlstr
-                                  param:(NSDictionary *)dict
-                                   mode:(XTRequestMode)mode ;
-
-+ (XTReqResonse *)getResultWithURLstr:(NSString *)urlstr
-                                  param:(NSDictionary *)dict
-                                   mode:(XTRequestMode)mode
-                                    hud:(BOOL)hud ;
-
-+ (id)getJsonObjectWithURLstr:(NSString *)urlstr
-                        param:(NSDictionary *)dict
-                         mode:(XTRequestMode)mode ;
-
-+ (id)getJsonObjectWithURLstr:(NSString *)urlstr
-                        param:(NSDictionary *)dict
-                         mode:(XTRequestMode)mode
-                          hud:(BOOL)hud ;
 
 @end
 

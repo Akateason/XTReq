@@ -33,11 +33,8 @@
                       
                   }] ;
     
-    //2
-    id jsonObj = [XTRequest getJsonObjectWithURLstr:urlStr
-                                              param:nil
-                                               mode:XTRequestMode_GET_MODE] ;
-    NSLog(@"sync") ;
+
+    
     
     //3
     [XTCacheRequest cacheGET:urlStr
