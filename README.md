@@ -6,7 +6,6 @@
 cocoapods
 ```
 pod 'Masonry'
-pod 'ASIHTTPRequest'
 pod 'AFNetworking'
 pod ‘YYModel’
 pod ‘FMDB’
@@ -69,6 +68,16 @@ XTRequest
         taskSuccess:(void (^)(NSURLSessionDataTask * task ,id json))success
                fail:(void (^)())fail ;
 
+/**
+sync
+Must be in the asynchronous thread , or the main thread will getting stuck .
+*/
++ (id)syncGetWithUrl:(NSString *)url
+parameters:(NSDictionary *)dict ;
+
++ (id)syncPostWithUrl:(NSString *)url
+parameters:(NSDictionary *)dict ;
+
 @end
 
 ```
@@ -117,3 +126,6 @@ XTCacheRequest
 @end
 
 ```
+
+
+
