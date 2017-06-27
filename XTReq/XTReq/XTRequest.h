@@ -16,11 +16,6 @@
 // base URL
 static NSString *const kBaseURL = @"http://www.akateason.top" ;
 
-
-
-
-
-
 @interface XTRequest : NSObject
 
 // set URL string with base url
@@ -34,7 +29,6 @@ static NSString *const kBaseURL = @"http://www.akateason.top" ;
 // status
 + (void)netWorkStatus ;
 + (void)netWorkStatus:(void (^)(NSInteger status))block ;
-
 
 /**
  async
@@ -73,6 +67,12 @@ static NSString *const kBaseURL = @"http://www.akateason.top" ;
         taskSuccess:(void (^)(NSURLSessionDataTask * task ,id json))success
                fail:(void (^)())fail ;
 
++ (void)POSTWithUrl:(NSString *)url
+             header:(NSDictionary *)header
+                hud:(BOOL)hud
+         parameters:(NSDictionary *)dict
+        taskSuccess:(void (^)(NSURLSessionDataTask * task ,id json))success
+               fail:(void (^)())fail ;
 
 /**
  sync
@@ -84,3 +84,8 @@ static NSString *const kBaseURL = @"http://www.akateason.top" ;
 + (id)syncPostWithUrl:(NSString *)url
            parameters:(NSDictionary *)dict ;
 @end
+
+
+
+
+
