@@ -6,9 +6,8 @@
 //  Copyright © 2015年 teason. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "XTReqSessionManager.h"
 @class XTReqResonse , NSURLSessionDataTask ;
-
 
 // get PARAM
 #define XT_GET_PARAM                         NSMutableDictionary *param = [XTRequest getParameters] ;
@@ -16,7 +15,7 @@
 // base URL
 static NSString *const kBaseURL = @"http://www.akateason.top" ;
 
-@interface XTRequest : NSObject
+@interface XTRequest : XTReqSessionManager
 
 // set URL string with base url
 + (NSString *)getFinalUrl:(NSString *)strPartOfUrl ;
