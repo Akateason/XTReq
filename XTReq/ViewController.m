@@ -32,17 +32,11 @@
 
 - (IBAction)syncAction:(id)sender
 {
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) ;
-    dispatch_async(queue, ^{
-
-        id result = [XTRequest syncGetWithUrl:kURLstr
-                                   parameters:nil] ;
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self showInfoInAlert:[result yy_modelToJSONString]] ;
-        }) ;
-        
-    }) ;
+    id result = [XTRequest syncWithReqMode:XTRequestMode_GET_MODE
+                                       url:kURLstr
+                                    header:nil
+                                parameters:nil] ;
+    [self showInfoInAlert:[result yy_modelToJSONString]] ;
 }
 
 - (IBAction)cachedAction:(id)sender

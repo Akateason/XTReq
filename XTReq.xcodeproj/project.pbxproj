@@ -25,6 +25,7 @@
 		8F785BDE1ECBDC6D005D5ECC /* XTFMDBBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BD91ECBDC6D005D5ECC /* XTFMDBBase.m */; };
 		8F785BE11ECBDE19005D5ECC /* NSDate+XTTick.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BE01ECBDE19005D5ECC /* NSDate+XTTick.m */; };
 		8F785BE41ECBDF76005D5ECC /* NSString+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BE31ECBDF76005D5ECC /* NSString+Extend.m */; };
+		8FD7A8DF1F162B6B001F40D8 /* XTJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD7A8DE1F162B6B001F40D8 /* XTJson.m */; };
 		BEEA1322E8065A0F82C0FA60 /* libPods-XTReq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEEC9E70B54B97213FAD3C3 /* libPods-XTReq.a */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,8 @@
 		8F785BE01ECBDE19005D5ECC /* NSDate+XTTick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+XTTick.m"; sourceTree = "<group>"; };
 		8F785BE21ECBDF76005D5ECC /* NSString+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extend.h"; sourceTree = "<group>"; };
 		8F785BE31ECBDF76005D5ECC /* NSString+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extend.m"; sourceTree = "<group>"; };
+		8FD7A8DD1F162B6B001F40D8 /* XTJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTJson.h; sourceTree = "<group>"; };
+		8FD7A8DE1F162B6B001F40D8 /* XTJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTJson.m; sourceTree = "<group>"; };
 		A6519CB82D2757CB09350DD2 /* Pods-XTReq.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XTReq.release.xcconfig"; path = "Pods/Target Support Files/Pods-XTReq/Pods-XTReq.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +114,7 @@
 		8F785BA51ECBDAE3005D5ECC /* XTReq */ = {
 			isa = PBXGroup;
 			children = (
+				8FD7A8DC1F162B6B001F40D8 /* XTJson */,
 				8F785BCE1ECBDC6D005D5ECC /* XTFMDB */,
 				8F785BBD1ECBDB07005D5ECC /* XTReq */,
 				8F785BA91ECBDAE3005D5ECC /* AppDelegate.h */,
@@ -172,6 +176,15 @@
 				8F785BD91ECBDC6D005D5ECC /* XTFMDBBase.m */,
 			);
 			path = XTFMDB;
+			sourceTree = "<group>";
+		};
+		8FD7A8DC1F162B6B001F40D8 /* XTJson */ = {
+			isa = PBXGroup;
+			children = (
+				8FD7A8DD1F162B6B001F40D8 /* XTJson.h */,
+				8FD7A8DE1F162B6B001F40D8 /* XTJson.m */,
+			);
+			path = XTJson;
 			sourceTree = "<group>";
 		};
 		F8584687362E298ADE067AEA /* Pods */ = {
@@ -315,6 +328,7 @@
 				8F785BAE1ECBDAE3005D5ECC /* ViewController.m in Sources */,
 				8F785BAB1ECBDAE3005D5ECC /* AppDelegate.m in Sources */,
 				8F785BDA1ECBDC6D005D5ECC /* NSObject+Reflection.m in Sources */,
+				8FD7A8DF1F162B6B001F40D8 /* XTJson.m in Sources */,
 				8F785BA81ECBDAE3005D5ECC /* main.m in Sources */,
 				8F785BDE1ECBDC6D005D5ECC /* XTFMDBBase.m in Sources */,
 				8F785BCC1ECBDB07005D5ECC /* XTRequest.m in Sources */,
