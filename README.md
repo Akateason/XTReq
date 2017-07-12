@@ -1,14 +1,16 @@
-# XTReq
+# XTReq 
 * GET/POST
+* 异步/同步
 * 请求缓存
+* 基于AFNetWorking
 
 
-cocoapods
+cocoapods 
 ```
-pod 'Masonry'
 pod 'AFNetworking'
 pod ‘YYModel’
 pod ‘FMDB’
+pod 'Masonry'
 pod 'SVProgressHUD'
 ```
 
@@ -70,13 +72,12 @@ XTRequest
 
 /**
 sync
-Must be in the asynchronous thread , or the main thread will getting stuck .
 */
-+ (id)syncGetWithUrl:(NSString *)url
-parameters:(NSDictionary *)dict ;
++ (id)syncWithReqMode:(XTRequestMode)mode
+                  url:(NSString *)url
+               header:(NSDictionary *)header
+           parameters:(NSDictionary *)dict ;
 
-+ (id)syncPostWithUrl:(NSString *)url
-parameters:(NSDictionary *)dict ;
 
 @end
 
