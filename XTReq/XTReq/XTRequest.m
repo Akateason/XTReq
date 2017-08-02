@@ -12,7 +12,9 @@
 #import "XTReqResonse.h"
 #import "XTReqSessionManager.h"
 
-NSString *const kStringBadNetwork = @"网络状况差" ;
+
+NSString *const kStringBadNetwork           = @"网络请求失败"   ;
+NSString *const kStringNetworkNotConnect    = @"网络连接不可用" ;
 
 @implementation XTRequest
 
@@ -27,27 +29,25 @@ NSString *const kStringBadNetwork = @"网络状况差" ;
 #pragma mark --
 #pragma mark - status
 
-+ (void)netWorkStatus
-{
-    [self netWorkStatus:nil] ;
-}
-
-+ (void)netWorkStatus:(void (^)(NSInteger status))block
-{
-    /**
-     AFNetworkReachabilityStatusUnknown          = -1,  // 未知
-     AFNetworkReachabilityStatusNotReachable     = 0,   // 无连接
-     AFNetworkReachabilityStatusReachableViaWWAN = 1,   // 3G 花钱
-     AFNetworkReachabilityStatusReachableViaWiFi = 2,   // WiFi
-     */
-    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        NSLog(@"网络状态 : %@", @(status)) ;
-        block(status) ;
-    }] ;
++ (void)startMonitor {
     [[AFNetworkReachabilityManager sharedManager] startMonitoring] ;
 }
 
++ (void)stopMonitor {
+    [[AFNetworkReachabilityManager sharedManager] stopMonitoring] ;
+}
 
++ (NSString *)netWorkStatus {
+    return [[AFNetworkReachabilityManager sharedManager] localizedNetworkReachabilityStatusString] ;
+}
+
++ (BOOL)isWifi {
+    return [[AFNetworkReachabilityManager sharedManager] isReachableViaWiFi] ;
+}
+
++ (BOOL)isReachable {
+    return [[AFNetworkReachabilityManager sharedManager] isReachable] ;
+}
 
 //  async
 #pragma mark --
@@ -200,10 +200,8 @@ NSString *const kStringBadNetwork = @"网络状况差" ;
 {
     if (hud) [SVProgressHUD show] ;
     
-    if (header)
-    {
-        for (NSString *key in header)
-        {
+    if (header) {
+        for (NSString *key in header) {
             NSString *value = header[key] ;
             [[XTReqSessionManager shareInstance].requestSerializer setValue:value
                                                          forHTTPHeaderField:key] ;
@@ -215,8 +213,7 @@ NSString *const kStringBadNetwork = @"网络状况差" ;
                                      progress:nil
                                       success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                           
-                                          if (success)
-                                          {
+                                          if (success) {
                                               if (hud) [SVProgressHUD dismiss] ;
                                               
                                               NSLog(@"url : %@ \nparam : %@",url,dict) ;
@@ -248,7 +245,7 @@ NSString *const kStringBadNetwork = @"网络状况差" ;
                fail:(void (^)())fail
 {
     if (hud) [SVProgressHUD show] ;
-
+    
     NSData *data = [rawBody dataUsingEncoding:NSUTF8StringEncoding] ;
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST"
                                                                                  URLString:url
