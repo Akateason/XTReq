@@ -44,9 +44,23 @@
     [XTCacheRequest cacheGET:kURLstr
                   parameters:nil
                   completion:^(id json) {
-                      NSLog(@"cache") ;
-                      [self showInfoInAlert:[json yy_modelToJSONString]] ;
-                  }] ;
+                     NSLog(@"cache") ;
+                     [self showInfoInAlert:[json yy_modelToJSONString]] ;
+     }] ;
+}
+
+- (IBAction)cacheJudgeResult:(id)sender {
+    [XTCacheRequest cacheGET:kURLstr
+                  parameters:nil
+                 judgeResult:^BOOL(id json) {
+                     if (!json) {
+                         return YES ; // 数据格式不对! 不缓存!
+                     }
+                     else {
+                         [self showInfoInAlert:[json yy_modelToJSONString]] ;
+                         return NO ;
+                     }
+                 }] ;
 }
 
 - (void)showInfoInAlert:(NSString *)info
