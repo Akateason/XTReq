@@ -45,7 +45,7 @@ typedef enum : NSUInteger {
  @param hud             BOOL
  @param cachePolicy     XTResponseCachePolicy
  @param timeoutIfNeed   int
- @param completion      void(^)(id json)            RESULT WILL BE CACHED IN ANY CASE .
+ @param completion      void(^)(id json)            RESPONSE WILL BE SAVED IN ANY CASE .
  */
 + (void)cacheGET:(NSString *)url
           header:(NSDictionary *)header
@@ -64,7 +64,7 @@ typedef enum : NSUInteger {
  @param hud             BOOL
  @param cachePolicy     XTResponseCachePolicy
  @param timeoutIfNeed   int
- @param completion      BOOL(^)(id json)            JUDGE RESULT ;  RETURN 'YES' IF RESULT NEEDN'T CACHE . RETURN 'NO' IF WILL CACHE .
+ @param completion      XTReqSaveJudgment(^)(id json)            JUDGE RESPONSE RESULT ;  RETURN 'XTReqSaveJudgment_NotSave' IF RESULT NEEDN'T CACHE . RETURN 'XTReqSaveJudgment_willSave' IF WILL SAVE .
  */
 + (void)cacheGET:(NSString *)url
           header:(NSDictionary *)header
@@ -125,7 +125,7 @@ typedef enum : NSUInteger {
  @param hud             BOOL
  @param cachePolicy     XTResponseCachePolicy
  @param timeoutIfNeed   int
- @param completion      BOOL(^)(id json)            JUDGE RESULT ;  RETURN 'YES' IF RESULT NEEDN'T CACHE . RETURN 'NO' IF WILL CACHE .
+ @param completion      XTReqSaveJudgment(^)(id json)            JUDGE RESPONSE RESULT ;  RETURN 'XTReqSaveJudgment_NotSave' IF RESULT NEEDN'T CACHE . RETURN 'XTReqSaveJudgment_willSave' IF WILL SAVE .
  */
 + (void)cachePOST:(NSString *)url
            header:(NSDictionary *)header
