@@ -10,7 +10,7 @@
 #import "FMDB.h"
 
 #define QUEUE                         [XTFMDBBase sharedInstance].queue
-
+#define DB                            [XTFMDBBase sharedInstance].database
 
 @interface XTFMDBBase : NSObject
 + (XTFMDBBase *)sharedInstance ;
@@ -21,6 +21,8 @@
 
 // config db in "- [(AppDelegate *) AppDidLaunchFinish]"
 - (void)configureDB:(NSString *)name ;
+- (void)configureDB:(NSString *)name
+               path:(NSString *)path ;
 
 - (BOOL)verify ;
 

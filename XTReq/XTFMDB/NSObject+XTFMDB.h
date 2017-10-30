@@ -20,6 +20,7 @@
 + (BOOL)xt_createTable ;
 
 #pragma mark - insert
+// insert or replace
 - (int)xt_insert ; // return lastRowId .
 + (BOOL)xt_insertList:(NSArray *)modelList ;
 
@@ -29,14 +30,23 @@
 
 #pragma mark - select
 + (NSArray *)xt_selectAll ;
-+ (NSArray *)xt_selectWhere:(NSString *)strWhere ; // param e.g. @" pkid = '1' "
 + (instancetype)xt_findFirstWhere:(NSString *)strWhere ;
 + (BOOL)xt_hasModelWhere:(NSString *)strWhere ;
++ (NSArray *)xt_selectWhere:(NSString *)strWhere ;
+
+// any sql
++ (NSArray *)xt_findWithSql:(NSString *)sql ;
++ (instancetype)xt_findFirstWithSql:(NSString *)sql ;
 
 #pragma mark - delete
 - (BOOL)xt_deleteModel ;
 + (BOOL)xt_deleteModelWhere:(NSString *)strWhere ; // param e.g. @" pkid = '1' "
 + (BOOL)xt_dropTable ;
+
+#pragma mark - alter
+
++ (BOOL)xt_alterAddColumn:(NSString *)name
+                     type:(NSString *)type ;
 
 #pragma mark - Constraints
 //props Sqlite Keywords

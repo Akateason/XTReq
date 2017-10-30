@@ -52,13 +52,13 @@
 - (IBAction)cacheJudgeResult:(id)sender {
     [XTCacheRequest cacheGET:kURLstr
                   parameters:nil
-                 judgeResult:^BOOL(id json) {
+                 judgeResult:^XTReqSaveJudgment(id json) {
                      if (!json) {
-                         return YES ; // 数据格式不对! 不缓存!
+                         return XTReqSaveJudgment_NotSave ; // 数据格式不对! 不缓存!
                      }
                      else {
                          [self showInfoInAlert:[json yy_modelToJSONString]] ;
-                         return NO ;
+                         return XTReqSaveJudgment_willSave ;
                      }
                  }] ;
 }
@@ -88,6 +88,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end
