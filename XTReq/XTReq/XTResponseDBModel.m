@@ -7,7 +7,7 @@
 //
 
 #import "XTResponseDBModel.h"
-#import <NSDate+XTFMDB_Tick.h>
+#import "NSDate+XTFMDB_Tick.h"
 #import "NSString+XTReq_Extend.h"
 
 @implementation XTResponseDBModel
