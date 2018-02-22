@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "XTReq"
-  s.version      = "0.0.2"
-  s.summary      = "XTReq"
+  s.version      = "0.0.3"
+  s.summary      = "XTReq."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -134,6 +134,9 @@ Pod::Spec.new do |s|
   
   s.dependency  "AFNetworking"
   s.dependency  "XTFMDB"
+  s.dependency  "YYModel"
+  s.dependency  "SVProgressHUD"
+
 
 
 
