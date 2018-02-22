@@ -7,9 +7,11 @@ target 'XTReq' do
 
 pod 'Masonry'
 pod 'AFNetworking'
-pod ‘YYModel’
-pod ‘FMDB’
+pod 'YYModel'
 pod 'SVProgressHUD'
+
+pod 'XTFMDB'
+
 
 
   # Pods for XTReq

@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  XTRequest
 //
-//  Created by TuTu on 15/11/12.
+//  Created by teason on 15/11/12.
 //  Copyright © 2015年 teason. All rights reserved.
 //
 
@@ -42,7 +42,7 @@ static NSString *const kBaseURL = @"http://top.akateason.top" ;
 
 + (void)stopMonitor  ;
 
-+ (NSString *)netWorkStatus ;
++ (NSString *)netWorkStatus ; // reachability
 
 + (BOOL)isWifi ;
 

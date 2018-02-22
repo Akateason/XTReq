@@ -7,13 +7,20 @@
 //
 
 #import "XTCacheRequest.h"
-#import "XTFMDB.h"
-#import "XTJson.h"
-#import "YYModel.h"
-#import "NSDate+XTTick.h"
-#import "NSString+Extend.h"
+#import <XTFMDB.h>
+#import <YYModel.h>
+#import <NSDate+XTFMDB_Tick.h>
+#import "NSString+XTReq_Extend.h"
 
 @implementation XTCacheRequest
+
+#pragma mark --
+
++ (void)configXTCacheReqWhenAppDidLaunchWithDBName:(NSString *)dbName {
+    [[XTFMDBBase sharedInstance] configureDB:dbName] ;
+    [XTResponseDBModel xt_createTable] ;
+}
+
 
 #pragma mark --
 
@@ -133,7 +140,8 @@
                 break;
             case XTResponseCachePolicyAlwaysCache:
             {//总是获取缓存的数据.不再更新.
-                if (completion) completion([XTJson getJsonWithStr:resModel.response]) ;
+                if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
+                
             }
                 break;
             case XTResponseCachePolicyTimeout:
@@ -153,7 +161,7 @@
                 }
                 else
                 { // return cache
-                    if (completion) completion([XTJson getJsonWithStr:resModel.response]) ;
+                    if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
                 }
             }
                 break;
@@ -280,7 +288,7 @@
                 break;
             case XTResponseCachePolicyAlwaysCache:
             {//总是获取缓存的数据.不再更新.
-                if (completion) completion([XTJson getJsonWithStr:resModel.response]) ;
+                if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
             }
                 break;
             case XTResponseCachePolicyTimeout:
@@ -300,7 +308,7 @@
                 }
                 else
                 { // return cache
-                    if (completion) completion([XTJson getJsonWithStr:resModel.response]) ;
+                    if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
                 }
             }
                 break;
@@ -351,7 +359,7 @@
                  }
              }
                     fail:^{
-                        if (completion) completion([XTJson getJsonWithStr:resModel.response]) ;
+                        if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
                     }] ;
     }
     else if (requestType == XTRequestMode_POST_MODE)
@@ -380,13 +388,26 @@
                   }
               }
                      fail:^{
-                         if (completion) completion([XTJson getJsonWithStr:resModel.response]) ;
+                         if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
               }] ;
     }
 }
 
-
-
++ (id)getJsonWithStr:(NSString *)jsonStr
+{
+    if (!jsonStr) return nil ;
+    NSError *error ;
+    id jsonObj = [NSJSONSerialization JSONObjectWithData:[jsonStr dataUsingEncoding:NSUTF8StringEncoding]
+                                                 options:0
+                                                   error:&error] ;
+    if (!jsonObj) {
+        NSLog(@"error : %@",error) ;
+        return nil ;
+    }
+    else {
+        return jsonObj ;
+    }
+}
 
 @end
 

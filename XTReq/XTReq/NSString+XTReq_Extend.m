@@ -1,14 +1,14 @@
 //
-//  NSString+Extend.m
-//  SuBaoJiang
+//  NSString+XTReq_Extend.m
+//  XTReq
 //
-//  Created by apple on 15/7/17.
-//  Copyright (c) 2015年 teason. All rights reserved.
+//  Created by teason23 on 2018/2/22.
+//  Copyright © 2018年 teaason. All rights reserved.
 //
 
-#import "NSString+Extend.h"
+#import "NSString+XTReq_Extend.h"
 
-@implementation NSString (Extend)
+@implementation NSString (XTReq_Extend)
 
 - (NSString *)minusSpaceStr
 {
@@ -26,7 +26,7 @@
     NSString *content = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] ;
     content = [content stringByReplacingOccurrencesOfString:@"\r" withString:@""] ;
     content = [content stringByReplacingOccurrencesOfString:@"\n" withString:@""] ;
-
+    
     return content ;
 }
 
@@ -49,5 +49,6 @@ static NSString *const kSingleQuotes = @"&SingleQuotes&" ;
     content = [content stringByReplacingOccurrencesOfString:kSingleQuotes withString:@"\'"] ;
     return content ;
 }
+
 
 @end

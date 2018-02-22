@@ -1,15 +1,14 @@
 //
-//  NSString+Extend.h
-//  SuBaoJiang
+//  NSString+XTReq_Extend.h
+//  XTReq
 //
-//  Created by apple on 15/7/17.
-//  Copyright (c) 2015年 teason. All rights reserved.
+//  Created by teason23 on 2018/2/22.
+//  Copyright © 2018年 teaason. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (Extend)
-
+@interface NSString (XTReq_Extend)
 // 去除空格.
 - (NSString *)minusSpaceStr ;
 

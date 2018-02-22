@@ -1,16 +1,17 @@
 //
 //  XTRequest
 //
-//  Created by TuTu on 15/11/12.
+//  Created by teason on 15/11/12.
 //  Copyright © 2015年 teason. All rights reserved.
 //
 
 #import "XTRequest.h"
-#import "AFNetworking.h"
-#import "SVProgressHUD.h"
-#import "YYModel.h"
 #import "XTReqResonse.h"
 #import "XTReqSessionManager.h"
+
+#import <AFNetworking.h>
+#import <SVProgressHUD.h>
+#import <YYModel.h>
 
 NSString *const kStringBadNetwork = @"网络请求失败" ;
 NSString *const kStringNetworkNotConnect = @"网络连接不可用" ;

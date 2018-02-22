@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "XTFMDB.h"
 #import "XTReq.h"
 
 @interface AppDelegate ()
@@ -19,9 +18,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    [[XTFMDBBase sharedInstance] configureDB:@"teason"] ;
-    [XTResponseDBModel xt_createTable] ;
+    // config cache req .
+    [XTCacheRequest configXTCacheReqWhenAppDidLaunchWithDBName:@"teason"] ;
+    
     
     return YES;
 }

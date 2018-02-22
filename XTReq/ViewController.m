@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "XTReq.h"
-#import "YYModel.h"
+#import <YYModel.h>
 
 @interface ViewController ()
 
@@ -80,7 +80,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
     [XTRequest startMonitor] ;
 }
 

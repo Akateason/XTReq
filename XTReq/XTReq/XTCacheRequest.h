@@ -16,6 +16,10 @@ typedef enum : NSUInteger {
 
 @interface XTCacheRequest : XTRequest
 
+#pragma mark - config
+
++ (void)configXTCacheReqWhenAppDidLaunchWithDBName:(NSString *)dbName ;
+    
 #pragma mark - get
 
 + (void)cacheGET:(NSString *)url

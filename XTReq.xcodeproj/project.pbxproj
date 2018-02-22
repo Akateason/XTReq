@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F2BFD7C203EA8040013394D /* NSString+XTReq_Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */; };
 		8F785BA81ECBDAE3005D5ECC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BA71ECBDAE3005D5ECC /* main.m */; };
 		8F785BAB1ECBDAE3005D5ECC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BAA1ECBDAE3005D5ECC /* AppDelegate.m */; };
 		8F785BAE1ECBDAE3005D5ECC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BAD1ECBDAE3005D5ECC /* ViewController.m */; };
@@ -18,20 +19,14 @@
 		8F785BCB1ECBDB07005D5ECC /* XTReqSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BC41ECBDB07005D5ECC /* XTReqSessionManager.m */; };
 		8F785BCC1ECBDB07005D5ECC /* XTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BC61ECBDB07005D5ECC /* XTRequest.m */; };
 		8F785BCD1ECBDB07005D5ECC /* XTResponseDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BC81ECBDB07005D5ECC /* XTResponseDBModel.m */; };
-		8F785BDA1ECBDC6D005D5ECC /* NSObject+Reflection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BD01ECBDC6D005D5ECC /* NSObject+Reflection.m */; };
-		8F785BDB1ECBDC6D005D5ECC /* NSObject+XTFMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BD21ECBDC6D005D5ECC /* NSObject+XTFMDB.m */; };
-		8F785BDC1ECBDC6D005D5ECC /* XTDBModel+autoSql.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BD41ECBDC6D005D5ECC /* XTDBModel+autoSql.m */; };
-		8F785BDD1ECBDC6D005D5ECC /* XTDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BD61ECBDC6D005D5ECC /* XTDBModel.m */; };
-		8F785BDE1ECBDC6D005D5ECC /* XTFMDBBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BD91ECBDC6D005D5ECC /* XTFMDBBase.m */; };
-		8F785BE11ECBDE19005D5ECC /* NSDate+XTTick.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BE01ECBDE19005D5ECC /* NSDate+XTTick.m */; };
-		8F785BE41ECBDF76005D5ECC /* NSString+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BE31ECBDF76005D5ECC /* NSString+Extend.m */; };
-		8FD7A8DF1F162B6B001F40D8 /* XTJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD7A8DE1F162B6B001F40D8 /* XTJson.m */; };
 		BEEA1322E8065A0F82C0FA60 /* libPods-XTReq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEEC9E70B54B97213FAD3C3 /* libPods-XTReq.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1E5D39551A0715AEF157A2B5 /* Pods-XTReq.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XTReq.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XTReq/Pods-XTReq.debug.xcconfig"; sourceTree = "<group>"; };
 		3CEEC9E70B54B97213FAD3C3 /* libPods-XTReq.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XTReq.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F2BFD7A203EA8040013394D /* NSString+XTReq_Extend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+XTReq_Extend.h"; sourceTree = "<group>"; };
+		8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+XTReq_Extend.m"; sourceTree = "<group>"; };
 		8F785BA31ECBDAE3005D5ECC /* XTReq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XTReq.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F785BA71ECBDAE3005D5ECC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8F785BA91ECBDAE3005D5ECC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -53,23 +48,6 @@
 		8F785BC61ECBDB07005D5ECC /* XTRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTRequest.m; sourceTree = "<group>"; };
 		8F785BC71ECBDB07005D5ECC /* XTResponseDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTResponseDBModel.h; sourceTree = "<group>"; };
 		8F785BC81ECBDB07005D5ECC /* XTResponseDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTResponseDBModel.m; sourceTree = "<group>"; };
-		8F785BCF1ECBDC6D005D5ECC /* NSObject+Reflection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Reflection.h"; sourceTree = "<group>"; };
-		8F785BD01ECBDC6D005D5ECC /* NSObject+Reflection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Reflection.m"; sourceTree = "<group>"; };
-		8F785BD11ECBDC6D005D5ECC /* NSObject+XTFMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+XTFMDB.h"; sourceTree = "<group>"; };
-		8F785BD21ECBDC6D005D5ECC /* NSObject+XTFMDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+XTFMDB.m"; sourceTree = "<group>"; };
-		8F785BD31ECBDC6D005D5ECC /* XTDBModel+autoSql.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XTDBModel+autoSql.h"; sourceTree = "<group>"; };
-		8F785BD41ECBDC6D005D5ECC /* XTDBModel+autoSql.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XTDBModel+autoSql.m"; sourceTree = "<group>"; };
-		8F785BD51ECBDC6D005D5ECC /* XTDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTDBModel.h; sourceTree = "<group>"; };
-		8F785BD61ECBDC6D005D5ECC /* XTDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTDBModel.m; sourceTree = "<group>"; };
-		8F785BD71ECBDC6D005D5ECC /* XTFMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTFMDB.h; sourceTree = "<group>"; };
-		8F785BD81ECBDC6D005D5ECC /* XTFMDBBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTFMDBBase.h; sourceTree = "<group>"; };
-		8F785BD91ECBDC6D005D5ECC /* XTFMDBBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTFMDBBase.m; sourceTree = "<group>"; };
-		8F785BDF1ECBDE19005D5ECC /* NSDate+XTTick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+XTTick.h"; sourceTree = "<group>"; };
-		8F785BE01ECBDE19005D5ECC /* NSDate+XTTick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+XTTick.m"; sourceTree = "<group>"; };
-		8F785BE21ECBDF76005D5ECC /* NSString+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extend.h"; sourceTree = "<group>"; };
-		8F785BE31ECBDF76005D5ECC /* NSString+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extend.m"; sourceTree = "<group>"; };
-		8FD7A8DD1F162B6B001F40D8 /* XTJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTJson.h; sourceTree = "<group>"; };
-		8FD7A8DE1F162B6B001F40D8 /* XTJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTJson.m; sourceTree = "<group>"; };
 		A6519CB82D2757CB09350DD2 /* Pods-XTReq.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XTReq.release.xcconfig"; path = "Pods/Target Support Files/Pods-XTReq/Pods-XTReq.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,8 +92,6 @@
 		8F785BA51ECBDAE3005D5ECC /* XTReq */ = {
 			isa = PBXGroup;
 			children = (
-				8FD7A8DC1F162B6B001F40D8 /* XTJson */,
-				8F785BCE1ECBDC6D005D5ECC /* XTFMDB */,
 				8F785BBD1ECBDB07005D5ECC /* XTReq */,
 				8F785BA91ECBDAE3005D5ECC /* AppDelegate.h */,
 				8F785BAA1ECBDAE3005D5ECC /* AppDelegate.m */,
@@ -144,10 +120,8 @@
 				8F785BC01ECBDB07005D5ECC /* XTReq.h */,
 				8F785BBE1ECBDB07005D5ECC /* XTCacheRequest.h */,
 				8F785BBF1ECBDB07005D5ECC /* XTCacheRequest.m */,
-				8F785BDF1ECBDE19005D5ECC /* NSDate+XTTick.h */,
-				8F785BE01ECBDE19005D5ECC /* NSDate+XTTick.m */,
-				8F785BE21ECBDF76005D5ECC /* NSString+Extend.h */,
-				8F785BE31ECBDF76005D5ECC /* NSString+Extend.m */,
+				8F2BFD7A203EA8040013394D /* NSString+XTReq_Extend.h */,
+				8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */,
 				8F785BC11ECBDB07005D5ECC /* XTReqResonse.h */,
 				8F785BC21ECBDB07005D5ECC /* XTReqResonse.m */,
 				8F785BC31ECBDB07005D5ECC /* XTReqSessionManager.h */,
@@ -158,33 +132,6 @@
 				8F785BC81ECBDB07005D5ECC /* XTResponseDBModel.m */,
 			);
 			path = XTReq;
-			sourceTree = "<group>";
-		};
-		8F785BCE1ECBDC6D005D5ECC /* XTFMDB */ = {
-			isa = PBXGroup;
-			children = (
-				8F785BCF1ECBDC6D005D5ECC /* NSObject+Reflection.h */,
-				8F785BD01ECBDC6D005D5ECC /* NSObject+Reflection.m */,
-				8F785BD11ECBDC6D005D5ECC /* NSObject+XTFMDB.h */,
-				8F785BD21ECBDC6D005D5ECC /* NSObject+XTFMDB.m */,
-				8F785BD31ECBDC6D005D5ECC /* XTDBModel+autoSql.h */,
-				8F785BD41ECBDC6D005D5ECC /* XTDBModel+autoSql.m */,
-				8F785BD51ECBDC6D005D5ECC /* XTDBModel.h */,
-				8F785BD61ECBDC6D005D5ECC /* XTDBModel.m */,
-				8F785BD71ECBDC6D005D5ECC /* XTFMDB.h */,
-				8F785BD81ECBDC6D005D5ECC /* XTFMDBBase.h */,
-				8F785BD91ECBDC6D005D5ECC /* XTFMDBBase.m */,
-			);
-			path = XTFMDB;
-			sourceTree = "<group>";
-		};
-		8FD7A8DC1F162B6B001F40D8 /* XTJson */ = {
-			isa = PBXGroup;
-			children = (
-				8FD7A8DD1F162B6B001F40D8 /* XTJson.h */,
-				8FD7A8DE1F162B6B001F40D8 /* XTJson.m */,
-			);
-			path = XTJson;
 			sourceTree = "<group>";
 		};
 		F8584687362E298ADE067AEA /* Pods */ = {
@@ -230,7 +177,7 @@
 				TargetAttributes = {
 					8F785BA21ECBDAE3005D5ECC = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = E3XZ878L8N;
+						DevelopmentTeam = 83SLLMU85B;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -273,9 +220,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-XTReq/Pods-XTReq-resources.sh",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -303,13 +253,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-XTReq-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -320,21 +273,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F785BCD1ECBDB07005D5ECC /* XTResponseDBModel.m in Sources */,
-				8F785BE11ECBDE19005D5ECC /* NSDate+XTTick.m in Sources */,
-				8F785BDD1ECBDC6D005D5ECC /* XTDBModel.m in Sources */,
 				8F785BC91ECBDB07005D5ECC /* XTCacheRequest.m in Sources */,
+				8F2BFD7C203EA8040013394D /* NSString+XTReq_Extend.m in Sources */,
 				8F785BCA1ECBDB07005D5ECC /* XTReqResonse.m in Sources */,
-				8F785BDC1ECBDC6D005D5ECC /* XTDBModel+autoSql.m in Sources */,
 				8F785BAE1ECBDAE3005D5ECC /* ViewController.m in Sources */,
 				8F785BAB1ECBDAE3005D5ECC /* AppDelegate.m in Sources */,
-				8F785BDA1ECBDC6D005D5ECC /* NSObject+Reflection.m in Sources */,
-				8FD7A8DF1F162B6B001F40D8 /* XTJson.m in Sources */,
 				8F785BA81ECBDAE3005D5ECC /* main.m in Sources */,
-				8F785BDE1ECBDC6D005D5ECC /* XTFMDBBase.m in Sources */,
 				8F785BCC1ECBDB07005D5ECC /* XTRequest.m in Sources */,
-				8F785BDB1ECBDC6D005D5ECC /* NSObject+XTFMDB.m in Sources */,
 				8F785BCB1ECBDB07005D5ECC /* XTReqSessionManager.m in Sources */,
-				8F785BE41ECBDF76005D5ECC /* NSString+Extend.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,7 +403,7 @@
 			baseConfigurationReference = 1E5D39551A0715AEF157A2B5 /* Pods-XTReq.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = E3XZ878L8N;
+				DEVELOPMENT_TEAM = 83SLLMU85B;
 				INFOPLIST_FILE = XTReq/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teason.XTReq;
@@ -470,7 +416,7 @@
 			baseConfigurationReference = A6519CB82D2757CB09350DD2 /* Pods-XTReq.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = E3XZ878L8N;
+				DEVELOPMENT_TEAM = 83SLLMU85B;
 				INFOPLIST_FILE = XTReq/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teason.XTReq;

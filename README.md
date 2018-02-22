@@ -1,22 +1,22 @@
 # XTReq 
 * GET/POST
 * 异步/同步
-* 请求缓存
-* 基于AFNetWorking
+* 缓存自带三种策略
+* 可手动控制是否缓存(防止服务器出错的情况)
 
 
 cocoapods 
 ```
-pod 'AFNetworking'
-pod ‘YYModel’
-pod ‘FMDB’
-pod 'Masonry'
-pod 'SVProgressHUD'
+pod 'XTReq'
 ```
 
 * 使用方式
 #import "XTReq.h"
-* 若需要缓存. 需要在APPdelegate注册并启动XTFMDB
+* 若需要缓存. 需要在APPdelegate配置
+```
+[XTCacheRequest configXTCacheReqWhenAppDidLaunchWithDBName:@"yourDB"] ;
+
+```
 
 XTRequest
 ```
@@ -93,6 +93,10 @@ XTReqSaveJudgment_NotSave       = 1 ,
 } XTReqSaveJudgment ;
 
 @interface XTCacheRequest : XTRequest
+
+#pragma mark - config
+
++ (void)configXTCacheReqWhenAppDidLaunchWithDBName:(NSString *)dbName ;
 
 #pragma mark - get
 
