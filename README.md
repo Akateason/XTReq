@@ -4,6 +4,7 @@
 * 同步异步
 * GET / POST / PUT , header , formData , rawbody
 * 带progessHUD
+* 取消
 * 持久化保存
 * 指定三种不同的保存策略
 * 可手动保存可控
@@ -24,6 +25,7 @@ pod 'XTReq'
 3.  GET / POST / PUT , fast append HTTP header / formdata / rawbody
 4.  log result
 5.  show hud
+6. cancel all req
 
 #  XTCacheRequest
 1.  Persistent save the response of requests .
@@ -38,33 +40,33 @@ pod 'XTReq'
 ### async
 ```
 [XTRequest GETWithUrl:kURLstr
-header:nil
-hud:YES
-parameters:nil
-taskSuccess:^(NSURLSessionDataTask *task, id json) {
+            header:nil
+            hud:YES
+            parameters:nil
+            taskSuccess:^(NSURLSessionDataTask *task, id json) {
 
-} fail:^{
+        } fail:^{
 
-}] ;
+    }] ;
 ```
 
 ### raw body
 ```
-[XTRequest POSTWithURL:<#(NSString *)#>
-header:<#(NSDictionary *)#>
-param:<#(NSDictionary *)#>
-rawBody:<#(NSString *)#>
-hud:<#(BOOL)#>
-success:<#^(id json)success#>
-fail:<#^(void)fail#>]
+[XTRequest POSTWithURL:url
+                header:
+                param:
+                rawBody:
+                hud:
+                success:
+                fail: ] ;
 ```
 
 ### sync
 ```
-[XTRequest syncWithReqMode:<#(XTRequestMode)#>
-url:<#(NSString *)#>
-header:<#(NSDictionary *)#>
-parameters:<#(NSDictionary *)#>]
+id json = [XTRequest syncWithReqMode:
+                                 url:
+                              header:
+                              parameters:] ;
 ```
 
 
@@ -81,9 +83,11 @@ parameters:<#(NSDictionary *)#>]
 
 ### 最通常的情况, 一行调用
 ```
-[XTCacheRequest cacheGET:<#(NSString *)#>
-parameters:<#(NSDictionary *)#>
-completion:<#^(id json)completion#>]
+[XTCacheRequest cacheGET:
+                parameters:
+                completion:^(id json) {
+
+}] ;
 ```
 
 ### 缓存策略
@@ -98,32 +102,32 @@ completion:<#^(id json)completion#>]
 ### XTResponseCachePolicy
 ```
 [XTCacheRequest cacheGET:kURLstr
-header:nil
-parameters:nil
-hud:YES
-policy:XTResponseCachePolicyTimeout
-timeoutIfNeed:10 * 60
-completion:^(id json) {
+                header:nil
+                parameters:nil
+                hud:YES
+                policy:XTResponseCachePolicyTimeout
+                timeoutIfNeed:10 * 60
+                completion:^(id json) {
 
 }] ;
 ```
 
 ### 防止服务器出bug或者崩溃的处理方法
-### judgeResult 控制是否保存
-XTReqSaveJudgment_willSave
-XTReqSaveJudgment_NotSave
+### 控制是否保存
+* XTReqSaveJudgment_willSave
+* XTReqSaveJudgment_NotSave
 
 ```
 [XTCacheRequest cacheGET:kURLstr
-parameters:nil
-judgeResult:^XTReqSaveJudgment(id json) {
-if (!json) {
-return XTReqSaveJudgment_NotSave ; // 数据格式不对! 不缓存!
-}
-else {
-[self showInfoInAlert:[json yy_modelToJSONString]] ;
-return XTReqSaveJudgment_willSave ;
-}
+                parameters:nil
+                judgeResult:^XTReqSaveJudgment(id json) {
+                    if (!json) {
+                        return XTReqSaveJudgment_NotSave ; // 数据格式不对. 则不保存的情况.
+                    }
+                    else {
+                        [self showInfoInAlert:[json yy_modelToJSONString]] ;
+                        return XTReqSaveJudgment_willSave ;
+                    }
 }] ;
 ```
 

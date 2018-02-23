@@ -10,6 +10,7 @@
 // 3. Get/Post/Put , fast append HTTP header / formdata / rawbody
 // 4. log success or failure
 // 5. show hud
+// 6. cancel req
 
 
 #import "XTReqSessionManager.h"
