@@ -7,7 +7,7 @@
 //
 
 #import "XTReqSessionManager.h"
-@class XTReqResonse , NSURLSessionDataTask ;
+@class NSURLSessionDataTask ;
 
 extern NSString *const kStringBadNetwork ;
 
@@ -18,34 +18,22 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
 } ;
 
 // base URL
-static NSString *const kBaseURL = @"http://top.akateason.top" ;
+static NSString *const kBaseURL = @"http://yourbaseAPI.com" ;
 
 // get PARAM
 #define XT_GET_PARAM                         NSMutableDictionary *param = [XTRequest getParameters] ;
 
 
-
-
-
 @interface XTRequest : XTReqSessionManager
 
-// set URL string with base url
-+ (NSString *)getFinalUrl:(NSString *)strPartOfUrl ;
-// get url format baseurl?param1&param2&param3...
-+ (NSString *)fullUrl:(NSString *)url
-                param:(NSDictionary *)param ;
 // param
 + (NSMutableDictionary *)getParameters ;
 
-// status
+// reachability
 + (void)startMonitor ;
-
 + (void)stopMonitor  ;
-
-+ (NSString *)netWorkStatus ; // reachability
-
++ (NSString *)netWorkStatus ;
 + (BOOL)isWifi ;
-
 + (BOOL)isReachable ;
 
 /**

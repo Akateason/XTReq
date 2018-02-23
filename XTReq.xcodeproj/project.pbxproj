@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8F2BFD7C203EA8040013394D /* NSString+XTReq_Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */; };
+		8F2BFFCA203FC2670013394D /* XTRequest+UrlString.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2BFFC9203FC2670013394D /* XTRequest+UrlString.m */; };
 		8F785BA81ECBDAE3005D5ECC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BA71ECBDAE3005D5ECC /* main.m */; };
 		8F785BAB1ECBDAE3005D5ECC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BAA1ECBDAE3005D5ECC /* AppDelegate.m */; };
 		8F785BAE1ECBDAE3005D5ECC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BAD1ECBDAE3005D5ECC /* ViewController.m */; };
@@ -27,6 +28,8 @@
 		3CEEC9E70B54B97213FAD3C3 /* libPods-XTReq.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XTReq.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F2BFD7A203EA8040013394D /* NSString+XTReq_Extend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+XTReq_Extend.h"; sourceTree = "<group>"; };
 		8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+XTReq_Extend.m"; sourceTree = "<group>"; };
+		8F2BFFC8203FC2670013394D /* XTRequest+UrlString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XTRequest+UrlString.h"; sourceTree = "<group>"; };
+		8F2BFFC9203FC2670013394D /* XTRequest+UrlString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "XTRequest+UrlString.m"; sourceTree = "<group>"; };
 		8F785BA31ECBDAE3005D5ECC /* XTReq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XTReq.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F785BA71ECBDAE3005D5ECC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8F785BA91ECBDAE3005D5ECC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -97,6 +100,8 @@
 				8F785BAA1ECBDAE3005D5ECC /* AppDelegate.m */,
 				8F785BAC1ECBDAE3005D5ECC /* ViewController.h */,
 				8F785BAD1ECBDAE3005D5ECC /* ViewController.m */,
+				8F785BC11ECBDB07005D5ECC /* XTReqResonse.h */,
+				8F785BC21ECBDB07005D5ECC /* XTReqResonse.m */,
 				8F785BAF1ECBDAE3005D5ECC /* Main.storyboard */,
 				8F785BB21ECBDAE3005D5ECC /* Assets.xcassets */,
 				8F785BB41ECBDAE3005D5ECC /* LaunchScreen.storyboard */,
@@ -122,12 +127,12 @@
 				8F785BBF1ECBDB07005D5ECC /* XTCacheRequest.m */,
 				8F2BFD7A203EA8040013394D /* NSString+XTReq_Extend.h */,
 				8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */,
-				8F785BC11ECBDB07005D5ECC /* XTReqResonse.h */,
-				8F785BC21ECBDB07005D5ECC /* XTReqResonse.m */,
 				8F785BC31ECBDB07005D5ECC /* XTReqSessionManager.h */,
 				8F785BC41ECBDB07005D5ECC /* XTReqSessionManager.m */,
 				8F785BC51ECBDB07005D5ECC /* XTRequest.h */,
 				8F785BC61ECBDB07005D5ECC /* XTRequest.m */,
+				8F2BFFC8203FC2670013394D /* XTRequest+UrlString.h */,
+				8F2BFFC9203FC2670013394D /* XTRequest+UrlString.m */,
 				8F785BC71ECBDB07005D5ECC /* XTResponseDBModel.h */,
 				8F785BC81ECBDB07005D5ECC /* XTResponseDBModel.m */,
 			);
@@ -278,6 +283,7 @@
 				8F785BCA1ECBDB07005D5ECC /* XTReqResonse.m in Sources */,
 				8F785BAE1ECBDAE3005D5ECC /* ViewController.m in Sources */,
 				8F785BAB1ECBDAE3005D5ECC /* AppDelegate.m in Sources */,
+				8F2BFFCA203FC2670013394D /* XTRequest+UrlString.m in Sources */,
 				8F785BA81ECBDAE3005D5ECC /* main.m in Sources */,
 				8F785BCC1ECBDB07005D5ECC /* XTRequest.m in Sources */,
 				8F785BCB1ECBDB07005D5ECC /* XTReqSessionManager.m in Sources */,

@@ -6,20 +6,20 @@
 //
 
 #import "XTRequest.h"
-#import "XTReqResonse.h"
 #import "XTReqSessionManager.h"
 
 #import "SVProgressHUD.h"
 #import "YYModel.h"
 
-NSString *const kStringBadNetwork = @"网络请求失败" ;
-NSString *const kStringNetworkNotConnect = @"网络连接不可用" ;
+NSString *const kStringBadNetwork        = @"网络请求失败"     ;
+NSString *const kStringNetworkNotConnect = @"网络连接不可用"   ;
 
 @implementation XTRequest
 
 #pragma mark --
 #pragma mark - get URL with strPartOfUrl
-+ (NSString *)getFinalUrl:(NSString *)strPartOfUrl { return [kBaseURL stringByAppendingString:strPartOfUrl] ; }
+
+
 + (NSMutableDictionary *)getParameters { return [@{} mutableCopy] ; }
 
 
@@ -199,10 +199,8 @@ NSString *const kStringNetworkNotConnect = @"网络连接不可用" ;
 {
     if (hud) [SVProgressHUD show] ;
     
-    if (header)
-    {
-        for (NSString *key in header)
-        {
+    if (header) {
+        for (NSString *key in header) {
             NSString *value = header[key] ;
             [[XTReqSessionManager shareInstance].requestSerializer setValue:value
                                                          forHTTPHeaderField:key] ;
@@ -251,7 +249,7 @@ NSString *const kStringNetworkNotConnect = @"网络连接不可用" ;
                                                                                  URLString:url
                                                                                 parameters:param
                                                                                      error:nil] ;
-    request.timeoutInterval = 15 ;
+    request.timeoutInterval = kTIMEOUT ;
     
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"] ;
     if (header) {
@@ -263,6 +261,8 @@ NSString *const kStringNetworkNotConnect = @"网络连接不可用" ;
     [request setHTTPBody:data] ;
     
     [[[XTReqSessionManager shareInstance] dataTaskWithRequest:request
+                                               uploadProgress:nil
+                                             downloadProgress:nil
                                             completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
                                                 if (hud) [SVProgressHUD dismiss] ;
 
@@ -271,8 +271,9 @@ NSString *const kStringNetworkNotConnect = @"网络连接不可用" ;
                                                 [[XTReqSessionManager shareInstance] reset] ;
                                                 if (!error) {
                                                     success(responseObject) ;
-                                                } else {
-                                                    fail();
+                                                }
+                                                else {
+                                                    fail() ;
                                                     if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
                                                 }
                                             }] resume] ;
@@ -296,7 +297,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
         manager.requestSerializer  = [AFHTTPRequestSerializer serializer] ;
         manager.responseSerializer = [AFJSONResponseSerializer serializer] ;
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/javascript",@"text/plain",nil] ;
-        manager.requestSerializer.timeoutInterval = timeout ;
+        manager.requestSerializer.timeoutInterval = timeout ?: kTIMEOUT ;
         manager.completionQueue = xt_getCompletionQueue() ;
         if (header) {
             for (NSString *key in header) {
@@ -351,40 +352,6 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
                              url:url
                           header:header
                       parameters:dict] ;
-}
-
-
-
-
-
-#pragma mark --
-#pragma mark - private
-
-+ (NSString *)getUrlInGetModeWithDic:(NSDictionary *)dict
-{
-    NSArray *allKeys = [dict allKeys] ;
-    BOOL bFirst = YES ;
-    NSString *appendingStr = @"" ;
-    for (NSString *key in allKeys) {
-        NSString *val = [dict objectForKey:key] ;
-        NSString *item = @"";
-        if (bFirst) {
-            bFirst = NO ;
-            item = [NSString stringWithFormat:@"?%@=%@",key,val] ;
-        }
-        else {
-            item = [NSString stringWithFormat:@"&%@=%@",key,val] ;
-        }
-        appendingStr = [appendingStr stringByAppendingString:item] ;
-    }
-    
-    return appendingStr ;
-}
-
-+ (NSString *)fullUrl:(NSString *)url
-                param:(NSDictionary *)param
-{
-    return [url stringByAppendingString:[self getUrlInGetModeWithDic:param]] ;
 }
 
 

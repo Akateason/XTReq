@@ -14,25 +14,22 @@
 @synthesize response = _response ;
 
 #pragma mark - props Sqlite Keywords
-+ (NSDictionary *)modelPropertiesSqliteKeywords
-{
++ (NSDictionary *)modelPropertiesSqliteKeywords {
     return @{
-             @"requestUrl" : @"UNIQUE" ,
+                @"requestUrl" : @"UNIQUE" ,
              } ;
 }
 
 
 #pragma mark --
 #pragma mark - setter
-- (void)setResponse:(NSString *)response
-{
+- (void)setResponse:(NSString *)response {
     if (!response) return ;
     _response = [response encodeTransferredMeaningForSingleQuotes] ; // 去掉'号 转义
 }
 
 // get decode response
-- (NSString *)decodeResponse
-{
+- (NSString *)decodeResponse {
     return [self.response decodeTransferredMeaningForSingleQuotes] ;
 }
 
@@ -66,8 +63,7 @@
     return dbModel ;
 }
 
-- (BOOL)isAlreadyTimeout
-{
+- (BOOL)isAlreadyTimeout {
     NSDate *now = [NSDate date] ;
     NSDate *dateUpdate = [NSDate xt_getDateWithTick:self.updateTime] ;
     NSDate *dateWillTimeout = [NSDate dateWithTimeInterval:self.timeout
