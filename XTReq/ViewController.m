@@ -17,6 +17,38 @@
 @implementation ViewController
 
 #define kURLstr     [NSString stringWithFormat:@"https://api.douban.com/v2/book/%@",@(1220562)]
+#define kURLstr2     [NSString stringWithFormat:@"https://api.douban.com/v2/book/%@",@(1220563)]
+
+- (IBAction)cancelReqAction:(id)sender {
+    
+    NSURLSessionDataTask *task1 =
+    [XTRequest GETWithUrl:kURLstr
+                   header:nil
+                      hud:YES
+               parameters:nil
+              taskSuccess:^(NSURLSessionDataTask *task, id json) {
+                  
+              } fail:^{
+                  
+              }] ;
+    
+    NSURLSessionDataTask *task2 =
+    [XTRequest GETWithUrl:kURLstr2
+                      hud:YES
+               parameters:nil
+              taskSuccess:^(NSURLSessionDataTask *task, id json) {
+                  
+              } fail:^{
+                  
+              }] ;
+    
+//    cancel 1
+//    [task1 cancel] ;
+    
+//    cancel all
+    [XTRequest cancelAllRequest] ;
+}
+
 
 - (IBAction)asyncAction:(id)sender
 {

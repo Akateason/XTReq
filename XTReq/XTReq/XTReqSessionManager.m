@@ -1,12 +1,11 @@
 //
 //  XTReqSessionManager.m
-//  XTkit
+//  XTlib
 //
 //  Created by teason23 on 2017/5/12.
 //  Copyright © 2017年 teason. All rights reserved.
 //
 
-#define ACCEPTABLE_CONTENT_TYPES                    @"application/json", @"text/html", @"text/json", @"text/javascript",@"text/plain"
 
 #import "XTReqSessionManager.h"
 
@@ -62,7 +61,7 @@ static XTReqSessionManager *_instance = nil;
 }
 
 #pragma mark --
-
+// reset manager for share next time .
 - (void)reset {
     self.requestSerializer  = [AFHTTPRequestSerializer serializer] ;
     self.responseSerializer = [AFJSONResponseSerializer serializer] ;

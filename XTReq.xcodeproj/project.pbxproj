@@ -16,7 +16,6 @@
 		8F785BB31ECBDAE3005D5ECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F785BB21ECBDAE3005D5ECC /* Assets.xcassets */; };
 		8F785BB61ECBDAE3005D5ECC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F785BB41ECBDAE3005D5ECC /* LaunchScreen.storyboard */; };
 		8F785BC91ECBDB07005D5ECC /* XTCacheRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BBF1ECBDB07005D5ECC /* XTCacheRequest.m */; };
-		8F785BCA1ECBDB07005D5ECC /* XTReqResonse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BC21ECBDB07005D5ECC /* XTReqResonse.m */; };
 		8F785BCB1ECBDB07005D5ECC /* XTReqSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BC41ECBDB07005D5ECC /* XTReqSessionManager.m */; };
 		8F785BCC1ECBDB07005D5ECC /* XTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BC61ECBDB07005D5ECC /* XTRequest.m */; };
 		8F785BCD1ECBDB07005D5ECC /* XTResponseDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BC81ECBDB07005D5ECC /* XTResponseDBModel.m */; };
@@ -43,8 +42,6 @@
 		8F785BBE1ECBDB07005D5ECC /* XTCacheRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTCacheRequest.h; sourceTree = "<group>"; };
 		8F785BBF1ECBDB07005D5ECC /* XTCacheRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTCacheRequest.m; sourceTree = "<group>"; };
 		8F785BC01ECBDB07005D5ECC /* XTReq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTReq.h; sourceTree = "<group>"; };
-		8F785BC11ECBDB07005D5ECC /* XTReqResonse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTReqResonse.h; sourceTree = "<group>"; };
-		8F785BC21ECBDB07005D5ECC /* XTReqResonse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTReqResonse.m; sourceTree = "<group>"; };
 		8F785BC31ECBDB07005D5ECC /* XTReqSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTReqSessionManager.h; sourceTree = "<group>"; };
 		8F785BC41ECBDB07005D5ECC /* XTReqSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTReqSessionManager.m; sourceTree = "<group>"; };
 		8F785BC51ECBDB07005D5ECC /* XTRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTRequest.h; sourceTree = "<group>"; };
@@ -100,8 +97,6 @@
 				8F785BAA1ECBDAE3005D5ECC /* AppDelegate.m */,
 				8F785BAC1ECBDAE3005D5ECC /* ViewController.h */,
 				8F785BAD1ECBDAE3005D5ECC /* ViewController.m */,
-				8F785BC11ECBDB07005D5ECC /* XTReqResonse.h */,
-				8F785BC21ECBDB07005D5ECC /* XTReqResonse.m */,
 				8F785BAF1ECBDAE3005D5ECC /* Main.storyboard */,
 				8F785BB21ECBDAE3005D5ECC /* Assets.xcassets */,
 				8F785BB41ECBDAE3005D5ECC /* LaunchScreen.storyboard */,
@@ -123,18 +118,18 @@
 			isa = PBXGroup;
 			children = (
 				8F785BC01ECBDB07005D5ECC /* XTReq.h */,
-				8F785BBE1ECBDB07005D5ECC /* XTCacheRequest.h */,
-				8F785BBF1ECBDB07005D5ECC /* XTCacheRequest.m */,
-				8F2BFD7A203EA8040013394D /* NSString+XTReq_Extend.h */,
-				8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */,
-				8F785BC31ECBDB07005D5ECC /* XTReqSessionManager.h */,
-				8F785BC41ECBDB07005D5ECC /* XTReqSessionManager.m */,
 				8F785BC51ECBDB07005D5ECC /* XTRequest.h */,
 				8F785BC61ECBDB07005D5ECC /* XTRequest.m */,
 				8F2BFFC8203FC2670013394D /* XTRequest+UrlString.h */,
 				8F2BFFC9203FC2670013394D /* XTRequest+UrlString.m */,
+				8F785BC31ECBDB07005D5ECC /* XTReqSessionManager.h */,
+				8F785BC41ECBDB07005D5ECC /* XTReqSessionManager.m */,
+				8F785BBE1ECBDB07005D5ECC /* XTCacheRequest.h */,
+				8F785BBF1ECBDB07005D5ECC /* XTCacheRequest.m */,
 				8F785BC71ECBDB07005D5ECC /* XTResponseDBModel.h */,
 				8F785BC81ECBDB07005D5ECC /* XTResponseDBModel.m */,
+				8F2BFD7A203EA8040013394D /* NSString+XTReq_Extend.h */,
+				8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */,
 			);
 			path = XTReq;
 			sourceTree = "<group>";
@@ -280,7 +275,6 @@
 				8F785BCD1ECBDB07005D5ECC /* XTResponseDBModel.m in Sources */,
 				8F785BC91ECBDB07005D5ECC /* XTCacheRequest.m in Sources */,
 				8F2BFD7C203EA8040013394D /* NSString+XTReq_Extend.m in Sources */,
-				8F785BCA1ECBDB07005D5ECC /* XTReqResonse.m in Sources */,
 				8F785BAE1ECBDAE3005D5ECC /* ViewController.m in Sources */,
 				8F785BAB1ECBDAE3005D5ECC /* AppDelegate.m in Sources */,
 				8F2BFFCA203FC2670013394D /* XTRequest+UrlString.m in Sources */,

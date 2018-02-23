@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -55,23 +55,36 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O70-7Z-X3a">
-                                <rect key="frame" x="117" y="352" width="141" height="30"/>
+                                <rect key="frame" x="87.5" y="352" width="200" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="ll2-xx-pO0"/>
-                                    <constraint firstAttribute="width" constant="141" id="upg-ap-MVH"/>
+                                    <constraint firstAttribute="width" constant="200" id="upg-ap-MVH"/>
                                 </constraints>
                                 <state key="normal" title="cache( judge result )"/>
                                 <connections>
                                     <action selector="cacheJudgeResult:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s1N-Kc-cI8"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDH-EW-sMh">
+                                <rect key="frame" x="149" y="405" width="76" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="76" id="JJ3-Fl-4Vb"/>
+                                    <constraint firstAttribute="height" constant="30" id="fiI-mR-vq7"/>
+                                </constraints>
+                                <state key="normal" title="cancel Req"/>
+                                <connections>
+                                    <action selector="cancelReqAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aYm-Yg-o43"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ake-9S-FCg" firstAttribute="top" secondItem="ZXW-j4-bEp" secondAttribute="bottom" constant="22" id="8DQ-xU-qbK"/>
+                            <constraint firstItem="SDH-EW-sMh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8DR-BL-AqW"/>
                             <constraint firstItem="O70-7Z-X3a" firstAttribute="top" secondItem="ake-9S-FCg" secondAttribute="bottom" constant="22" id="BAE-tW-cSn"/>
                             <constraint firstItem="ZXW-j4-bEp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Pje-Zb-ad8"/>
                             <constraint firstItem="rRA-La-gT4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VXc-IR-Xmy"/>
+                            <constraint firstItem="SDH-EW-sMh" firstAttribute="top" secondItem="O70-7Z-X3a" secondAttribute="bottom" constant="23" id="c2Y-sC-mMj"/>
                             <constraint firstItem="O70-7Z-X3a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cUV-el-J9f"/>
                             <constraint firstItem="ake-9S-FCg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="f8k-7z-qC0"/>
                             <constraint firstItem="ZXW-j4-bEp" firstAttribute="top" secondItem="rRA-La-gT4" secondAttribute="bottom" constant="24" id="htf-uV-1O3"/>
