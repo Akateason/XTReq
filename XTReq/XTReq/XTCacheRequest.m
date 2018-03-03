@@ -15,7 +15,7 @@
 
 @implementation XTCacheRequest
 
-#pragma mark --
+#pragma mark - config
 
 + (void)configXTCacheReqWhenAppDidLaunchWithDBName:(NSString *)dbName {
     [[XTFMDBBase sharedInstance] configureDB:dbName] ;
@@ -23,7 +23,7 @@
 }
 
 
-#pragma mark --
+#pragma mark - func
 
 + (void)cacheGET:(NSString *)url
       parameters:(NSDictionary *)param
@@ -89,7 +89,7 @@
      timeoutIfNeed:timeoutIfNeed
        judgeResult:^XTReqSaveJudgment(id json) {
            if (completion) completion(json) ;
-           return FALSE ;
+           return XTReqSaveJudgment_willSave ;
        }] ;
 }
 
@@ -117,7 +117,7 @@
                       responseModel:resModel
                          completion:^XTReqSaveJudgment (id json) {
                              if (completion) return completion(json) ; // return
-                             return FALSE ;
+                             return XTReqSaveJudgment_willSave ;
                          }] ;
     }
     else {// has cache
@@ -133,7 +133,7 @@
                               responseModel:resModel
                                  completion:^XTReqSaveJudgment (id json) {
                                      if (completion) return completion(json) ; // return
-                                     return FALSE ;
+                                     return XTReqSaveJudgment_willSave ;
                                  }] ;
             }
                 break;
@@ -154,7 +154,7 @@
                                   responseModel:resModel
                                      completion:^XTReqSaveJudgment (id json) {
                                          if (completion) return completion(json) ; // return
-                                         return FALSE ;
+                                         return XTReqSaveJudgment_willSave ;
                                      }] ;
                 }
                 else { // return cache
@@ -233,7 +233,7 @@
       timeoutIfNeed:timeoutIfNeed
         judgeResult:^XTReqSaveJudgment(id json) {
             if (completion) completion(json) ;
-            return FALSE ;
+            return XTReqSaveJudgment_willSave ;
          }] ;
 }
 
@@ -261,7 +261,7 @@
                       responseModel:resModel
                          completion:^XTReqSaveJudgment (id json) {
                              if (completion) return completion(json) ; // return
-                             return FALSE ;
+                             return XTReqSaveJudgment_willSave ;
                          }] ;
     }
     else {// has cache
@@ -277,7 +277,7 @@
                               responseModel:resModel
                                  completion:^XTReqSaveJudgment (id json) {
                                      if (completion) return completion(json) ; // return
-                                     return FALSE ;
+                                     return XTReqSaveJudgment_willSave ;
                                  }] ;
             }
                 break;
@@ -297,7 +297,7 @@
                                   responseModel:resModel
                                      completion:^XTReqSaveJudgment (id json) {
                                          if (completion) return completion(json) ; // return
-                                         return FALSE ;
+                                         return XTReqSaveJudgment_willSave ;
                                      }] ;
                 }
                 else { // return cache

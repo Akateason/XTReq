@@ -8,9 +8,15 @@
 
 #import "XTDBModel.h"
 
+
+/**
+ Cache Policy
+ */
 typedef NS_ENUM(NSUInteger, XTResponseCachePolicy) {
     XTResponseCachePolicyNeverUseCache      , // DEFAULT
     XTResponseCachePolicyAlwaysCache        ,
+    
+    XTResponseCachePolicyIm
     
     XTResponseCachePolicyTimeout      = 20  ,
 } ;
