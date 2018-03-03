@@ -145,7 +145,7 @@
                 break;
             case XTResponseCachePolicyTimeout:
             {//规定时间内.返回缓存.超时则更新数据. 需设置timeout时间. timeout默认1小时
-                if ([resModel isAlreadyTimeout]) { // timeout . update request
+                if ([resModel isOverTime]) { // timeout . update request
                     [self updateRequestWithType:XTRequestMode_GET_MODE
                                             url:url
                                             hud:hud
@@ -288,7 +288,7 @@
                 break;
             case XTResponseCachePolicyTimeout:
             {//规定时间内.返回缓存.超时则更新数据. 需设置timeout时间. timeout默认1小时
-                if ([resModel isAlreadyTimeout]) { // timeout . update request
+                if ([resModel isOverTime]) { // timeout . update request
                     [self updateRequestWithType:XTRequestMode_POST_MODE
                                             url:url
                                             hud:hud

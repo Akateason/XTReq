@@ -32,9 +32,9 @@
                   
               }] ;
     
-    [XTCacheRequest cacheGET:<#(NSString *)#>
-                  parameters:<#(NSDictionary *)#>
-                  completion:<#^(id json)completion#>]
+//    [XTCacheRequest cacheGET:<#(NSString *)#>
+//                  parameters:<#(NSDictionary *)#>
+//                  completion:<#^(id json)completion#>]
     
     NSURLSessionDataTask *task2 =
     [XTRequest GETWithUrl:kURLstr2

@@ -38,8 +38,8 @@ typedef NS_ENUM(NSUInteger, XTResponseCachePolicy) {
                                    val:(NSString *)respStr
                                 policy:(int)policy
                                timeout:(int)timeout ;
-// is timeout ?
-- (BOOL)isAlreadyTimeout ;
+// is overTime ?
+- (BOOL)isOverTime ;
 
 // decode Response
 - (NSString *)decodeResponse ; // 如果插入时经过单引号转义. 获取时用这个方法获得Response .

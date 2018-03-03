@@ -63,7 +63,7 @@
     return dbModel ;
 }
 
-- (BOOL)isAlreadyTimeout {
+- (BOOL)isOverTime {
     NSDate *now = [NSDate date] ;
     NSDate *dateUpdate = [NSDate xt_getDateWithTick:self.updateTime] ;
     NSDate *dateWillTimeout = [NSDate dateWithTimeInterval:self.timeout
