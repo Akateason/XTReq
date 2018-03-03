@@ -95,15 +95,15 @@ id json = [XTRequest syncWithReqMode:
 ### 全能方法
 ```
 [XTCacheRequest cachedReq:XTRequestMode_GET_MODE
-url:kURLstr
-hud:YES
-header:nil
-param:nil
-policy:XTResponseCachePolicyTimeout
-timeoutIfNeed:10
-judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
-[self showInfoInAlert:[json yy_modelToJSONString]] ;
-return XTReqSaveJudgment_willSave ;
+                    url:kURLstr
+                    hud:YES
+                    header:nil
+                    param:nil
+                    policy:XTResponseCachePolicyTimeout
+                    timeoutIfNeed:10
+                    judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
+                        [self showInfoInAlert:[json yy_modelToJSONString]] ;
+                        return XTReqSaveJudgment_willSave ;
 }] ;
 
 ```
