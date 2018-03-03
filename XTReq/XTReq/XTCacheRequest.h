@@ -22,7 +22,43 @@ typedef enum : NSUInteger {
 #pragma mark - config
 
 + (void)configXTCacheReqWhenAppDidLaunchWithDBName:(NSString *)dbName ;
-    
+
+
+#pragma mark - main req
+
+/**
+ XTCacheRequest designated
+
+ @param reqMode         XTRequestMode get / post mode
+ @param url             string
+ @param hud             bool
+ @param header          dic    HTTPheader if has .
+ @param param           dic    param if has .
+ @param cachePolicy     XTResponseCachePolicy
+ @param timeoutIfNeed   INT
+ @param completion      (XTReqSaveJudgment(^)(BOOL isNewest, id json))completion
+                PARAM  isNewest          : isCacheOrNewest
+                PARAM  json              : respObj
+                RETURN XTReqSaveJudgment : judge If Need Cache
+ */
++ (void)cachedReq:(XTRequestMode)reqMode
+              url:(NSString *)url
+              hud:(BOOL)hud
+           header:(NSDictionary *)header
+            param:(NSDictionary *)param
+           policy:(XTResponseCachePolicy)cachePolicy
+    timeoutIfNeed:(int)timeoutIfNeed
+      judgeResult:(XTReqSaveJudgment(^)(BOOL isNewest, id json))completion ;
+
++ (void)cachedReq:(XTRequestMode)reqMode
+              url:(NSString *)url
+              hud:(BOOL)hud
+           header:(NSDictionary *)header
+            param:(NSDictionary *)param
+           policy:(XTResponseCachePolicy)cachePolicy
+    timeoutIfNeed:(int)timeoutIfNeed
+       completion:(void(^)(BOOL isNewest, id json))completion ;
+
 #pragma mark - get
 
 + (void)cacheGET:(NSString *)url

@@ -23,7 +23,7 @@
 }
 
 
-#pragma mark - func
+#pragma mark - get
 
 + (void)cacheGET:(NSString *)url
       parameters:(NSDictionary *)param
@@ -101,74 +101,19 @@
    timeoutIfNeed:(int)timeoutIfNeed
      judgeResult:(XTReqSaveJudgment (^)(id json))completion
 {
-    NSString *strUniqueKey = [self getFinalUrlWithBaseUrl:url param:param] ;
-    XTResponseDBModel *resModel = [XTResponseDBModel xt_findFirstWhere:[NSString stringWithFormat:@"requestUrl == '%@'",strUniqueKey]] ;
-    if (!resModel) {// not cache
-        resModel = [XTResponseDBModel newDefaultModelWithKey:strUniqueKey
-                                                         val:nil                         // response is nil
-                                                      policy:cachePolicy
-                                                     timeout:timeoutIfNeed] ;
-        
-        [self updateRequestWithType:XTRequestMode_GET_MODE
-                                url:url
-                                hud:hud
-                             header:header
-                              param:param
-                      responseModel:resModel
-                         completion:^XTReqSaveJudgment (id json) {
-                             if (completion) return completion(json) ; // return
-                             return XTReqSaveJudgment_willSave ;
-                         }] ;
-    }
-    else {// has cache
-        switch (resModel.cachePolicy)
-        {
-            case XTResponseCachePolicyNeverUseCache:
-            {//从不缓存 适合每次都实时的数据流.
-                [self updateRequestWithType:XTRequestMode_GET_MODE
-                                        url:url
-                                        hud:hud
-                                     header:header
-                                      param:param
-                              responseModel:resModel
-                                 completion:^XTReqSaveJudgment (id json) {
-                                     if (completion) return completion(json) ; // return
-                                     return XTReqSaveJudgment_willSave ;
-                                 }] ;
-            }
-                break;
-            case XTResponseCachePolicyAlwaysCache:
-            {//总是获取缓存的数据.不再更新.
-                if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
-                
-            }
-                break;
-            case XTResponseCachePolicyTimeout:
-            {//规定时间内.返回缓存.超时则更新数据. 需设置timeout时间. timeout默认1小时
-                if ([resModel isOverTime]) { // timeout . update request
-                    [self updateRequestWithType:XTRequestMode_GET_MODE
-                                            url:url
-                                            hud:hud
-                                         header:header
-                                          param:param
-                                  responseModel:resModel
-                                     completion:^XTReqSaveJudgment (id json) {
-                                         if (completion) return completion(json) ; // return
-                                         return XTReqSaveJudgment_willSave ;
-                                     }] ;
-                }
-                else { // return cache
-                    if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
-                }
-            }
-                break;
-            default:
-                break;
-        }
-    }
+    [self cachedReq:XTRequestMode_POST_MODE
+                url:url
+                hud:hud
+             header:header
+              param:param
+             policy:cachePolicy
+      timeoutIfNeed:timeoutIfNeed
+        judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
+            return completion(json) ;
+        }] ;
 }
 
-#pragma mark - 
+#pragma mark - post
 
 + (void)cachePOST:(NSString *)url
        parameters:(NSDictionary *)param
@@ -245,63 +190,91 @@
     timeoutIfNeed:(int)timeoutIfNeed
       judgeResult:(XTReqSaveJudgment(^)(id json))completion
 {
+    [self cachedReq:XTRequestMode_POST_MODE
+                url:url
+                hud:hud
+             header:header
+              param:param
+             policy:cachePolicy
+      timeoutIfNeed:timeoutIfNeed
+        judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
+            return completion(json) ;
+        }] ;
+}
+
+#pragma mark - main
+
++ (void)cachedReq:(XTRequestMode)reqMode
+              url:(NSString *)url
+              hud:(BOOL)hud
+           header:(NSDictionary *)header
+            param:(NSDictionary *)param
+           policy:(XTResponseCachePolicy)cachePolicy
+    timeoutIfNeed:(int)timeoutIfNeed
+      judgeResult:(XTReqSaveJudgment(^)(BOOL isNewest, id json))completion
+{
     NSString *strUniqueKey = [self getFinalUrlWithBaseUrl:url param:param] ;
     XTResponseDBModel *resModel = [XTResponseDBModel xt_findFirstWhere:[NSString stringWithFormat:@"requestUrl == '%@'",strUniqueKey]] ;
-    if (!resModel) {// not cache
+    if (!resModel) {
+        // not cache
         resModel = [XTResponseDBModel newDefaultModelWithKey:strUniqueKey
-                                                       val:nil                         // response is nil
-                                                    policy:cachePolicy
-                                                   timeout:timeoutIfNeed] ;
+                                                         val:nil                         // response is nil
+                                                      policy:cachePolicy
+                                                     timeout:timeoutIfNeed] ;
         
-        [self updateRequestWithType:XTRequestMode_POST_MODE
+        [self updateRequestWithType:reqMode
                                 url:url
                                 hud:hud
                              header:header
                               param:param
                       responseModel:resModel
                          completion:^XTReqSaveJudgment (id json) {
-                             if (completion) return completion(json) ; // return
+                             if (completion) return completion(YES, json) ; // return newest result .
                              return XTReqSaveJudgment_willSave ;
                          }] ;
     }
-    else {// has cache
+    else {
+        // has cache
+        // completion return cache first .
+        if (completion) completion(NO, [self.class getJsonWithStr:resModel.response]) ;
+        
         switch (resModel.cachePolicy)
         {
             case XTResponseCachePolicyNeverUseCache:
             {//从不缓存 适合每次都实时的数据流.
-                [self updateRequestWithType:XTRequestMode_POST_MODE
+                [self updateRequestWithType:reqMode
                                         url:url
                                         hud:hud
                                      header:header
                                       param:param
                               responseModel:resModel
                                  completion:^XTReqSaveJudgment (id json) {
-                                     if (completion) return completion(json) ; // return
+                                     if (completion) return completion(YES, json) ; // return newest result again.
                                      return XTReqSaveJudgment_willSave ;
                                  }] ;
             }
                 break;
             case XTResponseCachePolicyAlwaysCache:
             {//总是获取缓存的数据.不再更新.
-                if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
+                //if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
             }
                 break;
             case XTResponseCachePolicyTimeout:
             {//规定时间内.返回缓存.超时则更新数据. 需设置timeout时间. timeout默认1小时
                 if ([resModel isOverTime]) { // timeout . update request
-                    [self updateRequestWithType:XTRequestMode_POST_MODE
+                    [self updateRequestWithType:reqMode
                                             url:url
                                             hud:hud
                                          header:header
                                           param:param
                                   responseModel:resModel
                                      completion:^XTReqSaveJudgment (id json) {
-                                         if (completion) return completion(json) ; // return
+                                         if (completion) return completion(YES, json) ; // return newest result again.
                                          return XTReqSaveJudgment_willSave ;
                                      }] ;
                 }
                 else { // return cache
-                    if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
+                    //if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
                 }
             }
                 break;
@@ -311,11 +284,28 @@
     }
 }
 
++ (void)cachedReq:(XTRequestMode)reqMode
+              url:(NSString *)url
+              hud:(BOOL)hud
+           header:(NSDictionary *)header
+            param:(NSDictionary *)param
+           policy:(XTResponseCachePolicy)cachePolicy
+    timeoutIfNeed:(int)timeoutIfNeed
+       completion:(void(^)(BOOL isNewest, id json))completion
+{
+    [self cachedReq:reqMode
+                url:url
+                hud:hud
+             header:header
+              param:param
+             policy:cachePolicy
+      timeoutIfNeed:timeoutIfNeed
+        judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
+            if (completion) completion(isNewest, json) ;
+            return XTReqSaveJudgment_willSave ;
+        }] ;
+}
 
-
-
-
-#pragma mark --
 #pragma mark - private
 
 + (void)updateRequestWithType:(XTRequestMode)requestType

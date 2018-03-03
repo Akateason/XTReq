@@ -32,10 +32,6 @@
                   
               }] ;
     
-//    [XTCacheRequest cacheGET:<#(NSString *)#>
-//                  parameters:<#(NSDictionary *)#>
-//                  completion:<#^(id json)completion#>]
-    
     NSURLSessionDataTask *task2 =
     [XTRequest GETWithUrl:kURLstr2
                       hud:YES
@@ -77,12 +73,18 @@
 
 - (IBAction)cachedAction:(id)sender
 {
-    [XTCacheRequest cacheGET:kURLstr
-                  parameters:nil
-                  completion:^(id json) {
-                     NSLog(@"cache") ;
-                     [self showInfoInAlert:[json yy_modelToJSONString]] ;
-     }] ;
+    [XTCacheRequest cachedReq:XTRequestMode_GET_MODE
+                          url:kURLstr
+                          hud:YES
+                       header:nil
+                        param:nil
+                       policy:XTResponseCachePolicyTimeout
+                timeoutIfNeed:10
+                  judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
+                      [self showInfoInAlert:[json yy_modelToJSONString]] ;
+                      return XTReqSaveJudgment_willSave ;
+                  }] ;
+    
 }
 
 - (IBAction)cacheJudgeResult:(id)sender {
@@ -97,17 +99,6 @@
                          return XTReqSaveJudgment_willSave ;
                      }
                  }] ;
-    
-    
-//    [XTCacheRequest cacheGET:kURLstr
-//                      header:nil
-//                  parameters:nil
-//                         hud:YES
-//                      policy:XTResponseCachePolicyTimeout
-//               timeoutIfNeed:10 * 60
-//                  completion:^(id json) {
-//
-//                  }] ;
 }
 
 - (void)showInfoInAlert:(NSString *)info

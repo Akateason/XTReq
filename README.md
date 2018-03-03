@@ -5,7 +5,8 @@
 * GET / POST / PUT , header , formData , rawbody
 * 带progessHUD
 * 取消
-* 持久化保存
+* 持久化保存(缓存)
+* 支持立即返回缓存.请求后再刷新最新请求结果.
 * 指定三种不同的保存策略
 * 可手动保存可控
 
@@ -88,7 +89,25 @@ id json = [XTRequest syncWithReqMode:
                 completion:^(id json) {
 
 }] ;
+
 ```
+
+### 全能方法
+```
+[XTCacheRequest cachedReq:XTRequestMode_GET_MODE
+url:kURLstr
+hud:YES
+header:nil
+param:nil
+policy:XTResponseCachePolicyTimeout
+timeoutIfNeed:10
+judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
+[self showInfoInAlert:[json yy_modelToJSONString]] ;
+return XTReqSaveJudgment_willSave ;
+}] ;
+
+```
+
 
 ### 缓存策略
 ```
