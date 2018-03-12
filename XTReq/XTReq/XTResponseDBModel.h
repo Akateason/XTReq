@@ -16,7 +16,7 @@ typedef NS_ENUM(NSUInteger, XTResponseCachePolicy) {
     XTResponseCachePolicyNeverUseCache      , // DEFAULT
     XTResponseCachePolicyAlwaysCache        ,
     
-    XTResponseCachePolicyTimeout      = 20  ,
+    XTResponseCachePolicyOverTime      = 20  ,
 } ;
 
 

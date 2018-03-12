@@ -22,28 +22,7 @@
     [XTResponseDBModel xt_createTable] ;
 }
 
-
 #pragma mark - get
-
-+ (void)cacheGET:(NSString *)url
-      parameters:(NSDictionary *)param
-      completion:(void(^)(id json))completion
-{
-    [self cacheGET:url
-            header:nil
-        parameters:param
-        completion:completion] ;
-}
-
-+ (void)cacheGET:(NSString *)url
-      parameters:(NSDictionary *)param
-     judgeResult:(XTReqSaveJudgment(^)(id json))completion
-{
-    [self cacheGET:url
-            header:nil
-        parameters:param
-       judgeResult:completion] ;
-}
 
 + (void)cacheGET:(NSString *)url
           header:(NSDictionary *)header
@@ -55,7 +34,7 @@
         parameters:param
                hud:NO
             policy:XTResponseCachePolicyNeverUseCache
-     timeoutIfNeed:0
+     overTimeIfNeed:0
         completion:completion] ;
 }
 
@@ -69,7 +48,7 @@
         parameters:param
                hud:NO
             policy:XTResponseCachePolicyNeverUseCache
-     timeoutIfNeed:0
+     overTimeIfNeed:0
        judgeResult:completion] ;
 }
 
@@ -78,7 +57,7 @@
       parameters:(NSDictionary *)param
              hud:(BOOL)hud
           policy:(XTResponseCachePolicy)cachePolicy
-   timeoutIfNeed:(int)timeoutIfNeed
+   overTimeIfNeed:(int)overTimeIfNeed
       completion:(void(^)(id json))completion
 {
     [self cacheGET:url
@@ -86,7 +65,7 @@
         parameters:param
                hud:hud
             policy:cachePolicy
-     timeoutIfNeed:timeoutIfNeed
+     overTimeIfNeed:overTimeIfNeed
        judgeResult:^XTReqSaveJudgment(id json) {
            if (completion) completion(json) ;
            return XTReqSaveJudgment_willSave ;
@@ -98,16 +77,17 @@
       parameters:(NSDictionary *)param
              hud:(BOOL)hud
           policy:(XTResponseCachePolicy)cachePolicy
-   timeoutIfNeed:(int)timeoutIfNeed
+   overTimeIfNeed:(int)overTimeIfNeed
      judgeResult:(XTReqSaveJudgment (^)(id json))completion
 {
-    [self cachedReq:XTRequestMode_POST_MODE
+    [self cachedReq:XTRequestMode_GET_MODE
                 url:url
                 hud:hud
              header:header
               param:param
+               body:nil
              policy:cachePolicy
-      timeoutIfNeed:timeoutIfNeed
+      overTimeIfNeed:overTimeIfNeed
         judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
             return completion(json) ;
         }] ;
@@ -116,25 +96,6 @@
 #pragma mark - post
 
 + (void)cachePOST:(NSString *)url
-       parameters:(NSDictionary *)param
-       completion:(void(^)(id json))completion
-{
-    [self cachePOST:url
-         parameters:param
-         completion:completion] ;
-}
-
-+ (void)cachePOST:(NSString *)url
-       parameters:(NSDictionary *)param
-      judgeResult:(XTReqSaveJudgment (^)(id json))completion
-{
-    [self cachePOST:url
-             header:nil
-         parameters:param
-        judgeResult:completion] ;
-}
-
-+ (void)cachePOST:(NSString *)url
            header:(NSDictionary *)header
        parameters:(NSDictionary *)param
        completion:(void(^)(id json))completion
@@ -142,9 +103,10 @@
     [self cachePOST:url
              header:header
          parameters:param
+               body:nil
                 hud:NO
              policy:XTResponseCachePolicyNeverUseCache
-      timeoutIfNeed:0
+      overTimeIfNeed:0
          completion:completion] ;
 }
 
@@ -156,26 +118,29 @@
     [self cachePOST:url
              header:header
          parameters:param
+               body:nil
                 hud:NO
              policy:XTResponseCachePolicyNeverUseCache
-      timeoutIfNeed:0
+      overTimeIfNeed:0
         judgeResult:completion] ;
 }
 
 + (void)cachePOST:(NSString *)url
            header:(NSDictionary *)header
        parameters:(NSDictionary *)param
+             body:(NSString *)body
               hud:(BOOL)hud
            policy:(XTResponseCachePolicy)cachePolicy
-    timeoutIfNeed:(int)timeoutIfNeed
+    overTimeIfNeed:(int)overTimeIfNeed
        completion:(void(^)(id json))completion
 {
     [self cachePOST:url
              header:header
          parameters:param
+               body:body
                 hud:YES
              policy:cachePolicy
-      timeoutIfNeed:timeoutIfNeed
+      overTimeIfNeed:overTimeIfNeed
         judgeResult:^XTReqSaveJudgment(id json) {
             if (completion) completion(json) ;
             return XTReqSaveJudgment_willSave ;
@@ -185,9 +150,10 @@
 + (void)cachePOST:(NSString *)url
            header:(NSDictionary *)header
        parameters:(NSDictionary *)param
+             body:(NSString *)body
               hud:(BOOL)hud
            policy:(XTResponseCachePolicy)cachePolicy
-    timeoutIfNeed:(int)timeoutIfNeed
+    overTimeIfNeed:(int)overTimeIfNeed
       judgeResult:(XTReqSaveJudgment(^)(id json))completion
 {
     [self cachedReq:XTRequestMode_POST_MODE
@@ -195,8 +161,9 @@
                 hud:hud
              header:header
               param:param
+               body:body
              policy:cachePolicy
-      timeoutIfNeed:timeoutIfNeed
+      overTimeIfNeed:overTimeIfNeed
         judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
             return completion(json) ;
         }] ;
@@ -209,8 +176,9 @@
               hud:(BOOL)hud
            header:(NSDictionary *)header
             param:(NSDictionary *)param
+             body:(NSString *)body
            policy:(XTResponseCachePolicy)cachePolicy
-    timeoutIfNeed:(int)timeoutIfNeed
+    overTimeIfNeed:(int)overTimeIfNeed
       judgeResult:(XTReqSaveJudgment(^)(BOOL isNewest, id json))completion
 {
     NSString *strUniqueKey = [self getFinalUrlWithBaseUrl:url param:param] ;
@@ -220,13 +188,14 @@
         resModel = [XTResponseDBModel newDefaultModelWithKey:strUniqueKey
                                                          val:nil                         // response is nil
                                                       policy:cachePolicy
-                                                     timeout:timeoutIfNeed] ;
+                                                     timeout:overTimeIfNeed] ;
         
         [self updateRequestWithType:reqMode
                                 url:url
                                 hud:hud
                              header:header
                               param:param
+                               body:body
                       responseModel:resModel
                          completion:^XTReqSaveJudgment (id json) {
                              if (completion) return completion(YES, json) ; // return newest result .
@@ -247,6 +216,7 @@
                                         hud:hud
                                      header:header
                                       param:param
+                                       body:body
                               responseModel:resModel
                                  completion:^XTReqSaveJudgment (id json) {
                                      if (completion) return completion(YES, json) ; // return newest result again.
@@ -259,7 +229,7 @@
                 //if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
             }
                 break;
-            case XTResponseCachePolicyTimeout:
+            case XTResponseCachePolicyOverTime:
             {//规定时间内.返回缓存.超时则更新数据. 需设置timeout时间. timeout默认1小时
                 if ([resModel isOverTime]) { // timeout . update request
                     [self updateRequestWithType:reqMode
@@ -267,6 +237,7 @@
                                             hud:hud
                                          header:header
                                           param:param
+                                           body:body
                                   responseModel:resModel
                                      completion:^XTReqSaveJudgment (id json) {
                                          if (completion) return completion(YES, json) ; // return newest result again.
@@ -289,8 +260,9 @@
               hud:(BOOL)hud
            header:(NSDictionary *)header
             param:(NSDictionary *)param
+             body:(NSString *)body
            policy:(XTResponseCachePolicy)cachePolicy
-    timeoutIfNeed:(int)timeoutIfNeed
+    overTimeIfNeed:(int)overTimeIfNeed
        completion:(void(^)(BOOL isNewest, id json))completion
 {
     [self cachedReq:reqMode
@@ -298,8 +270,9 @@
                 hud:hud
              header:header
               param:param
+               body:body
              policy:cachePolicy
-      timeoutIfNeed:timeoutIfNeed
+      overTimeIfNeed:overTimeIfNeed
         judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
             if (completion) completion(isNewest, json) ;
             return XTReqSaveJudgment_willSave ;
@@ -313,15 +286,16 @@
                           hud:(BOOL)hud
                        header:(NSDictionary *)header
                         param:(NSDictionary *)param
+                         body:(NSString *)body
                 responseModel:(XTResponseDBModel *)resModel
                    completion:(XTReqSaveJudgment(^)(id json))completion
 {
     if (requestType == XTRequestMode_GET_MODE) {
         [self GETWithUrl:url
                   header:header
-                     hud:hud
               parameters:param
-             taskSuccess:^(NSURLSessionDataTask *task, id json) {
+                     hud:hud
+                 success:^(id json) {
                  
                  XTReqSaveJudgment flag = -1 ;
                  if (completion) flag = completion(json) ; // return .
@@ -347,9 +321,10 @@
     else if (requestType == XTRequestMode_POST_MODE) {
         [self POSTWithUrl:url
                    header:header
-                      hud:hud
                parameters:param
-              taskSuccess:^(NSURLSessionDataTask *task, id json) {
+                  rawBody:body
+                      hud:hud
+                  success:^(id json) {
                   
                   XTReqSaveJudgment flag = -1 ;
                   if (completion) flag = completion(json) ; // return .
@@ -374,8 +349,7 @@
     }
 }
 
-+ (id)getJsonWithStr:(NSString *)jsonStr
-{
++ (id)getJsonWithStr:(NSString *)jsonStr {
     if (!jsonStr) return nil ;
     NSError *error ;
     id jsonObj = [NSJSONSerialization JSONObjectWithData:[jsonStr dataUsingEncoding:NSUTF8StringEncoding]

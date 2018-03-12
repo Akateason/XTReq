@@ -49,69 +49,60 @@ static NSString *const kBaseURL = @"http://yourbaseAPI.com" ;
  */
 
 // GET
+/**
+ get url + param
+ */
 + (NSURLSessionDataTask *)GETWithUrl:(NSString *)url
                           parameters:(NSDictionary *)dict
                              success:(void (^)(id json))success
                                 fail:(void (^)())fail ;
-
-+ (NSURLSessionDataTask *)GETWithUrl:(NSString *)url
-                                 hud:(BOOL)hud
-                          parameters:(NSDictionary *)dict
-                             success:(void (^)(id json))success
-                                fail:(void (^)())fail ;
-
-+ (NSURLSessionDataTask *)GETWithUrl:(NSString *)url
-                                 hud:(BOOL)hud
-                          parameters:(NSDictionary *)dict
-                         taskSuccess:(void (^)(NSURLSessionDataTask * task ,id json))success
-                                fail:(void (^)())fail ;
-
+/**
+ get url + header + param + hud
+ */
 + (NSURLSessionDataTask *)GETWithUrl:(NSString *)url
                               header:(NSDictionary *)header
-                                 hud:(BOOL)hud
                           parameters:(NSDictionary *)dict
-                         taskSuccess:(void (^)(NSURLSessionDataTask * task ,id json))success
+                                 hud:(BOOL)hud
+                             success:(void (^)(id json))success
                                 fail:(void (^)())fail ;
 
 // POST
+/**
+ post url + param
+ */
 + (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
                            parameters:(NSDictionary *)dict
                               success:(void (^)(id json))success
                                  fail:(void (^)())fail ;
-
-+ (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
-                                  hud:(BOOL)hud
-                           parameters:(NSDictionary *)dict
-                              success:(void (^)(id json))success
-                                 fail:(void (^)())fail ;
-
-+ (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
-                                  hud:(BOOL)hud
-                           parameters:(NSDictionary *)dict
-                          taskSuccess:(void (^)(NSURLSessionDataTask * task ,id json))success
-                                 fail:(void (^)())fail ;
-
+/**
+ post url + param + header + hud
+ */
 + (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
                                header:(NSDictionary *)header
-                                  hud:(BOOL)hud
                            parameters:(NSDictionary *)dict
-                          taskSuccess:(void (^)(NSURLSessionDataTask * task ,id json))success
+                                  hud:(BOOL)hud
+                              success:(void (^)(id json))success
+                                 fail:(void (^)())fail ;
+/**
+ post url + param + header + body + hud
+ */
++ (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
+                               header:(NSDictionary *)header
+                           parameters:(NSDictionary *)param
+                              rawBody:(NSString *)rawBody
+                                  hud:(BOOL)hud
+                              success:(void (^)(id json))success
                                  fail:(void (^)())fail ;
 
-+ (void)POSTWithURL:(NSString *)url
-             header:(NSDictionary *)header
-              param:(NSDictionary *)param
-            rawBody:(NSString *)rawBody
-                hud:(BOOL)hud
-            success:(void (^)(id json))success
-               fail:(void (^)())fail ;
-
 // PUT
+/**
+ put url + param + header + hud
+ */
 + (NSURLSessionDataTask *)PUTWithUrl:(NSString *)url
                               header:(NSDictionary *)header
                                  hud:(BOOL)hud
                           parameters:(NSDictionary *)dict
-                         taskSuccess:(void (^)(NSURLSessionDataTask * task ,id json))success
+                             success:(void (^)(NSURLSessionDataTask * task ,id json))success
                                 fail:(void (^)())fail ;
 
 

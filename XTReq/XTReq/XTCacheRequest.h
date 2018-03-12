@@ -21,21 +21,27 @@ typedef enum : NSUInteger {
 
 #pragma mark - config
 
+/**
+ config when App is launching .
+ 
+ @param dbName      yourApps DB name
+ */
 + (void)configXTCacheReqWhenAppDidLaunchWithDBName:(NSString *)dbName ;
 
 
 #pragma mark - main req
 
 /**
- XTCacheRequest designated
-
- @param reqMode         XTRequestMode get / post mode
+ XTCacheRequest judgeResult designated MAIN FUNC
+ 
+ @param reqMode         XTRequestMode               get / post mode .
  @param url             string
  @param hud             bool
- @param header          dic    HTTPheader if has .
- @param param           dic    param if has .
- @param cachePolicy     XTResponseCachePolicy
- @param timeoutIfNeed   INT
+ @param header          dic                         HTTP header if has .
+ @param param           dic                         param if has .
+ @param body            str                         post rawbody if has .
+ @param cachePolicy     XTResponseCachePolicy       cache policy .
+ @param overTimeIfNeed   INT (seconds)               only in XTResponseCachePolicyOverTime mode .
  @param completion      (XTReqSaveJudgment(^)(BOOL isNewest, id json))completion
                 PARAM  isNewest          : isCacheOrNewest
                 PARAM  json              : respObj
@@ -46,137 +52,98 @@ typedef enum : NSUInteger {
               hud:(BOOL)hud
            header:(NSDictionary *)header
             param:(NSDictionary *)param
+             body:(NSString *)body
            policy:(XTResponseCachePolicy)cachePolicy
-    timeoutIfNeed:(int)timeoutIfNeed
+    overTimeIfNeed:(int)overTimeIfNeed
       judgeResult:(XTReqSaveJudgment(^)(BOOL isNewest, id json))completion ;
 
+/**
+ XTCacheRequest completion MAIN FUNC
+*/
 + (void)cachedReq:(XTRequestMode)reqMode
               url:(NSString *)url
               hud:(BOOL)hud
            header:(NSDictionary *)header
             param:(NSDictionary *)param
+             body:(NSString *)body
            policy:(XTResponseCachePolicy)cachePolicy
-    timeoutIfNeed:(int)timeoutIfNeed
+    overTimeIfNeed:(int)overTimeIfNeed
        completion:(void(^)(BOOL isNewest, id json))completion ;
 
 #pragma mark - get
 
-+ (void)cacheGET:(NSString *)url
-      parameters:(NSDictionary *)param
-      completion:(void(^)(id json))completion ;
-
-+ (void)cacheGET:(NSString *)url
-      parameters:(NSDictionary *)param
-     judgeResult:(XTReqSaveJudgment(^)(id json))completion ;
-
-+ (void)cacheGET:(NSString *)url
-          header:(NSDictionary *)header
-      parameters:(NSDictionary *)param
-      completion:(void(^)(id json))completion ;
-
-+ (void)cacheGET:(NSString *)url
-          header:(NSDictionary *)header
-      parameters:(NSDictionary *)param
-     judgeResult:(XTReqSaveJudgment(^)(id json))completion ;
-
 /**
- cacheGET completion
- 
- @param url             NSString
- @param header          NSDictionary
- @param param           NSDictionary
- @param hud             BOOL
- @param cachePolicy     XTResponseCachePolicy
- @param timeoutIfNeed   int
- @param completion      void(^)(id json)            RESPONSE WILL BE SAVED IN ANY CASE .
+ cacheGET header + param + completion
+ */
++ (void)cacheGET:(NSString *)url
+          header:(NSDictionary *)header
+      parameters:(NSDictionary *)param
+      completion:(void(^)(id json))completion ;
+/**
+ cacheGET header + param + judgeResult
+ */
++ (void)cacheGET:(NSString *)url
+          header:(NSDictionary *)header
+      parameters:(NSDictionary *)param
+     judgeResult:(XTReqSaveJudgment (^)(id json))completion ;
+/**
+ cacheGET header + param + hud + policy + completion
  */
 + (void)cacheGET:(NSString *)url
           header:(NSDictionary *)header
       parameters:(NSDictionary *)param
              hud:(BOOL)hud
           policy:(XTResponseCachePolicy)cachePolicy
-   timeoutIfNeed:(int)timeoutIfNeed
+   overTimeIfNeed:(int)overTimeIfNeed
       completion:(void(^)(id json))completion ;
-
 /**
- cacheGET judgeResult
- 
- @param url             NSString
- @param header          NSDictionary
- @param param           NSDictionary
- @param hud             BOOL
- @param cachePolicy     XTResponseCachePolicy
- @param timeoutIfNeed   int
- @param completion      XTReqSaveJudgment(^)(id json)            JUDGE RESPONSE RESULT ;  RETURN 'XTReqSaveJudgment_NotSave' IF RESULT NEEDN'T CACHE . RETURN 'XTReqSaveJudgment_willSave' IF WILL SAVE .
+ cacheGET header + param + hud + policy + judgeResult
  */
 + (void)cacheGET:(NSString *)url
           header:(NSDictionary *)header
       parameters:(NSDictionary *)param
              hud:(BOOL)hud
           policy:(XTResponseCachePolicy)cachePolicy
-   timeoutIfNeed:(int)timeoutIfNeed
+   overTimeIfNeed:(int)overTimeIfNeed
      judgeResult:(XTReqSaveJudgment (^)(id json))completion ;
 
-
-
 #pragma mark - post
-
-+ (void)cachePOST:(NSString *)url
-       parameters:(NSDictionary *)param
-       completion:(void(^)(id json))completion ;
-
-+ (void)cachePOST:(NSString *)url
-       parameters:(NSDictionary *)param
-      judgeResult:(XTReqSaveJudgment(^)(id json))completion ;
-
-+ (void)cachePOST:(NSString *)url
-           header:(NSDictionary *)header
-       parameters:(NSDictionary *)param
-       completion:(void(^)(id json))completion ;
-
-+ (void)cachePOST:(NSString *)url
-           header:(NSDictionary *)header
-       parameters:(NSDictionary *)param
-      judgeResult:(XTReqSaveJudgment(^)(id json))completion ;
-
-
 /**
- cachePOST completion
- 
- @param url             NSString
- @param header          NSDictionary
- @param param           NSDictionary
- @param hud             BOOL
- @param cachePolicy     XTResponseCachePolicy
- @param timeoutIfNeed   int
- @param completion      void(^)(id json)            RESULT WILL BE CACHED IN ANY CASE .
+ cachePOST header + param + completion
  */
 + (void)cachePOST:(NSString *)url
            header:(NSDictionary *)header
        parameters:(NSDictionary *)param
-              hud:(BOOL)hud
-           policy:(XTResponseCachePolicy)cachePolicy
-    timeoutIfNeed:(int)timeoutIfNeed
-       completion:(void(^)(id json))completion;
-
+       completion:(void(^)(id json))completion ;
 /**
- cachePOST judgeResult
- 
- @param url             NSString
- @param header          NSDictionary
- @param param           NSDictionary
- @param hud             BOOL
- @param cachePolicy     XTResponseCachePolicy
- @param timeoutIfNeed   int
- @param completion      XTReqSaveJudgment(^)(id json)            JUDGE RESPONSE RESULT ;  RETURN 'XTReqSaveJudgment_NotSave' IF RESULT NEEDN'T CACHE . RETURN 'XTReqSaveJudgment_willSave' IF WILL SAVE .
+ cachePOST header + param + judgeResult
  */
 + (void)cachePOST:(NSString *)url
            header:(NSDictionary *)header
        parameters:(NSDictionary *)param
+      judgeResult:(XTReqSaveJudgment (^)(id json))completion ;
+/**
+ cachePOST header + param + body + policy + completion
+ */
++ (void)cachePOST:(NSString *)url
+           header:(NSDictionary *)header
+       parameters:(NSDictionary *)param
+             body:(NSString *)body
               hud:(BOOL)hud
            policy:(XTResponseCachePolicy)cachePolicy
-    timeoutIfNeed:(int)timeoutIfNeed
-      judgeResult:(XTReqSaveJudgment(^)(id json))completion;
+    overTimeIfNeed:(int)overTimeIfNeed
+       completion:(void(^)(id json))completion ;
+/**
+ cachePOST header + param + body + policy + judgeResult
+ */
++ (void)cachePOST:(NSString *)url
+           header:(NSDictionary *)header
+       parameters:(NSDictionary *)param
+             body:(NSString *)body
+              hud:(BOOL)hud
+           policy:(XTResponseCachePolicy)cachePolicy
+    overTimeIfNeed:(int)overTimeIfNeed
+      judgeResult:(XTReqSaveJudgment(^)(id json))completion ;
 
 @end
 

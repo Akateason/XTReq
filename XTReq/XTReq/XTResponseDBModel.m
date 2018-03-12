@@ -52,7 +52,7 @@
                                timeout:(int)timeout
 {
     if (!policy) policy = XTResponseCachePolicyNeverUseCache ; // default policy
-    if (policy == XTResponseCachePolicyTimeout && !timeout) timeout = 60 * 60 ; // 1hour default timeout if need .
+    if (policy == XTResponseCachePolicyOverTime && !timeout) timeout = 60 * 60 ; // 1hour default timeout if need .
     XTResponseDBModel *dbModel = [[XTResponseDBModel alloc] init] ;
     dbModel.requestUrl = urlStr ;
     dbModel.response = respStr ;

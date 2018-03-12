@@ -23,20 +23,17 @@
     
     NSURLSessionDataTask *task1 =
     [XTRequest GETWithUrl:kURLstr
-                   header:nil
-                      hud:YES
                parameters:nil
-              taskSuccess:^(NSURLSessionDataTask *task, id json) {
-                  
-              } fail:^{
-                  
-              }] ;
+                  success:^(id json) {
+                      
+                  } fail:^{
+                      
+                  }] ;
     
     NSURLSessionDataTask *task2 =
     [XTRequest GETWithUrl:kURLstr2
-                      hud:YES
                parameters:nil
-              taskSuccess:^(NSURLSessionDataTask *task, id json) {
+                  success:^(id json) {
                   
               } fail:^{
                   
@@ -78,8 +75,9 @@
                           hud:YES
                        header:nil
                         param:nil
-                       policy:XTResponseCachePolicyTimeout
-                timeoutIfNeed:10
+                         body:nil
+                       policy:XTResponseCachePolicyOverTime
+                overTimeIfNeed:10
                   judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
                       [self showInfoInAlert:[json yy_modelToJSONString]] ;
                       return XTReqSaveJudgment_willSave ;
@@ -89,6 +87,7 @@
 
 - (IBAction)cacheJudgeResult:(id)sender {
     [XTCacheRequest cacheGET:kURLstr
+                      header:nil
                   parameters:nil
                  judgeResult:^XTReqSaveJudgment(id json) {
                      if (!json) {

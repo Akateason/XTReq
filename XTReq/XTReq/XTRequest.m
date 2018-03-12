@@ -10,8 +10,8 @@
 #import "SVProgressHUD.h"
 #import "YYModel.h"
 
-NSString *const kStringBadNetwork        = @"网络请求失败"     ;
-NSString *const kStringNetworkNotConnect = @"网络连接不可用"   ;
+NSString *const kStringBadNetwork        = @"网络请求失败" ;
+NSString *const kStringNetworkNotConnect = @"网络连接不可用" ;
 
 #define kFLEX_IN_LOG_TAIL   @"\n🏀🏀🏀🏀🏀"
 
@@ -51,56 +51,26 @@ NSString *const kStringNetworkNotConnect = @"网络连接不可用"   ;
 //  async
 #pragma mark --
 #pragma mark - async
-
+#pragma mark - get
 + (NSURLSessionDataTask *)GETWithUrl:(NSString *)url
                           parameters:(NSDictionary *)dict
                              success:(void (^)(id json))success
-                                fail:(void (^)())fail
+                                fail:(void (^)())fail ;
 {
     return
     [self GETWithUrl:url
-                 hud:YES
+              header:nil
           parameters:dict
+                 hud:YES
              success:success
                 fail:fail] ;
 }
 
 + (NSURLSessionDataTask *)GETWithUrl:(NSString *)url
-                                 hud:(BOOL)hud
-                          parameters:(NSDictionary *)dict
-                             success:(void (^)(id json))success
-                                fail:(void (^)())fail
-{
-    return
-    [self GETWithUrl:url
-                 hud:hud
-          parameters:dict
-         taskSuccess:^(NSURLSessionDataTask *task, id json) {
-             success(json) ;
-         }
-                fail:fail] ;
-}
-
-+ (NSURLSessionDataTask *)GETWithUrl:(NSString *)url
-                                 hud:(BOOL)hud
-                          parameters:(NSDictionary *)dict
-                         taskSuccess:(void (^)(NSURLSessionDataTask * task ,id json))success
-                                fail:(void (^)())fail
-{
-    return
-    [self GETWithUrl:url
-              header:nil
-                 hud:hud
-          parameters:dict
-         taskSuccess:success
-                fail:fail] ;
-}
-
-+ (NSURLSessionDataTask *)GETWithUrl:(NSString *)url
                               header:(NSDictionary *)header
-                                 hud:(BOOL)hud
                           parameters:(NSDictionary *)dict
-                         taskSuccess:(void (^)(NSURLSessionDataTask *, id))success
+                                 hud:(BOOL)hud
+                             success:(void (^)(id json))success
                                 fail:(void (^)())fail
 {
     if (hud) [SVProgressHUD show] ;
@@ -123,7 +93,7 @@ NSString *const kStringNetworkNotConnect = @"网络连接不可用"   ;
                                              if (hud) [SVProgressHUD dismiss] ;
                                              NSLog(@"url : %@ \nparam : %@",url,dict) ;
                                              NSLog(@"resp\n %@ %@",responseObject, kFLEX_IN_LOG_TAIL) ;
-                                             success(task,responseObject) ;
+                                             success(responseObject) ;
                                          }
                                      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                          NSLog(@"xt_req fail Error:%@ %@", error ,kFLEX_IN_LOG_TAIL) ;
@@ -135,6 +105,8 @@ NSString *const kStringNetworkNotConnect = @"网络连接不可用"   ;
                                      }] ;
 }
 
+#pragma mark - post
+
 + (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
                            parameters:(NSDictionary *)dict
                               success:(void (^)(id json))success
@@ -142,137 +114,89 @@ NSString *const kStringNetworkNotConnect = @"网络连接不可用"   ;
 {
     return
     [self POSTWithUrl:url
-                  hud:YES
+               header:nil
            parameters:dict
+                  hud:YES
               success:success
                  fail:fail] ;
 }
 
 + (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
-                hud:(BOOL)hud
-         parameters:(NSDictionary *)dict
-            success:(void (^)(id json))success
-               fail:(void (^)())fail
+                               header:(NSDictionary *)header
+                           parameters:(NSDictionary *)dict
+                                  hud:(BOOL)hud
+                              success:(void (^)(id json))success
+                                 fail:(void (^)())fail
 {
     return
     [self POSTWithUrl:url
-                  hud:hud
+               header:header
            parameters:dict
-          taskSuccess:^(NSURLSessionDataTask *task, id json) {
-              success(json) ;
-          } fail:fail] ;
-}
-
-+ (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
-                hud:(BOOL)hud
-         parameters:(NSDictionary *)dict
-        taskSuccess:(void (^)(NSURLSessionDataTask * task ,id json))success
-               fail:(void (^)())fail
-{
-    return
-    [self POSTWithUrl:url
-               header:nil
+              rawBody:nil
                   hud:hud
-           parameters:dict
-          taskSuccess:success
+              success:success
                  fail:fail] ;
 }
 
 + (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
-             header:(NSDictionary *)header
-                hud:(BOOL)hud
-         parameters:(NSDictionary *)dict
-        taskSuccess:(void (^)(NSURLSessionDataTask * task ,id json))success
-               fail:(void (^)())fail
-{
-    if (hud) [SVProgressHUD show] ;
-    
-    if (header) {
-        for (NSString *key in header) {
-            NSString *value = header[key] ;
-            [[XTReqSessionManager shareInstance].requestSerializer setValue:value
-                                                         forHTTPHeaderField:key] ;
-        }
-    }
-    
-    return
-    [[XTReqSessionManager shareInstance] POST:url
-                                   parameters:dict
-                                     progress:nil
-                                      success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                          
-                                          [[XTReqSessionManager shareInstance] reset] ;
-                                          if (success) {
-                                              if (hud) [SVProgressHUD dismiss] ;
-                                              
-                                              NSLog(@"url : %@ \nparam : %@",url,dict) ;
-                                              NSLog(@"resp\n %@ %@",responseObject,kFLEX_IN_LOG_TAIL) ;
-                                              success(task , responseObject) ;
-                                          }
-                                          
-                                      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                          
-                                          NSLog(@"xt_req fail Error: %@ %@", error,kFLEX_IN_LOG_TAIL) ;
-                                          [[XTReqSessionManager shareInstance] reset] ;
-                                          if (fail) {
-                                              if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
-                                              fail() ;
-                                          }
-                                          
-                                      }] ;
-}
-
-// post body raw
-+ (void)POSTWithURL:(NSString *)url
                                header:(NSDictionary *)header
-                                param:(NSDictionary *)param
+                           parameters:(NSDictionary *)param
                               rawBody:(NSString *)rawBody
                                   hud:(BOOL)hud
                               success:(void (^)(id json))success
                                  fail:(void (^)())fail
 {
     if (hud) [SVProgressHUD show] ;
-
-    NSData *data = [rawBody dataUsingEncoding:NSUTF8StringEncoding] ;
+    // url , param
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST"
                                                                                  URLString:url
                                                                                 parameters:param
                                                                                      error:nil] ;
     request.timeoutInterval = kTIMEOUT ;
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"] ;
+    // header
     if (header) {
         for (NSString *key in header) {
             [request setValue:header[key] forHTTPHeaderField:key] ;
         }
     }
-    [request setHTTPBody:data] ;
+    // body
+    if (rawBody && rawBody.length > 0) {
+        NSData *dataBody = [rawBody dataUsingEncoding:NSUTF8StringEncoding] ;
+        [request setHTTPBody:dataBody] ;
+    }
     
-    [[[XTReqSessionManager shareInstance] dataTaskWithRequest:request
-                                               uploadProgress:nil
-                                             downloadProgress:nil
-                                            completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-                                                if (hud) [SVProgressHUD dismiss] ;
+    
+    NSURLSessionDataTask *task =
+    [[XTReqSessionManager shareInstance] dataTaskWithRequest:request
+                                           uploadProgress:nil
+                                         downloadProgress:nil
+                                        completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                                            if (hud) [SVProgressHUD dismiss] ;
 
-                                                NSLog(@"url : %@ \nparam : %@",url,param) ;
-                                                NSLog(@"resp\n %@ %@",responseObject,kFLEX_IN_LOG_TAIL) ;
-                                                [[XTReqSessionManager shareInstance] reset] ;
-                                                if (!error) {
-                                                    success(responseObject) ;
-                                                }
-                                                else {
-                                                    NSLog(@"xt_req fail Error: %@ %@",error,kFLEX_IN_LOG_TAIL) ;
-                                                    fail() ;
-                                                    if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
-                                                }
-                                            }] resume] ;
+                                            NSLog(@"url : %@ \nparam : %@",url,param) ;
+                                            NSLog(@"resp\n %@ %@",responseObject,kFLEX_IN_LOG_TAIL) ;
+                                            [[XTReqSessionManager shareInstance] reset] ;
+                                            if (!error) {
+                                                if (success) success(responseObject) ;
+                                            }
+                                            else {
+                                                NSLog(@"xt_req fail Error: %@ %@",error,kFLEX_IN_LOG_TAIL) ;
+                                                if (fail) fail() ;
+                                                if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
+                                            }
+                                        }]  ;
+    [task resume] ;
+    return task ;
 }
 
+#pragma mark - put
 
 + (NSURLSessionDataTask *)PUTWithUrl:(NSString *)url
                               header:(NSDictionary *)header
                                  hud:(BOOL)hud
                           parameters:(NSDictionary *)dict
-                         taskSuccess:(void (^)(NSURLSessionDataTask * task ,id json))success
+                             success:(void (^)(NSURLSessionDataTask * task ,id json))success
                                 fail:(void (^)())fail
 {
     if (hud) [SVProgressHUD show] ;
