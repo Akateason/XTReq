@@ -12,10 +12,10 @@
 #import "XTRequest.h"
 #import "XTResponseDBModel.h"
 
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSUInteger, XTReqSaveJudgment) {
     XTReqSaveJudgment_willSave      = 0 ,
     XTReqSaveJudgment_NotSave       = 1 ,
-} XTReqSaveJudgment ;
+} ;
 
 @interface XTCacheRequest : XTRequest
 
@@ -40,8 +40,8 @@ typedef enum : NSUInteger {
  @param header          dic                         HTTP header if has .
  @param param           dic                         param if has .
  @param body            str                         post rawbody if has .
- @param cachePolicy     XTResponseCachePolicy       cache policy .
- @param overTimeIfNeed   INT (seconds)               only in XTResponseCachePolicyOverTime mode .
+ @param cachePolicy     XTReqPolicy                 req policy .
+ @param overTimeIfNeed   INT (seconds)               only in XTReqPolicyOverTime mode .
  @param completion      (XTReqSaveJudgment(^)(BOOL isNewest, id json))completion
                 PARAM  isNewest          : isCacheOrNewest
                 PARAM  json              : respObj
@@ -53,8 +53,8 @@ typedef enum : NSUInteger {
            header:(NSDictionary *)header
             param:(NSDictionary *)param
              body:(NSString *)body
-           policy:(XTResponseCachePolicy)cachePolicy
-    overTimeIfNeed:(int)overTimeIfNeed
+           policy:(XTReqPolicy)cachePolicy
+   overTimeIfNeed:(int)overTimeIfNeed
       judgeResult:(XTReqSaveJudgment(^)(BOOL isNewest, id json))completion ;
 
 /**
@@ -66,8 +66,8 @@ typedef enum : NSUInteger {
            header:(NSDictionary *)header
             param:(NSDictionary *)param
              body:(NSString *)body
-           policy:(XTResponseCachePolicy)cachePolicy
-    overTimeIfNeed:(int)overTimeIfNeed
+           policy:(XTReqPolicy)cachePolicy
+   overTimeIfNeed:(int)overTimeIfNeed
        completion:(void(^)(BOOL isNewest, id json))completion ;
 
 #pragma mark - get
@@ -93,8 +93,8 @@ typedef enum : NSUInteger {
           header:(NSDictionary *)header
       parameters:(NSDictionary *)param
              hud:(BOOL)hud
-          policy:(XTResponseCachePolicy)cachePolicy
-   overTimeIfNeed:(int)overTimeIfNeed
+          policy:(XTReqPolicy)cachePolicy
+  overTimeIfNeed:(int)overTimeIfNeed
       completion:(void(^)(id json))completion ;
 /**
  cacheGET header + param + hud + policy + judgeResult
@@ -103,8 +103,8 @@ typedef enum : NSUInteger {
           header:(NSDictionary *)header
       parameters:(NSDictionary *)param
              hud:(BOOL)hud
-          policy:(XTResponseCachePolicy)cachePolicy
-   overTimeIfNeed:(int)overTimeIfNeed
+          policy:(XTReqPolicy)cachePolicy
+  overTimeIfNeed:(int)overTimeIfNeed
      judgeResult:(XTReqSaveJudgment (^)(id json))completion ;
 
 #pragma mark - post
@@ -130,8 +130,8 @@ typedef enum : NSUInteger {
        parameters:(NSDictionary *)param
              body:(NSString *)body
               hud:(BOOL)hud
-           policy:(XTResponseCachePolicy)cachePolicy
-    overTimeIfNeed:(int)overTimeIfNeed
+           policy:(XTReqPolicy)cachePolicy
+   overTimeIfNeed:(int)overTimeIfNeed
        completion:(void(^)(id json))completion ;
 /**
  cachePOST header + param + body + policy + judgeResult
@@ -141,8 +141,8 @@ typedef enum : NSUInteger {
        parameters:(NSDictionary *)param
              body:(NSString *)body
               hud:(BOOL)hud
-           policy:(XTResponseCachePolicy)cachePolicy
-    overTimeIfNeed:(int)overTimeIfNeed
+           policy:(XTReqPolicy)cachePolicy
+   overTimeIfNeed:(int)overTimeIfNeed
       judgeResult:(XTReqSaveJudgment(^)(id json))completion ;
 
 @end

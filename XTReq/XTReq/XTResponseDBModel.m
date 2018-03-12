@@ -43,13 +43,13 @@
     return [self newDefaultModelWithKey:urlStr
                                     val:respStr
                                  policy:0
-                                timeout:0] ;
+                               overTime:0] ;
 }
 
 + (instancetype)newDefaultModelWithKey:(NSString *)urlStr
                                    val:(NSString *)respStr
                                 policy:(int)policy
-                               timeout:(int)timeout
+                              overTime:(int)timeout
 {
     if (!policy) policy = XTResponseCachePolicyNeverUseCache ; // default policy
     if (policy == XTResponseCachePolicyOverTime && !timeout) timeout = 60 * 60 ; // 1hour default timeout if need .
@@ -57,7 +57,7 @@
     dbModel.requestUrl = urlStr ;
     dbModel.response = respStr ;
     dbModel.cachePolicy = policy ;
-    dbModel.timeout = timeout ;
+    dbModel.overTimeSec = timeout ;
     dbModel.createTime = [NSDate xt_getNowTick] ;
     dbModel.updateTime = dbModel.createTime ;
     return dbModel ;
@@ -66,7 +66,7 @@
 - (BOOL)isOverTime {
     NSDate *now = [NSDate date] ;
     NSDate *dateUpdate = [NSDate xt_getDateWithTick:self.updateTime] ;
-    NSDate *dateWillTimeout = [NSDate dateWithTimeInterval:self.timeout
+    NSDate *dateWillTimeout = [NSDate dateWithTimeInterval:self.overTimeSec
                                                  sinceDate:dateUpdate] ;
     NSComparisonResult result = [dateWillTimeout compare:now] ;
     return result == NSOrderedAscending ;

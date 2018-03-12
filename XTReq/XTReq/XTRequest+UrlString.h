@@ -20,6 +20,11 @@
 + (NSString *)getFinalUrlWithBaseUrl:(NSString *)baseUrlStr
                                param:(NSDictionary *)diction ;
 
++ (NSString *)getUniqueKeyWithUrl:(NSString *)url
+                           header:(NSDictionary *)header
+                            param:(NSDictionary *)param
+                             body:(NSString *)body ;
+
 + (NSString *)getTrailUrlInGetReqModeWithDic:(NSDictionary *)dict ;
     
 @end

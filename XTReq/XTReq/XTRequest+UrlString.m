@@ -30,6 +30,18 @@
     return [baseUrlStr stringByAppendingString:[self getTrailUrlInGetReqModeWithDic:diction]] ;
 }
 
++ (NSString *)getUniqueKeyWithUrl:(NSString *)url
+                           header:(NSDictionary *)header
+                            param:(NSDictionary *)param
+                             body:(NSString *)body
+{
+    NSString *finalUrl = [self getFinalUrlWithBaseUrl:url param:param] ;
+    if (header) finalUrl = [finalUrl stringByAppendingString:[NSString stringWithFormat:@"&%@",[self dicToString:header]]] ;
+    if (body) finalUrl = [finalUrl stringByAppendingString:[NSString stringWithFormat:@"&%@",body]] ;
+    NSLog(@"xt_UniqueKey : %@",finalUrl) ;
+    return finalUrl ;
+}
+
 + (NSString *)getTrailUrlInGetReqModeWithDic:(NSDictionary *)dict {
     NSArray *allKeys = [dict allKeys] ;
     BOOL bFirst = YES ;
@@ -48,5 +60,15 @@
     }
     return appendingStr ;
 }
+
++ (NSString *)dicToString:(NSDictionary *)dic {
+    NSString *result = @"" ;
+    for (NSString *key in dic) {
+        NSString *val = dic[key] ;
+        result = [result stringByAppendingString:[NSString stringWithFormat:@"&%@",val]] ;
+    }
+    return result ;
+}
+
 
 @end

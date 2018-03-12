@@ -16,8 +16,8 @@
 
 @implementation ViewController
 
-#define kURLstr     [NSString stringWithFormat:@"https://api.douban.com/v2/book/%@",@(1220562)]
-#define kURLstr2     [NSString stringWithFormat:@"https://api.douban.com/v2/book/%@",@(1220563)]
+#define kURLstr         [NSString stringWithFormat:@"https://api.douban.com/v2/book/%@",@(1220562)]
+#define kURLstr2        [NSString stringWithFormat:@"https://api.douban.com/v2/book/%@",@(1220563)]
 
 - (IBAction)cancelReqAction:(id)sender {
     
@@ -76,8 +76,8 @@
                        header:nil
                         param:nil
                          body:nil
-                       policy:XTResponseCachePolicyOverTime
-                overTimeIfNeed:10
+                       policy:XTReqPolicy_NeverCache_IRTU
+                overTimeIfNeed:0
                   judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
                       [self showInfoInAlert:[json yy_modelToJSONString]] ;
                       return XTReqSaveJudgment_willSave ;
@@ -86,7 +86,7 @@
 }
 
 - (IBAction)cacheJudgeResult:(id)sender {
-    [XTCacheRequest cacheGET:kURLstr
+    [XTCacheRequest cacheGET:kURLstr2
                       header:nil
                   parameters:nil
                  judgeResult:^XTReqSaveJudgment(id json) {

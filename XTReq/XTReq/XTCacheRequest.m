@@ -33,7 +33,7 @@
             header:header
         parameters:param
                hud:NO
-            policy:XTResponseCachePolicyNeverUseCache
+            policy:XTReqPolicy_NeverCache_WaitReturn
      overTimeIfNeed:0
         completion:completion] ;
 }
@@ -47,7 +47,7 @@
             header:header
         parameters:param
                hud:NO
-            policy:XTResponseCachePolicyNeverUseCache
+            policy:XTReqPolicy_NeverCache_WaitReturn
      overTimeIfNeed:0
        judgeResult:completion] ;
 }
@@ -56,7 +56,7 @@
           header:(NSDictionary *)header
       parameters:(NSDictionary *)param
              hud:(BOOL)hud
-          policy:(XTResponseCachePolicy)cachePolicy
+          policy:(XTReqPolicy)cachePolicy
    overTimeIfNeed:(int)overTimeIfNeed
       completion:(void(^)(id json))completion
 {
@@ -76,7 +76,7 @@
           header:(NSDictionary *)header
       parameters:(NSDictionary *)param
              hud:(BOOL)hud
-          policy:(XTResponseCachePolicy)cachePolicy
+          policy:(XTReqPolicy)cachePolicy
    overTimeIfNeed:(int)overTimeIfNeed
      judgeResult:(XTReqSaveJudgment (^)(id json))completion
 {
@@ -105,7 +105,7 @@
          parameters:param
                body:nil
                 hud:NO
-             policy:XTResponseCachePolicyNeverUseCache
+             policy:XTReqPolicy_NeverCache_WaitReturn
       overTimeIfNeed:0
          completion:completion] ;
 }
@@ -120,7 +120,7 @@
          parameters:param
                body:nil
                 hud:NO
-             policy:XTResponseCachePolicyNeverUseCache
+             policy:XTReqPolicy_NeverCache_WaitReturn
       overTimeIfNeed:0
         judgeResult:completion] ;
 }
@@ -130,7 +130,7 @@
        parameters:(NSDictionary *)param
              body:(NSString *)body
               hud:(BOOL)hud
-           policy:(XTResponseCachePolicy)cachePolicy
+           policy:(XTReqPolicy)cachePolicy
     overTimeIfNeed:(int)overTimeIfNeed
        completion:(void(^)(id json))completion
 {
@@ -152,7 +152,7 @@
        parameters:(NSDictionary *)param
              body:(NSString *)body
               hud:(BOOL)hud
-           policy:(XTResponseCachePolicy)cachePolicy
+           policy:(XTReqPolicy)cachePolicy
     overTimeIfNeed:(int)overTimeIfNeed
       judgeResult:(XTReqSaveJudgment(^)(id json))completion
 {
@@ -177,18 +177,23 @@
            header:(NSDictionary *)header
             param:(NSDictionary *)param
              body:(NSString *)body
-           policy:(XTResponseCachePolicy)cachePolicy
+           policy:(XTReqPolicy)cachePolicy
     overTimeIfNeed:(int)overTimeIfNeed
       judgeResult:(XTReqSaveJudgment(^)(BOOL isNewest, id json))completion
 {
-    NSString *strUniqueKey = [self getFinalUrlWithBaseUrl:url param:param] ;
+    NSString *strUniqueKey = [self getUniqueKeyWithUrl:url
+                                                header:header
+                                                 param:param
+                                                  body:body] ;
+    
     XTResponseDBModel *resModel = [XTResponseDBModel xt_findFirstWhere:[NSString stringWithFormat:@"requestUrl == '%@'",strUniqueKey]] ;
+    
     if (!resModel) {
-        // not cache
+        // never ever cached
         resModel = [XTResponseDBModel newDefaultModelWithKey:strUniqueKey
                                                          val:nil                         // response is nil
                                                       policy:cachePolicy
-                                                     timeout:overTimeIfNeed] ;
+                                                    overTime:overTimeIfNeed] ;
         
         [self updateRequestWithType:reqMode
                                 url:url
@@ -204,13 +209,33 @@
     }
     else {
         // has cache
+        resModel.cachePolicy = cachePolicy ;
         // completion return cache first .
-        if (completion) completion(NO, [self.class getJsonWithStr:resModel.response]) ;
+        if (cachePolicy & XTResponseReturnPolicyImmediatelyReturnThenUpdate && completion) completion(NO, [self.class getJsonWithStr:resModel.response]) ;
         
-        switch (resModel.cachePolicy)
-        {
-            case XTResponseCachePolicyNeverUseCache:
-            {//从不缓存 适合每次都实时的数据流.
+        if ( cachePolicy & XTResponseCachePolicyNeverUseCache ) {
+            //NeverUseCache everytime new req return .
+            [self updateRequestWithType:reqMode
+                                    url:url
+                                    hud:hud
+                                 header:header
+                                  param:param
+                                   body:body
+                          responseModel:resModel
+                             completion:^XTReqSaveJudgment (id json) {
+                                 if ( completion) return completion(YES, json) ; // return newest result once or again.
+                                 return XTReqSaveJudgment_willSave ;
+                             }] ;
+        }
+        else if ( cachePolicy & XTResponseCachePolicyAlwaysCache ) {
+            // always return cache
+            if (cachePolicy & XTResponseReturnPolicyWaitUtilReqDone && completion)
+                completion(NO,[self.class getJsonWithStr:resModel.response]) ;
+        }
+        else if ( cachePolicy & XTResponseCachePolicyOverTime ) {
+            // overTime or not ? . needs set overTime
+            if ([resModel isOverTime]) {
+                // timeout . update request
                 [self updateRequestWithType:reqMode
                                         url:url
                                         hud:hud
@@ -219,38 +244,15 @@
                                        body:body
                               responseModel:resModel
                                  completion:^XTReqSaveJudgment (id json) {
-                                     if (completion) return completion(YES, json) ; // return newest result again.
+                                     if (completion) return completion(YES, json) ; // return newest result once or again.
                                      return XTReqSaveJudgment_willSave ;
                                  }] ;
             }
-                break;
-            case XTResponseCachePolicyAlwaysCache:
-            {//总是获取缓存的数据.不再更新.
-                //if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
+            else {
+                // return cache
+                if (cachePolicy & XTResponseReturnPolicyWaitUtilReqDone && completion)
+                    completion(NO,[self.class getJsonWithStr:resModel.response]) ;
             }
-                break;
-            case XTResponseCachePolicyOverTime:
-            {//规定时间内.返回缓存.超时则更新数据. 需设置timeout时间. timeout默认1小时
-                if ([resModel isOverTime]) { // timeout . update request
-                    [self updateRequestWithType:reqMode
-                                            url:url
-                                            hud:hud
-                                         header:header
-                                          param:param
-                                           body:body
-                                  responseModel:resModel
-                                     completion:^XTReqSaveJudgment (id json) {
-                                         if (completion) return completion(YES, json) ; // return newest result again.
-                                         return XTReqSaveJudgment_willSave ;
-                                     }] ;
-                }
-                else { // return cache
-                    //if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
-                }
-            }
-                break;
-            default:
-                break;
         }
     }
 }
@@ -261,7 +263,7 @@
            header:(NSDictionary *)header
             param:(NSDictionary *)param
              body:(NSString *)body
-           policy:(XTResponseCachePolicy)cachePolicy
+           policy:(XTReqPolicy)cachePolicy
     overTimeIfNeed:(int)overTimeIfNeed
        completion:(void(^)(BOOL isNewest, id json))completion
 {
