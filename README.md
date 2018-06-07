@@ -10,6 +10,8 @@ pod 'XTReq'
 ```
 
 # XTRequest
+
+Based on [XTFMDB](https://github.com/Akateason/XTFMDB)
 1.  share one manager .
 2.  async and sync .
 3.  GET / POST / PUT , fast append HTTP header / formdata / rawbody
