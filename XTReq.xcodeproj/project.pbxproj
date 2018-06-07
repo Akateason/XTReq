@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F19862020C968270082662A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8F19861F20C968270082662A /* README.md */; };
 		8F2BFD7C203EA8040013394D /* NSString+XTReq_Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */; };
 		8F2BFFCA203FC2670013394D /* XTRequest+UrlString.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2BFFC9203FC2670013394D /* XTRequest+UrlString.m */; };
 		8F785BA81ECBDAE3005D5ECC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BA71ECBDAE3005D5ECC /* main.m */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		1E5D39551A0715AEF157A2B5 /* Pods-XTReq.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XTReq.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XTReq/Pods-XTReq.debug.xcconfig"; sourceTree = "<group>"; };
 		3CEEC9E70B54B97213FAD3C3 /* libPods-XTReq.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XTReq.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F19861F20C968270082662A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8F2BFD7A203EA8040013394D /* NSString+XTReq_Extend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+XTReq_Extend.h"; sourceTree = "<group>"; };
 		8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+XTReq_Extend.m"; sourceTree = "<group>"; };
 		8F2BFFC8203FC2670013394D /* XTRequest+UrlString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XTRequest+UrlString.h"; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 		8F785B9A1ECBDAE3005D5ECC = {
 			isa = PBXGroup;
 			children = (
+				8F19861F20C968270082662A /* README.md */,
 				8F785BA51ECBDAE3005D5ECC /* XTReq */,
 				8F785BA41ECBDAE3005D5ECC /* Products */,
 				F8584687362E298ADE067AEA /* Pods */,
@@ -207,6 +210,7 @@
 			files = (
 				8F785BB61ECBDAE3005D5ECC /* LaunchScreen.storyboard in Resources */,
 				8F785BB31ECBDAE3005D5ECC /* Assets.xcassets in Resources */,
+				8F19862020C968270082662A /* README.md in Resources */,
 				8F785BB11ECBDAE3005D5ECC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

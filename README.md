@@ -1,15 +1,4 @@
 # XTReq
-* 基于AFNetworking代码最少的请求框架.
-* 无内存泄露
-* 同步异步
-* GET / POST / PUT , header , formData , rawbody
-* 带progessHUD
-* 取消
-* 持久化保存(缓存)
-* 支持立即返回缓存.请求后再刷新最新请求结果.
-* 指定三种不同的保存策略
-* 可手动保存可控
-
 
 cocoapods 
 ```
@@ -35,7 +24,7 @@ pod 'XTReq'
 
 ---
 
-* 使用示例 供参考
+* FYI
 
 ## XTRequest
 ### async
@@ -75,64 +64,47 @@ id json = [XTRequest syncWithReqMode:
 
 ## XTCacheRequest
 
-#### 若需要缓存. 需在APPdelegate配置, 传入你的数据库名, 如果有的话.
+prepare in appDidLaunch
 ```
 [XTCacheRequest configXTCacheReqWhenAppDidLaunchWithDBName:@"yourDB"] ;
 
 ```
 
 
-### 最通常的情况, 一行调用
+###  XTCacheRequest judgeResult designated MAIN FUNC
 ```
-[XTCacheRequest cacheGET:
-                parameters:
-                completion:^(id json) {
-
-}] ;
-
-```
-
-### 全能方法
-```
-[XTCacheRequest cachedReq:XTRequestMode_GET_MODE
-                    url:kURLstr
-                    hud:YES
-                    header:nil
-                    param:nil
-                    policy:XTResponseCachePolicyTimeout
-                    timeoutIfNeed:10
-                    judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
-                        [self showInfoInAlert:[json yy_modelToJSONString]] ;
-                        return XTReqSaveJudgment_willSave ;
-}] ;
-
+@param reqMode         XTRequestMode               get / post mode .
+@param url             string
+@param hud             bool
+@param header          dic                         HTTP header if has .
+@param param           dic                         param if has .
+@param body            str                         post rawbody if has .
+@param cachePolicy     XTReqPolicy                 req policy .
+@param overTimeIfNeed   INT (seconds)               only in XTReqPolicyOverTime mode .
+@param completion      (XTReqSaveJudgment(^)(BOOL isNewest, id json))completion
+PARAM  isNewest          : isCacheOrNewest
+PARAM  json              : respObj
+RETURN XTReqSaveJudgment : judge If Need Cache
 ```
 
 
-### 缓存策略
+### XTReqPolicy
 ```
-***XTResponseCacheType***
-*  XTResponseCachePolicyNeverUseCache  从不缓存适合每次都实时的数据流.
-*  XTResponseCachePolicyAlwaysCache    总是获取缓存的数据.不再更新.
-*  XTResponseCachePolicyTimeout        规定时间内.返回缓存.超时则更新数据. 需设置timeout时间. timeout默认1小时
+typedef NS_OPTIONS(NSUInteger, XTReqPolicy) {
+XTReqPolicy_NeverCache_WaitReturn   = XTResponseCachePolicyNeverUseCache | XTResponseReturnPolicyWaitUtilReqDone ,      // DEFAULT
+XTReqPolicy_AlwaysCache_WaitReturn  = XTResponseCachePolicyAlwaysCache | XTResponseReturnPolicyWaitUtilReqDone ,
+XTReqPolicy_OverTime_WaitReturn     = XTResponseCachePolicyOverTime | XTResponseReturnPolicyWaitUtilReqDone ,
+
+XTReqPolicy_NeverCache_IRTU         = XTResponseCachePolicyNeverUseCache | XTResponseReturnPolicyImmediatelyReturnThenUpdate ,
+XTReqPolicy_AlwaysCache_IRTU        = XTResponseCachePolicyAlwaysCache | XTResponseReturnPolicyImmediatelyReturnThenUpdate ,
+XTReqPolicy_OverTime_IRTU           = XTResponseCachePolicyOverTime | XTResponseReturnPolicyImmediatelyReturnThenUpdate ,
+} ;
+
 ```
 
-### 你也可指定三种不同的保存策略 以定时为例.设计定时超出时间.s为单位.
-### XTResponseCachePolicy
-```
-[XTCacheRequest cacheGET:kURLstr
-                header:nil
-                parameters:nil
-                hud:YES
-                policy:XTResponseCachePolicyTimeout
-                timeoutIfNeed:10 * 60
-                completion:^(id json) {
 
-}] ;
-```
-
-### 防止服务器出bug或者崩溃的处理方法
-### 控制是否保存
+### Handling dirty data
+### use XTReqSaveJudgment block 
 * XTReqSaveJudgment_willSave
 * XTReqSaveJudgment_NotSave
 
@@ -141,7 +113,7 @@ id json = [XTRequest syncWithReqMode:
                 parameters:nil
                 judgeResult:^XTReqSaveJudgment(id json) {
                     if (!json) {
-                        return XTReqSaveJudgment_NotSave ; // 数据格式不对. 则不保存的情况.
+                        return XTReqSaveJudgment_NotSave ; // dirty data will not save
                     }
                     else {
                         [self showInfoInAlert:[json yy_modelToJSONString]] ;
