@@ -48,14 +48,6 @@ static XTReqSessionManager *_instance = nil;
     return  _instance;
 }
 
-+ (id)copyWithZone:(struct _NSZone *)zone {
-    return  _instance;
-}
-
-+ (id)mutableCopyWithZone:(struct _NSZone *)zone {
-    return _instance;
-}
-
 - (id)mutableCopyWithZone:(NSZone *)zone {
     return _instance;
 }

@@ -20,6 +20,7 @@ static const float kTIMEOUT = 15.f ;
 
 + (instancetype)shareInstance ;
 
+// clear session Mannager responseSerializer.acceptableContentTypes and http headers
 - (void)reset ;
 
 @end
