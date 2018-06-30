@@ -52,6 +52,7 @@ NSString *const kStringNetworkNotConnect = @"网络连接不可用" ;
 #pragma mark --
 #pragma mark - async
 #pragma mark - get
+
 + (NSURLSessionDataTask *)GETWithUrl:(NSString *)url
                           parameters:(NSDictionary *)dict
                              success:(void (^)(id json))success
@@ -128,14 +129,36 @@ NSString *const kStringNetworkNotConnect = @"网络连接不可用" ;
                               success:(void (^)(id json))success
                                  fail:(void (^)())fail
 {
+    if (hud) [SVProgressHUD show] ;
+    
+    if (header) {
+        for (NSString *key in header) {
+            NSString *value = header[key] ;
+            [[XTReqSessionManager shareInstance].requestSerializer setValue:value
+                                                         forHTTPHeaderField:key] ;
+        }
+    }
+    
     return
-    [self POSTWithUrl:url
-               header:header
-           parameters:dict
-              rawBody:nil
-                  hud:hud
-              success:success
-                 fail:fail] ;
+    [[XTReqSessionManager shareInstance] POST:url parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [[XTReqSessionManager shareInstance] reset] ;
+        if (success) {
+            if (hud) [SVProgressHUD dismiss] ;
+            NSLog(@"url : %@ \nparam : %@",url,dict) ;
+            NSLog(@"resp\n %@ %@",responseObject, kFLEX_IN_LOG_TAIL) ;
+            success(responseObject) ;
+        }
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"xt_req fail Error:%@ %@", error ,kFLEX_IN_LOG_TAIL) ;
+        [[XTReqSessionManager shareInstance] reset] ;
+        if (fail) {
+            if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
+            fail() ;
+        }
+    }] ;
 }
 
 + (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
