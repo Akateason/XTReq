@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "XTReq.h"
+#import <YYModel.h>
 
 @interface AppDelegate ()
 
@@ -21,6 +22,32 @@
     // config cache req .
     [XTCacheRequest configXTCacheReqWhenAppDidLaunchWithDBName:@"teason"] ;
     
+    
+    NSDictionary *dic = @{@"app_version":@"1082",
+                          @"device_info":@"iPhone7,2",
+                          @"imei":@"",
+                          @"os_version":@"iOS 11.4",
+                          @"channel_code":@"SC000000",
+                          @"os_name":@"iOS",
+                          @"identifier":@"BBDCB834-09AB-4574-AE31-CF9CD08E1D0F",
+                          @"app_name":@"swift.free.phone.call.wifi.chat.ios"} ;
+
+////    Cookie = "auth_token=c1f3bbee-099d-4d6c-82f6-d4d0bcd13ab4";
+//    [XTRequest POSTWithUrl:@"https://zh-cn.ime.cootek.com/statistic/active"
+//                    header:@{@"Cookie" : @"auth_token=c1f3bbee-099d-4d6c-82f6-d4d0bcd13ab4"}
+//                parameters:dic
+//                       hud:YES
+//                   success:^(id json) {
+//
+//                   } fail:^{
+//
+//                   }] ;
+
+    [XTRequest POSTWithUrl:@"https://zh-cn.ime.cootek.com/statistic/active" header:@{@"Cookie" : @"auth_token=c1f3bbee-099d-4d6c-82f6-d4d0bcd13ab4"} parameters:dic rawBody:[dic yy_modelToJSONString] hud:YES success:^(id json) {
+        
+    } fail:^{
+        
+    }] ;
     
     return YES;
 }

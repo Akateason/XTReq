@@ -84,7 +84,7 @@ static NSString *const kBaseURL = @"http://yourbaseAPI.com" ;
                               success:(void (^)(id json))success
                                  fail:(void (^)())fail ;
 /**
- post url + param + header + body + hud
+ post url + param + header + rawbody + hud
  */
 + (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
                                header:(NSDictionary *)header
