@@ -11,6 +11,7 @@
 
 #import "XTRequest.h"
 #import "XTRequest+UrlString.h"
+#import "XTRequest+Reachability.h"
 #import "XTCacheRequest.h"
 #import "XTReqSessionManager.h"
 

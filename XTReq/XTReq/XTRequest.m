@@ -11,9 +11,8 @@
 #import "YYModel.h"
 
 NSString *const kStringBadNetwork        = @"网络请求失败" ;
-NSString *const kStringNetworkNotConnect = @"网络连接不可用" ;
 
-#define kFLEX_IN_LOG_TAIL   @"\n🏀🏀🏀🏀🏀"
+#define kFLEX_IN_LOG_TAIL   @"\n🌍🌍🌍🌍 XTReq 🌍🌍🌍🌍"
 
 @implementation XTRequest
 
@@ -21,32 +20,6 @@ NSString *const kStringNetworkNotConnect = @"网络连接不可用" ;
 #pragma mark - param
 
 + (NSMutableDictionary *)getParameters { return [@{} mutableCopy] ; }
-
-
-//  status
-#pragma mark --
-#pragma mark - status
-
-+ (void)startMonitor {
-    [[AFNetworkReachabilityManager sharedManager] startMonitoring] ;
-}
-
-+ (void)stopMonitor {
-    [[AFNetworkReachabilityManager sharedManager] stopMonitoring] ;
-}
-
-+ (NSString *)netWorkStatus {
-    return [[AFNetworkReachabilityManager sharedManager] localizedNetworkReachabilityStatusString] ;
-}
-
-+ (BOOL)isWifi {
-    return [[AFNetworkReachabilityManager sharedManager] isReachableViaWiFi] ;
-}
-
-+ (BOOL)isReachable {
-    return [[AFNetworkReachabilityManager sharedManager] isReachable] ;
-}
-
 
 //  async
 #pragma mark --
@@ -56,7 +29,7 @@ NSString *const kStringNetworkNotConnect = @"网络连接不可用" ;
 + (NSURLSessionDataTask *)GETWithUrl:(NSString *)url
                           parameters:(NSDictionary *)dict
                              success:(void (^)(id json))success
-                                fail:(void (^)())fail ;
+                                fail:(void (^)())fail
 {
     return
     [self GETWithUrl:url
@@ -188,7 +161,6 @@ NSString *const kStringNetworkNotConnect = @"网络连接不可用" ;
         NSData *dataBody = [rawBody dataUsingEncoding:NSUTF8StringEncoding] ;
         [request setHTTPBody:dataBody] ;
     }
-    
     
     NSURLSessionDataTask *task =
     [[XTReqSessionManager shareInstance] dataTaskWithRequest:request

@@ -33,13 +33,6 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
 // param
 + (NSMutableDictionary *)getParameters ;
 
-// reachability
-+ (void)startMonitor ;
-+ (void)stopMonitor  ;
-+ (NSString *)netWorkStatus ;
-+ (BOOL)isWifi ;
-+ (BOOL)isReachable ;
-
 /**
  async req
  */
@@ -104,7 +97,6 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
 /**
  sync req
  */
-
 + (id)syncWithReqMode:(XTRequestMode)mode
               timeout:(int)timeout
                   url:(NSString *)url

@@ -10,6 +10,7 @@
 		8F19862020C968270082662A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8F19861F20C968270082662A /* README.md */; };
 		8F2BFD7C203EA8040013394D /* NSString+XTReq_Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */; };
 		8F2BFFCA203FC2670013394D /* XTRequest+UrlString.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2BFFC9203FC2670013394D /* XTRequest+UrlString.m */; };
+		8F44616821464F2C00A6D322 /* XTRequest+Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F44616721464F2C00A6D322 /* XTRequest+Reachability.m */; };
 		8F785BA81ECBDAE3005D5ECC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BA71ECBDAE3005D5ECC /* main.m */; };
 		8F785BAB1ECBDAE3005D5ECC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BAA1ECBDAE3005D5ECC /* AppDelegate.m */; };
 		8F785BAE1ECBDAE3005D5ECC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BAD1ECBDAE3005D5ECC /* ViewController.m */; };
@@ -32,6 +33,8 @@
 		8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+XTReq_Extend.m"; sourceTree = "<group>"; };
 		8F2BFFC8203FC2670013394D /* XTRequest+UrlString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XTRequest+UrlString.h"; sourceTree = "<group>"; };
 		8F2BFFC9203FC2670013394D /* XTRequest+UrlString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "XTRequest+UrlString.m"; sourceTree = "<group>"; };
+		8F44616621464F2C00A6D322 /* XTRequest+Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XTRequest+Reachability.h"; sourceTree = "<group>"; };
+		8F44616721464F2C00A6D322 /* XTRequest+Reachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "XTRequest+Reachability.m"; sourceTree = "<group>"; };
 		8F785BA31ECBDAE3005D5ECC /* XTReq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XTReq.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F785BA71ECBDAE3005D5ECC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8F785BA91ECBDAE3005D5ECC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -126,6 +129,8 @@
 				8F785BC01ECBDB07005D5ECC /* XTReq.h */,
 				8F785BC51ECBDB07005D5ECC /* XTRequest.h */,
 				8F785BC61ECBDB07005D5ECC /* XTRequest.m */,
+				8F44616621464F2C00A6D322 /* XTRequest+Reachability.h */,
+				8F44616721464F2C00A6D322 /* XTRequest+Reachability.m */,
 				8F2BFFC8203FC2670013394D /* XTRequest+UrlString.h */,
 				8F2BFFC9203FC2670013394D /* XTRequest+UrlString.m */,
 				8F785BC31ECBDB07005D5ECC /* XTReqSessionManager.h */,
@@ -288,6 +293,7 @@
 				8F2BFFCA203FC2670013394D /* XTRequest+UrlString.m in Sources */,
 				8F785BA81ECBDAE3005D5ECC /* main.m in Sources */,
 				8F785BCC1ECBDB07005D5ECC /* XTRequest.m in Sources */,
+				8F44616821464F2C00A6D322 /* XTRequest+Reachability.m in Sources */,
 				8F785BCB1ECBDB07005D5ECC /* XTReqSessionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
