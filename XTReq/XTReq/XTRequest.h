@@ -33,9 +33,7 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
 // param
 + (NSMutableDictionary *)getParameters ;
 
-/**
- async req
- */
+#pragma mark - async
 
 // GET
 /**
@@ -94,9 +92,23 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
                              success:(void (^)(NSURLSessionDataTask * task ,id json))success
                                 fail:(void (^)())fail ;
 
-/**
- sync req
- */
+// UPLOAD IMAGES
++ (void)uploadImageWithParam:(NSDictionary *)param
+                  imageArray:(NSArray *)imageArray
+                      urlStr:(NSString *)urlString
+                    progress:(nullable void (^)(float))progressValueBlock
+                     success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                     failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure ;
+
+// DOWNLOAD
++ (void)downLoadFileWithSavePath:(NSString *)savePath
+                   fromUrlString:(NSString *)urlString
+                         success:(void (^)(id response))success
+                            fail:(void (^)(NSError *error))fail
+                downLoadProgress:(void (^)(float))progress ;
+
+#pragma mark - sync
+
 + (id)syncWithReqMode:(XTRequestMode)mode
               timeout:(int)timeout
                   url:(NSString *)url

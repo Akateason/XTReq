@@ -11,9 +11,13 @@
 @interface XTRequest (Reachability)
 
 + (void)startMonitor ;
+
 + (void)stopMonitor  ;
+
 + (NSString *)netWorkStatus ;
+
 + (BOOL)isWifi ;
+
 + (BOOL)isReachable ;
 
 @end

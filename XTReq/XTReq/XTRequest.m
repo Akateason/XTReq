@@ -228,6 +228,64 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
     
 }
 
++ (void)uploadImageWithParam:(NSDictionary *)param
+                  imageArray:(NSArray *)imageArray
+                      urlStr:(NSString *)urlString
+                    progress:(nullable void (^)(float))progressValueBlock
+                     success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                     failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure {
+    
+    [[XTReqSessionManager shareInstance] POST:urlString parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        NSUInteger i = 0;
+        for (UIImage * image in imageArray) {
+            NSData *imgData = UIImageJPEGRepresentation(image, .5) ;
+            //拼接data
+            [formData appendPartWithFileData:imgData
+                                        name:[NSString stringWithFormat:@"picflie%ld",(long)i]
+                                    fileName:@"image.png"
+                                    mimeType:@" image/jpeg"];
+            i++;
+        }
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        progressValueBlock(uploadProgress.completedUnitCount / uploadProgress.totalUnitCount) ;
+    } success:success failure:failure] ;
+}
+
++ (void)downLoadFileWithSavePath:(NSString *)savePath
+                   fromUrlString:(NSString *)urlString
+                         success:(void (^)(id response))success
+                            fail:(void (^)(NSError *error))fail
+                downLoadProgress:(void (^)(float))progress {
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]] ;
+    
+    NSURL *url = [NSURL URLWithString:urlString] ;
+    NSURLRequest *request = [NSURLRequest requestWithURL:url] ;
+    
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+        NSLog(@"下载进度：%.0f％", downloadProgress.fractionCompleted * 100) ;
+        progress(downloadProgress.fractionCompleted) ;
+        
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        return [NSURL fileURLWithPath:savePath] ;
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        
+        if (error) {
+            fail(error) ;
+        }
+        else {
+            NSLog(@"下载完成");
+            success(response) ;
+        }
+    }] ;
+    [downloadTask resume] ;
+}
+
+
+
 #pragma mark --
 #pragma mark - sync
 
