@@ -11,13 +11,16 @@ pod 'XTReq'
 
 # XTRequest
 
-Based on [XTFMDB](https://github.com/Akateason/XTFMDB)
+Based on [XTFMDB](https://github.com/Akateason/XTFMDB) & AFNetworking
 1.  share one manager .
 2.  async and sync .
 3.  GET / POST / PUT , fast append HTTP header / formdata / rawbody
 4.  log result
 5.  show hud
 6. cancel all req
+7. upload images
+8. download
+9. reachability
 
 #  XTCacheRequest
 1.  Persistent save the response of requests .
