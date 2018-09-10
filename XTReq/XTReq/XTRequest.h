@@ -25,12 +25,8 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
     XTRequestMode_PUT_MODE  ,
 } ;
 
-// base URL
-static NSString *const kBaseURL = @"http://yourbaseAPI.com" ;
-
 // get PARAM
 #define XT_GET_PARAM                         NSMutableDictionary *param = [XTRequest getParameters] ;
-
 
 @interface XTRequest : XTReqSessionManager
 
@@ -105,7 +101,6 @@ static NSString *const kBaseURL = @"http://yourbaseAPI.com" ;
                              success:(void (^)(NSURLSessionDataTask * task ,id json))success
                                 fail:(void (^)())fail ;
 
-
 /**
  sync req
  */
@@ -124,7 +119,6 @@ static NSString *const kBaseURL = @"http://yourbaseAPI.com" ;
 /**
  cancel all req
  */
-
 + (void)cancelAllRequest ;
 
 @end

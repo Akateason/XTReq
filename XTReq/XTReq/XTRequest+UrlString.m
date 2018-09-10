@@ -10,31 +10,20 @@
 
 @implementation XTRequest (UrlString)
 
-+ (NSString *)getFinalUrlWithTrailStr:(NSString *)strPartOfUrl {
-    return [self getFinalUrlWithBaseUrl:kBaseURL trailStr:strPartOfUrl] ;
-}
-
 + (NSString *)getFinalUrlWithBaseUrl:(NSString *)baseUrlStr
-                            trailStr:(NSString *)strPartOfUrl
-{
+                            trailStr:(NSString *)strPartOfUrl {
     return [baseUrlStr stringByAppendingString:strPartOfUrl] ;
 }
 
-+ (NSString *)getFinalUrlWithParam:(NSDictionary *)diction {
-    return [self getFinalUrlWithBaseUrl:kBaseURL param:diction] ;
-}
-
 + (NSString *)getFinalUrlWithBaseUrl:(NSString *)baseUrlStr
-                               param:(NSDictionary *)diction
-{
+                               param:(NSDictionary *)diction {
     return [baseUrlStr stringByAppendingString:[self getTrailUrlInGetReqModeWithDic:diction]] ;
 }
 
 + (NSString *)getUniqueKeyWithUrl:(NSString *)url
                            header:(NSDictionary *)header
                             param:(NSDictionary *)param
-                             body:(NSString *)body
-{
+                             body:(NSString *)body {
     NSString *finalUrl = [self getFinalUrlWithBaseUrl:url param:param] ;
     if (header) finalUrl = [finalUrl stringByAppendingString:[NSString stringWithFormat:@"&%@",[self dicToString:header]]] ;
     if (body) finalUrl = [finalUrl stringByAppendingString:[NSString stringWithFormat:@"&%@",body]] ;

@@ -10,12 +10,8 @@
 
 @interface XTRequest (UrlString)
 
-+ (NSString *)getFinalUrlWithTrailStr:(NSString *)strPartOfUrl ;
-
 + (NSString *)getFinalUrlWithBaseUrl:(NSString *)baseUrlStr
                             trailStr:(NSString *)strPartOfUrl ;
-
-+ (NSString *)getFinalUrlWithParam:(NSDictionary *)diction ;
 
 + (NSString *)getFinalUrlWithBaseUrl:(NSString *)baseUrlStr
                                param:(NSDictionary *)diction ;
@@ -26,5 +22,5 @@
                              body:(NSString *)body ;
 
 + (NSString *)getTrailUrlInGetReqModeWithDic:(NSDictionary *)dict ;
-    
+
 @end
