@@ -29,8 +29,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
 + (NSURLSessionDataTask *)GETWithUrl:(NSString *)url
                           parameters:(NSDictionary *)dict
                              success:(void (^)(id json))success
-                                fail:(void (^)())fail
-{
+                                fail:(void (^)())fail {
     return
     [self GETWithUrl:url
               header:nil
@@ -45,8 +44,9 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                           parameters:(NSDictionary *)dict
                                  hud:(BOOL)hud
                              success:(void (^)(id json))success
-                                fail:(void (^)())fail
-{
+                                fail:(void (^)())fail {
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     if (hud) [SVProgressHUD show] ;
     
     if (header) {
@@ -69,6 +69,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                                              NSLog(@"resp\n %@ %@",responseObject, kFLEX_IN_LOG_TAIL) ;
                                              success(responseObject) ;
                                          }
+                                         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                                      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                          NSLog(@"xt_req fail Error:%@ %@", error ,kFLEX_IN_LOG_TAIL) ;
                                          [[XTReqSessionManager shareInstance] reset] ;
@@ -76,6 +77,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                                              if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
                                              fail() ;
                                          }
+                                         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                                      }] ;
 }
 
@@ -84,8 +86,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
 + (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
                            parameters:(NSDictionary *)dict
                               success:(void (^)(id json))success
-                                 fail:(void (^)())fail
-{
+                                 fail:(void (^)())fail {
     return
     [self POSTWithUrl:url
                header:nil
@@ -100,8 +101,9 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                            parameters:(NSDictionary *)dict
                                   hud:(BOOL)hud
                               success:(void (^)(id json))success
-                                 fail:(void (^)())fail
-{
+                                 fail:(void (^)())fail {
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     if (hud) [SVProgressHUD show] ;
     
     if (header) {
@@ -122,7 +124,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
             NSLog(@"resp\n %@ %@",responseObject, kFLEX_IN_LOG_TAIL) ;
             success(responseObject) ;
         }
-
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"xt_req fail Error:%@ %@", error ,kFLEX_IN_LOG_TAIL) ;
@@ -131,6 +133,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
             if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
             fail() ;
         }
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }] ;
 }
 
@@ -140,8 +143,10 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                               rawBody:(NSString *)rawBody
                                   hud:(BOOL)hud
                               success:(void (^)(id json))success
-                                 fail:(void (^)())fail
-{
+                                 fail:(void (^)())fail {
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+
     if (hud) [SVProgressHUD show] ;
     // url , param
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST"
@@ -180,6 +185,9 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                                                 if (fail) fail() ;
                                                 if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
                                             }
+                                            
+                                            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+
                                         }]  ;
     [task resume] ;
     return task ;
@@ -192,8 +200,9 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                                  hud:(BOOL)hud
                           parameters:(NSDictionary *)dict
                              success:(void (^)(NSURLSessionDataTask * task ,id json))success
-                                fail:(void (^)())fail
-{
+                                fail:(void (^)())fail {
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     if (hud) [SVProgressHUD show] ;
     
     if (header) {
@@ -211,11 +220,11 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                                          [[XTReqSessionManager shareInstance] reset] ;
                                          if (success) {
                                              if (hud) [SVProgressHUD dismiss] ;
-                                             
                                              NSLog(@"url : %@ \nparam : %@",url,dict) ;
                                              NSLog(@"resp\n %@ %@",responseObject,kFLEX_IN_LOG_TAIL) ;
                                              success(task , responseObject) ;
                                          }
+                                         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                                      }
                                      failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                          NSLog(@"xt_req fail Error: %@ %@",error,kFLEX_IN_LOG_TAIL) ;
@@ -224,6 +233,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                                              if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
                                              fail() ;
                                          }
+                                         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                                      }] ;
     
 }
@@ -234,23 +244,38 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                     progress:(nullable void (^)(float))progressValueBlock
                      success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                      failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure {
-    
+
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+
     [[XTReqSessionManager shareInstance] POST:urlString parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
-        NSUInteger i = 0;
+        NSUInteger i = 0 ;
         for (UIImage * image in imageArray) {
-            NSData *imgData = UIImageJPEGRepresentation(image, .5) ;
-            //拼接data
+            NSData *imgData = UIImageJPEGRepresentation(image, 1) ;
             [formData appendPartWithFileData:imgData
                                         name:[NSString stringWithFormat:@"picflie%ld",(long)i]
                                     fileName:@"image.png"
-                                    mimeType:@" image/jpeg"];
-            i++;
+                                    mimeType:@" image/jpeg"] ; // filename todo
+            i++ ;
         }
         
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        progressValueBlock(uploadProgress.completedUnitCount / uploadProgress.totalUnitCount) ;
-    } success:success failure:failure] ;
+        float rProgress = (float)uploadProgress.completedUnitCount / (float)uploadProgress.totalUnitCount ;
+        NSLog(@"上传进度 %lf", rProgress) ;
+        progressValueBlock(rProgress) ;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (success) {
+            success(task,responseObject) ;
+            NSLog(@"images upload all success %@",kFLEX_IN_LOG_TAIL) ;
+        }
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO ;
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+            failure(task,error) ;
+            NSLog(@"images upload fail %@",kFLEX_IN_LOG_TAIL) ;
+        }
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO ;
+    }] ;
 }
 
 + (void)downLoadFileWithSavePath:(NSString *)savePath
@@ -258,6 +283,8 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                          success:(void (^)(id response))success
                             fail:(void (^)(NSError *error))fail
                 downLoadProgress:(void (^)(float))progress {
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]] ;
     
@@ -274,12 +301,15 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
         
         if (error) {
+            NSLog(@"images download fail error:%@ %@",error,kFLEX_IN_LOG_TAIL) ;
             fail(error) ;
         }
         else {
-            NSLog(@"下载完成");
+            NSLog(@"images download success %@",kFLEX_IN_LOG_TAIL) ;
             success(response) ;
         }
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO ;
+
     }] ;
     [downloadTask resume] ;
 }
@@ -296,8 +326,10 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
               timeout:(int)timeout
                   url:(NSString *)url
                header:(NSDictionary *)header
-           parameters:(NSDictionary *)dict
-{
+           parameters:(NSDictionary *)dict {
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+
     __block id result = nil ;
     NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
         AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init] ;
@@ -360,7 +392,9 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
     }] ;
     [operation start] ;
     [operation waitUntilFinished] ;
-    
+
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO ;
+
     return result ;
 }
 
