@@ -401,8 +401,8 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
 + (id)syncWithReqMode:(XTRequestMode)mode
                   url:(NSString *)url
               header:(NSDictionary *)header
-          parameters:(NSDictionary *)dict
-{
+          parameters:(NSDictionary *)dict {
+    
     return [self syncWithReqMode:mode
                          timeout:kTIMEOUT
                              url:url
