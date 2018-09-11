@@ -17,13 +17,13 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
 @implementation XTRequest
 
 #pragma mark --
-#pragma mark - param
+#pragma mark - Param
 
 + (NSMutableDictionary *)getParameters { return [@{} mutableCopy] ; }
 
 //  async
 #pragma mark --
-#pragma mark - async
+#pragma mark - Async
 #pragma mark - get
 
 + (NSURLSessionDataTask *)GETWithUrl:(NSString *)url
@@ -66,7 +66,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                                          if (success) {
                                              if (hud) [SVProgressHUD dismiss] ;
                                              NSLog(@"url : %@ \nparam : %@",url,dict) ;
-                                             NSLog(@"resp\n %@ %@",responseObject, kFLEX_IN_LOG_TAIL) ;
+                                             NSLog(@"resp\n %@ %@",[responseObject yy_modelToJSONString], kFLEX_IN_LOG_TAIL) ;
                                              success(responseObject) ;
                                          }
                                          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -121,7 +121,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
         if (success) {
             if (hud) [SVProgressHUD dismiss] ;
             NSLog(@"url : %@ \nparam : %@",url,dict) ;
-            NSLog(@"resp\n %@ %@",responseObject, kFLEX_IN_LOG_TAIL) ;
+            NSLog(@"resp\n %@ %@",[responseObject yy_modelToJSONString], kFLEX_IN_LOG_TAIL) ;
             success(responseObject) ;
         }
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -175,7 +175,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                                             if (hud) [SVProgressHUD dismiss] ;
 
                                             NSLog(@"url : %@ \nparam : %@",url,param) ;
-                                            NSLog(@"resp\n %@ %@",responseObject,kFLEX_IN_LOG_TAIL) ;
+                                            NSLog(@"resp\n %@ %@",[responseObject yy_modelToJSONString],kFLEX_IN_LOG_TAIL) ;
                                             [[XTReqSessionManager shareInstance] reset] ;
                                             if (!error) {
                                                 if (success) success(responseObject) ;
@@ -221,7 +221,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                                          if (success) {
                                              if (hud) [SVProgressHUD dismiss] ;
                                              NSLog(@"url : %@ \nparam : %@",url,dict) ;
-                                             NSLog(@"resp\n %@ %@",responseObject,kFLEX_IN_LOG_TAIL) ;
+                                             NSLog(@"resp\n %@ %@",[responseObject yy_modelToJSONString],kFLEX_IN_LOG_TAIL) ;
                                              success(task , responseObject) ;
                                          }
                                          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -267,6 +267,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
         if (success) {
             success(task,responseObject) ;
             NSLog(@"images upload all success %@",kFLEX_IN_LOG_TAIL) ;
+            NSLog(@"resp : %@",[responseObject yy_modelToJSONString]) ;
         }
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO ;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -306,6 +307,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
         }
         else {
             NSLog(@"images download success %@",kFLEX_IN_LOG_TAIL) ;
+            NSLog(@"resp : %@",[response yy_modelToJSONString]) ;
             success(response) ;
         }
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO ;
@@ -314,10 +316,8 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
     [downloadTask resume] ;
 }
 
-
-
 #pragma mark --
-#pragma mark - sync
+#pragma mark - Sync
 
 static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_create("xt_ForAFnetworkingSync", NULL) ; }
 
@@ -352,7 +352,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
                   parameters:dict
                     progress:nil
                      success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                         NSLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@  %@",url,header,dict,responseObject,kFLEX_IN_LOG_TAIL) ;
+                         NSLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@  %@",url,header,dict,[responseObject yy_modelToJSONString],kFLEX_IN_LOG_TAIL) ;
                          result = responseObject ;
                          dispatch_semaphore_signal(semaphore) ;
                      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -366,7 +366,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
                    parameters:dict
                      progress:nil
                       success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                          NSLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@  %@",url,header,dict,responseObject,kFLEX_IN_LOG_TAIL) ;
+                          NSLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@  %@",url,header,dict,[responseObject yy_modelToJSONString],kFLEX_IN_LOG_TAIL) ;
                           result = responseObject ;
                           dispatch_semaphore_signal(semaphore) ;
                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -379,7 +379,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
                 [manager PUT:url
                   parameters:dict
                      success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                         NSLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@  %@",url,header,dict,responseObject,kFLEX_IN_LOG_TAIL) ;
+                         NSLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@  %@",url,header,dict,[responseObject yy_modelToJSONString],kFLEX_IN_LOG_TAIL) ;
                          result = responseObject ;
                          dispatch_semaphore_signal(semaphore) ;
                      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -411,7 +411,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
 }
 
 #pragma mark --
-#pragma mark - cancel
+#pragma mark - Cancel
 
 + (void)cancelAllRequest {
     NSLog(@"xtReq cancel all"kFLEX_IN_LOG_TAIL) ;
