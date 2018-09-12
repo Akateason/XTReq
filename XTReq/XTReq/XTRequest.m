@@ -279,42 +279,52 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
     }] ;
 }
 
+
 + (void)downLoadFileWithSavePath:(NSString *)savePath
                    fromUrlString:(NSString *)urlString
-                         success:(void (^)(id response))success
+                          header:(NSDictionary *)header
+                         success:(void (^)(id response, id dataFile))success
                             fail:(void (^)(NSError *error))fail
-                downLoadProgress:(void (^)(float))progress {
+                downLoadProgress:(void (^)(float progressVal))progress {
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]] ;
     
     NSURL *url = [NSURL URLWithString:urlString] ;
-    NSURLRequest *request = [NSURLRequest requestWithURL:url] ;
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url] ;
+    if (header) {
+        for (NSString *key in header.allKeys) {
+            NSString *value = header[key] ;
+            [request setValue:value forHTTPHeaderField:key] ;
+        }
+    }
     
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
         
         NSLog(@"下载进度：%.0f％", downloadProgress.fractionCompleted * 100) ;
-        progress(downloadProgress.fractionCompleted) ;
+        if (progress) progress(downloadProgress.fractionCompleted) ;
         
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
         return [NSURL fileURLWithPath:savePath] ;
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
         
         if (error) {
-            NSLog(@"images download fail error:%@ %@",error,kFLEX_IN_LOG_TAIL) ;
-            fail(error) ;
+            NSLog(@"images download fail error:%@ ",error) ;
+            if (fail) fail(error) ;
         }
         else {
-            NSLog(@"images download success %@",kFLEX_IN_LOG_TAIL) ;
+            NSLog(@"images download success") ;
             NSLog(@"resp : %@",[response yy_modelToJSONString]) ;
-            success(response) ;
+            id file = [NSData dataWithContentsOfFile:savePath] ;
+            if (success) success(response, file) ;
         }
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO ;
-
+        
     }] ;
     [downloadTask resume] ;
 }
+
 
 #pragma mark --
 #pragma mark - Sync

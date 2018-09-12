@@ -103,9 +103,10 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
 // DOWNLOAD
 + (void)downLoadFileWithSavePath:(NSString *)savePath
                    fromUrlString:(NSString *)urlString
-                         success:(void (^)(id response))success
+                          header:(NSDictionary *)header
+                         success:(void (^)(id response, id dataFile))success
                             fail:(void (^)(NSError *error))fail
-                downLoadProgress:(void (^)(float))progress ;
+                downLoadProgress:(void (^)(float progressVal))progress ;
 
 #pragma mark - sync
 
