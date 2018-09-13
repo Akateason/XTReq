@@ -238,54 +238,55 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
     
 }
 
-+ (void)uploadImageWithParam:(NSDictionary *)param
-                  imageArray:(NSArray *)imageArray
-                      urlStr:(NSString *)urlString
-                    progress:(nullable void (^)(float))progressValueBlock
-                     success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
-                     failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure {
+
++ (void)uploadFileWithData:(NSData *)fileData
+                    urlStr:(NSString *)urlString
+                    header:(NSDictionary *)header
+                  progress:(nullable void (^)(float))progressValueBlock
+                  complete:(void (^)(id responseObject))completion {
 
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 
-    [[XTReqSessionManager shareInstance] POST:urlString parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        
-        NSUInteger i = 0 ;
-        for (UIImage * image in imageArray) {
-            NSData *imgData = UIImageJPEGRepresentation(image, 1) ;
-            [formData appendPartWithFileData:imgData
-                                        name:[NSString stringWithFormat:@"picflie%ld",(long)i]
-                                    fileName:@"image.png"
-                                    mimeType:@" image/jpeg"] ; // filename todo
-            i++ ;
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration] ;
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration] ;
+    NSURL *URL = [NSURL URLWithString:urlString] ;
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL] ;
+    
+    [request setHTTPMethod:@"POST"] ;
+    if (header) {
+        for (NSString *key in header) {
+            [request setValue:header[key] forHTTPHeaderField:key] ;
         }
-        
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-        float rProgress = (float)uploadProgress.completedUnitCount / (float)uploadProgress.totalUnitCount ;
-        NSLog(@"上传进度 %lf", rProgress) ;
-        progressValueBlock(rProgress) ;
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (success) {
-            success(task,responseObject) ;
-            NSLog(@"images upload all success %@",kFLEX_IN_LOG_TAIL) ;
-            NSLog(@"resp : %@",[responseObject yy_modelToJSONString]) ;
-        }
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO ;
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (failure) {
-            failure(task,error) ;
-            NSLog(@"images upload fail %@",kFLEX_IN_LOG_TAIL) ;
-        }
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO ;
-    }] ;
-}
+    }
 
+    NSURLSessionUploadTask *uploadTask =
+    [manager uploadTaskWithRequest:request fromData:fileData progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        if (progressValueBlock) progressValueBlock(uploadProgress.fractionCompleted) ;
+        
+    } completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        
+        if (error) {
+            NSLog(@"xt upload Error: %@ %@", error, kFLEX_IN_LOG_TAIL) ;
+            if (completion) completion(nil) ;
+        }
+        else {
+            NSLog(@"xt upload Success: %@ %@", responseObject,kFLEX_IN_LOG_TAIL) ;
+            if (completion) completion(responseObject) ;
+        }
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO ;
+        
+    }] ;
+    [uploadTask resume] ;
+}
 
 + (void)downLoadFileWithSavePath:(NSString *)savePath
                    fromUrlString:(NSString *)urlString
                           header:(NSDictionary *)header
+                downLoadProgress:(void (^)(float progressVal))progress
                          success:(void (^)(id response, id dataFile))success
-                            fail:(void (^)(NSError *error))fail
-                downLoadProgress:(void (^)(float progressVal))progress {
+                            fail:(void (^)(NSError *error))fail {
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     

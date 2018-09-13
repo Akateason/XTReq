@@ -92,21 +92,20 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
                              success:(void (^)(NSURLSessionDataTask * task ,id json))success
                                 fail:(void (^)())fail ;
 
-// UPLOAD IMAGES
-+ (void)uploadImageWithParam:(NSDictionary *)param
-                  imageArray:(NSArray *)imageArray
-                      urlStr:(NSString *)urlString
-                    progress:(nullable void (^)(float))progressValueBlock
-                     success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
-                     failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure ;
+// UPLOAD one File
++ (void)uploadFileWithData:(NSData *)fileData
+                    urlStr:(NSString *)urlString
+                    header:(NSDictionary *)header
+                  progress:(nullable void (^)(float))progressValueBlock
+                  complete:(void (^)(id responseObject))completion ;
 
-// DOWNLOAD
+// DOWNLOAD one File
 + (void)downLoadFileWithSavePath:(NSString *)savePath
                    fromUrlString:(NSString *)urlString
                           header:(NSDictionary *)header
+                downLoadProgress:(void (^)(float progressVal))progress
                          success:(void (^)(id response, id dataFile))success
-                            fail:(void (^)(NSError *error))fail
-                downLoadProgress:(void (^)(float progressVal))progress ;
+                            fail:(void (^)(NSError *error))fail ;
 
 #pragma mark - sync
 
