@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
     XTRequestMode_GET_MODE  ,
     XTRequestMode_POST_MODE ,
     XTRequestMode_PUT_MODE  ,
+    XTRequestMode_DELETE_MODE  ,
 } ;
 
 // get PARAM
@@ -80,6 +81,18 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
                                   hud:(BOOL)hud
                               success:(void (^)(id json))success
                                  fail:(void (^)())fail ;
+
+/**
+ main body method
+ */
++ (NSURLSessionDataTask *)reqWithUrl:(NSString *)url
+                                mode:(XTRequestMode)mode
+                              header:(NSDictionary *)header
+                          parameters:(NSDictionary *)param
+                             rawBody:(NSString *)rawBody
+                                 hud:(BOOL)hud
+                             success:(void (^)(id json))success
+                                fail:(void (^)())fail ;
 
 // PUT
 /**

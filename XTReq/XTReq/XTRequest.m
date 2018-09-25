@@ -137,19 +137,33 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
     }] ;
 }
 
-+ (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
-                               header:(NSDictionary *)header
-                           parameters:(NSDictionary *)param
-                              rawBody:(NSString *)rawBody
-                                  hud:(BOOL)hud
-                              success:(void (^)(id json))success
-                                 fail:(void (^)())fail {
+
+/**
+  body method
+ */
++ (NSURLSessionDataTask *)reqWithUrl:(NSString *)url
+                                mode:(XTRequestMode)mode
+                              header:(NSDictionary *)header
+                          parameters:(NSDictionary *)param
+                             rawBody:(NSString *)rawBody
+                                 hud:(BOOL)hud
+                             success:(void (^)(id json))success
+                                fail:(void (^)())fail {
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-
+    
     if (hud) [SVProgressHUD show] ;
+    NSString *method = @"" ;
+    switch (mode) {
+        case XTRequestMode_GET_MODE: method = @"GET" ; break;
+        case XTRequestMode_POST_MODE: method = @"POST" ; break;
+        case XTRequestMode_PUT_MODE: method = @"PUT" ; break;
+        case XTRequestMode_DELETE_MODE: method = @"DELETE" ; break;
+        default:
+            break;
+    }
     // url , param
-    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST"
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:method
                                                                                  URLString:url
                                                                                 parameters:param
                                                                                      error:nil] ;
@@ -169,28 +183,39 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
     
     NSURLSessionDataTask *task =
     [[XTReqSessionManager shareInstance] dataTaskWithRequest:request
-                                           uploadProgress:nil
-                                         downloadProgress:nil
-                                        completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-                                            if (hud) [SVProgressHUD dismiss] ;
-
-                                            NSLog(@"url : %@ \nparam : %@",url,param) ;
-                                            NSLog(@"resp\n %@ %@",[responseObject yy_modelToJSONString],kFLEX_IN_LOG_TAIL) ;
-                                            [[XTReqSessionManager shareInstance] reset] ;
-                                            if (!error) {
-                                                if (success) success(responseObject) ;
-                                            }
-                                            else {
-                                                NSLog(@"xt_req fail Error: %@ %@",error,kFLEX_IN_LOG_TAIL) ;
-                                                if (fail) fail() ;
-                                                if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
-                                            }
-                                            
-                                            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-
-                                        }]  ;
+                                              uploadProgress:nil
+                                            downloadProgress:nil
+                                           completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                                               if (hud) [SVProgressHUD dismiss] ;
+                                               
+                                               NSLog(@"url : %@ \nparam : %@",url,param) ;
+                                               NSLog(@"resp\n %@ %@",[responseObject yy_modelToJSONString],kFLEX_IN_LOG_TAIL) ;
+                                               [[XTReqSessionManager shareInstance] reset] ;
+                                               if (!error) {
+                                                   if (success) success(responseObject) ;
+                                               }
+                                               else {
+                                                   NSLog(@"xt_req fail Error: %@ %@",error,kFLEX_IN_LOG_TAIL) ;
+                                                   if (fail) fail() ;
+                                                   if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
+                                               }
+                                               
+                                               [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                                               
+                                           }]  ;
     [task resume] ;
     return task ;
+}
+
++ (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
+                               header:(NSDictionary *)header
+                           parameters:(NSDictionary *)param
+                              rawBody:(NSString *)rawBody
+                                  hud:(BOOL)hud
+                              success:(void (^)(id json))success
+                                 fail:(void (^)())fail {
+    
+    return [self reqWithUrl:url mode:XTRequestMode_POST_MODE header:header parameters:param rawBody:rawBody hud:hud success:success fail:fail] ;
 }
 
 #pragma mark - put
@@ -237,6 +262,8 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                                      }] ;
     
 }
+
+
 
 
 + (void)uploadFileWithData:(NSData *)fileData
