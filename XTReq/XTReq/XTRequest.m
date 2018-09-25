@@ -29,7 +29,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
 + (NSURLSessionDataTask *)GETWithUrl:(NSString *)url
                           parameters:(NSDictionary *)dict
                              success:(void (^)(id json))success
-                                fail:(void (^)())fail {
+                                fail:(void (^)(void))fail {
     return
     [self GETWithUrl:url
               header:nil
@@ -44,7 +44,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                           parameters:(NSDictionary *)dict
                                  hud:(BOOL)hud
                              success:(void (^)(id json))success
-                                fail:(void (^)())fail {
+                                fail:(void (^)(void))fail {
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     if (hud) [SVProgressHUD show] ;
@@ -86,7 +86,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
 + (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
                            parameters:(NSDictionary *)dict
                               success:(void (^)(id json))success
-                                 fail:(void (^)())fail {
+                                 fail:(void (^)(void))fail {
     return
     [self POSTWithUrl:url
                header:nil
@@ -101,7 +101,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                            parameters:(NSDictionary *)dict
                                   hud:(BOOL)hud
                               success:(void (^)(id json))success
-                                 fail:(void (^)())fail {
+                                 fail:(void (^)(void))fail {
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     if (hud) [SVProgressHUD show] ;
@@ -148,7 +148,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                              rawBody:(NSString *)rawBody
                                  hud:(BOOL)hud
                              success:(void (^)(id json))success
-                                fail:(void (^)())fail {
+                                fail:(void (^)(NSError *error, id response))fail {
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
@@ -196,7 +196,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                                                }
                                                else {
                                                    NSLog(@"xt_req fail Error: %@ %@",error,kFLEX_IN_LOG_TAIL) ;
-                                                   if (fail) fail() ;
+                                                   if (fail) fail(error, responseObject) ;
                                                    if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
                                                }
                                                
@@ -213,9 +213,11 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                               rawBody:(NSString *)rawBody
                                   hud:(BOOL)hud
                               success:(void (^)(id json))success
-                                 fail:(void (^)())fail {
+                                 fail:(void (^)(void))fail {
     
-    return [self reqWithUrl:url mode:XTRequestMode_POST_MODE header:header parameters:param rawBody:rawBody hud:hud success:success fail:fail] ;
+    return [self reqWithUrl:url mode:XTRequestMode_POST_MODE header:header parameters:param rawBody:rawBody hud:hud success:success fail:^(NSError *error, id response) {
+        fail() ;
+    }] ;
 }
 
 #pragma mark - put
@@ -225,7 +227,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                                  hud:(BOOL)hud
                           parameters:(NSDictionary *)dict
                              success:(void (^)(NSURLSessionDataTask * task ,id json))success
-                                fail:(void (^)())fail {
+                                fail:(void (^)(void))fail {
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     if (hud) [SVProgressHUD show] ;

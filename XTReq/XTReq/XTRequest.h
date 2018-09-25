@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
 + (NSURLSessionDataTask *)GETWithUrl:(NSString *)url
                           parameters:(NSDictionary *)dict
                              success:(void (^)(id json))success
-                                fail:(void (^)())fail ;
+                                fail:(void (^)(void))fail ;
 /**
  get url + header + param + hud
  */
@@ -52,7 +52,7 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
                           parameters:(NSDictionary *)dict
                                  hud:(BOOL)hud
                              success:(void (^)(id json))success
-                                fail:(void (^)())fail ;
+                                fail:(void (^)(void))fail ;
 
 // POST
 /**
@@ -61,7 +61,7 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
 + (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
                            parameters:(NSDictionary *)dict
                               success:(void (^)(id json))success
-                                 fail:(void (^)())fail ;
+                                 fail:(void (^)(void))fail ;
 /**
  post url + param + header + hud
  */
@@ -70,7 +70,7 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
                            parameters:(NSDictionary *)dict
                                   hud:(BOOL)hud
                               success:(void (^)(id json))success
-                                 fail:(void (^)())fail ;
+                                 fail:(void (^)(void))fail ;
 /**
  post url + param + header + rawbody + hud
  */
@@ -80,7 +80,7 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
                               rawBody:(NSString *)rawBody
                                   hud:(BOOL)hud
                               success:(void (^)(id json))success
-                                 fail:(void (^)())fail ;
+                                 fail:(void (^)(void))fail ;
 
 /**
  main body method
@@ -92,7 +92,7 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
                              rawBody:(NSString *)rawBody
                                  hud:(BOOL)hud
                              success:(void (^)(id json))success
-                                fail:(void (^)())fail ;
+                                fail:(void (^)(NSError *error, id response))fail ;
 
 // PUT
 /**
@@ -103,7 +103,7 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
                                  hud:(BOOL)hud
                           parameters:(NSDictionary *)dict
                              success:(void (^)(NSURLSessionDataTask * task ,id json))success
-                                fail:(void (^)())fail ;
+                                fail:(void (^)(void))fail ;
 
 // UPLOAD one File
 + (void)uploadFileWithData:(NSData *)fileData
