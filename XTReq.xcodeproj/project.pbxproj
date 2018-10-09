@@ -165,7 +165,6 @@
 				8F785B9F1ECBDAE3005D5ECC /* Sources */,
 				8F785BA01ECBDAE3005D5ECC /* Frameworks */,
 				8F785BA11ECBDAE3005D5ECC /* Resources */,
-				7F6EBAFEBEEDA69D00039C2D /* [CP] Embed Pods Frameworks */,
 				0EED41CB211BE80EBEE9492D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -243,21 +242,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XTReq/Pods-XTReq-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7F6EBAFEBEEDA69D00039C2D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XTReq/Pods-XTReq-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B3EBBA7A8FB25AC683F8E7ED /* [CP] Check Pods Manifest.lock */ = {

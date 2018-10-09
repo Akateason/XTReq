@@ -17,8 +17,8 @@
 
 #pragma mark - config
 
-+ (void)configXTCacheReqWhenAppDidLaunchWithDBName:(NSString *)dbName {
-    [[XTFMDBBase sharedInstance] configureDB:dbName] ;
++ (void)configXTCacheReqWhenAppDidLaunchWithDBPath:(NSString *)dbPath {
+    [[XTFMDBBase sharedInstance] configureDBWithPath:dbPath] ;
     [XTResponseDBModel xt_createTable] ;
 }
 

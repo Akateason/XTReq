@@ -23,10 +23,9 @@ typedef NS_ENUM(NSUInteger, XTReqSaveJudgment) {
 
 /**
  config when App is launching .
- 
- @param dbName      yourApps DB name
+ @param dbPath      local path string .
  */
-+ (void)configXTCacheReqWhenAppDidLaunchWithDBName:(NSString *)dbName ;
++ (void)configXTCacheReqWhenAppDidLaunchWithDBPath:(NSString *)dbPath ;
 
 
 #pragma mark - main req
