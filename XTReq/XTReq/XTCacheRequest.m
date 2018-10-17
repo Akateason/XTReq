@@ -358,7 +358,7 @@
                                                  options:0
                                                    error:&error] ;
     if (!jsonObj) {
-        NSLog(@"error : %@",error) ;
+        NSLog(@"xtreq json error : %@",error) ;
         return nil ;
     }
     else

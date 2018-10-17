@@ -9,6 +9,7 @@
 #ifndef XTReq_h
 #define XTReq_h
 
+#import "XTReqConst.h"
 #import "XTRequest.h"
 #import "XTRequest+UrlString.h"
 #import "XTRequest+Reachability.h"

@@ -9,10 +9,10 @@
 #import "XTReqSessionManager.h"
 #import "SVProgressHUD.h"
 #import "YYModel.h"
+#import "XTReqConst.h"
 
 NSString *const kStringBadNetwork        = @"网络请求失败" ;
 
-#define kFLEX_IN_LOG_TAIL   @"\n🌍🌍🌍🌍 XTReq 🌍🌍🌍🌍"
 
 @implementation XTRequest
 
@@ -65,13 +65,12 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                                          [[XTReqSessionManager shareInstance] reset] ;
                                          if (success) {
                                              if (hud) [SVProgressHUD dismiss] ;
-                                             NSLog(@"url : %@ \nparam : %@",url,dict) ;
-                                             NSLog(@"resp\n %@ %@",[responseObject yy_modelToJSONString], kFLEX_IN_LOG_TAIL) ;
+                                             XTREQLog(@"url : %@ \nparam : %@ \nresp : %@",url,dict,[responseObject yy_modelToJSONString]) ;
                                              success(responseObject) ;
                                          }
                                          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                                      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                         NSLog(@"xt_req fail Error:%@ %@", error ,kFLEX_IN_LOG_TAIL) ;
+                                         XTREQLog(@"xt_req fail Error:%@", error ) ;
                                          [[XTReqSessionManager shareInstance] reset] ;
                                          if (fail) {
                                              if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
@@ -120,14 +119,13 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
         [[XTReqSessionManager shareInstance] reset] ;
         if (success) {
             if (hud) [SVProgressHUD dismiss] ;
-            NSLog(@"url : %@ \nparam : %@",url,dict) ;
-            NSLog(@"resp\n %@ %@",[responseObject yy_modelToJSONString], kFLEX_IN_LOG_TAIL) ;
+            XTREQLog(@"url : %@ \nparam : %@ \nresp : %@",url,dict,[responseObject yy_modelToJSONString]) ;
             success(responseObject) ;
         }
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        NSLog(@"xt_req fail Error:%@ %@", error ,kFLEX_IN_LOG_TAIL) ;
+        XTREQLog(@"xt_req fail Error:%@", error) ;
         [[XTReqSessionManager shareInstance] reset] ;
         if (fail) {
             if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
@@ -188,14 +186,13 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                                            completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
                                                if (hud) [SVProgressHUD dismiss] ;
                                                
-                                               NSLog(@"url : %@ \nparam : %@",url,param) ;
-                                               NSLog(@"resp\n %@ %@",[responseObject yy_modelToJSONString],kFLEX_IN_LOG_TAIL) ;
+                                               XTREQLog(@"url : %@ \nparam : %@ \nresp : %@",url,param,[responseObject yy_modelToJSONString]) ;
                                                [[XTReqSessionManager shareInstance] reset] ;
                                                if (!error) {
                                                    if (success) success(responseObject) ;
                                                }
                                                else {
-                                                   NSLog(@"xt_req fail Error: %@ %@",error,kFLEX_IN_LOG_TAIL) ;
+                                                   XTREQLog(@"xt_req fail Error: %@",error) ;
                                                    if (fail) fail(error, responseObject) ;
                                                    if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
                                                }
@@ -247,14 +244,12 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                                          [[XTReqSessionManager shareInstance] reset] ;
                                          if (success) {
                                              if (hud) [SVProgressHUD dismiss] ;
-                                             NSLog(@"url : %@ \nparam : %@",url,dict) ;
-                                             NSLog(@"resp\n %@ %@",[responseObject yy_modelToJSONString],kFLEX_IN_LOG_TAIL) ;
-                                             success(task , responseObject) ;
+                                             XTREQLog(@"url : %@ \nparam : %@ \nresp : %@",url,dict,[responseObject yy_modelToJSONString]) ;                                             success(task , responseObject) ;
                                          }
                                          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                                      }
                                      failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                         NSLog(@"xt_req fail Error: %@ %@",error,kFLEX_IN_LOG_TAIL) ;
+                                         XTREQLog(@"xt_req fail Error: %@",error) ;
                                          [[XTReqSessionManager shareInstance] reset] ;
                                          if (fail) {
                                              if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
@@ -296,11 +291,11 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
     } completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         
         if (error) {
-            NSLog(@"xt upload Error: %@ %@", error, kFLEX_IN_LOG_TAIL) ;
+            XTREQLog(@"xt upload Error: %@", error) ;
             if (completion) completion(nil) ;
         }
         else {
-            NSLog(@"xt upload Success: %@ %@", responseObject,kFLEX_IN_LOG_TAIL) ;
+            XTREQLog(@"xt upload Success: %@", responseObject) ;
             if (completion) completion(responseObject) ;
         }
         
@@ -332,7 +327,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
     
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
         
-        NSLog(@"下载进度：%.0f％", downloadProgress.fractionCompleted * 100) ;
+        XTREQLog(@"下载进度：%.0f％", downloadProgress.fractionCompleted * 100) ;
         if (progress) progress(downloadProgress.fractionCompleted) ;
         
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
@@ -340,12 +335,12 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
         
         if (error) {
-            NSLog(@"images download fail error:%@ ",error) ;
+            XTREQLog(@"images download fail error:%@ ",error) ;
             if (fail) fail(error) ;
         }
         else {
-            NSLog(@"images download success") ;
-            NSLog(@"resp : %@",[response yy_modelToJSONString]) ;
+            XTREQLog(@"images download success") ;
+            XTREQLog(@"resp : %@",[response yy_modelToJSONString]) ;
             id file = [NSData dataWithContentsOfFile:savePath] ;
             if (success) success(response, file) ;
         }
@@ -392,7 +387,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
                   parameters:dict
                     progress:nil
                      success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                         NSLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@  %@",url,header,dict,[responseObject yy_modelToJSONString],kFLEX_IN_LOG_TAIL) ;
+                         XTREQLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@",url,header,dict,[responseObject yy_modelToJSONString]) ;
                          result = responseObject ;
                          dispatch_semaphore_signal(semaphore) ;
                      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -406,7 +401,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
                    parameters:dict
                      progress:nil
                       success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                          NSLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@  %@",url,header,dict,[responseObject yy_modelToJSONString],kFLEX_IN_LOG_TAIL) ;
+                          XTREQLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@ ",url,header,dict,[responseObject yy_modelToJSONString]) ;
                           result = responseObject ;
                           dispatch_semaphore_signal(semaphore) ;
                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -419,7 +414,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
                 [manager PUT:url
                   parameters:dict
                      success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                         NSLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@  %@",url,header,dict,[responseObject yy_modelToJSONString],kFLEX_IN_LOG_TAIL) ;
+                         XTREQLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@",url,header,dict,[responseObject yy_modelToJSONString]) ;
                          result = responseObject ;
                          dispatch_semaphore_signal(semaphore) ;
                      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -454,7 +449,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
 #pragma mark - Cancel
 
 + (void)cancelAllRequest {
-    NSLog(@"xtReq cancel all"kFLEX_IN_LOG_TAIL) ;
+    XTREQLog(@"xtReq cancel all") ;
     [[XTReqSessionManager shareInstance].session
      getTasksWithCompletionHandler:^(NSArray<NSURLSessionDataTask *> * _Nonnull dataTasks,
                                      NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks,

@@ -38,7 +38,7 @@ static NSString *const kSingleQuotes = @"&SingleQuotes&" ;
 {
     NSString *content = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] ;
     content = [content stringByReplacingOccurrencesOfString:@"\'" withString:kSingleQuotes] ;
-    NSLog(@"content : %@",content) ;
+//    NSLog(@"content : %@",content) ;
     return content ;
 }
 
