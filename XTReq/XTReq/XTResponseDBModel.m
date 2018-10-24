@@ -9,7 +9,7 @@
 #import "XTResponseDBModel.h"
 #import "NSDate+XTFMDB_Tick.h"
 #import "NSString+XTReq_Extend.h"
-#import <XTFMDB.h>
+#import "XTFMDB.h"
 
 @implementation XTResponseDBModel
 @synthesize response = _response ;
