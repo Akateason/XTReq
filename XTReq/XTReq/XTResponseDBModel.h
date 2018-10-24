@@ -6,7 +6,7 @@
 //  Copyright © 2017年 teason. All rights reserved.
 //
 
-#import "XTDBModel.h"
+#import <Foundation/Foundation.h>
 
 
 
@@ -53,7 +53,7 @@ typedef NS_OPTIONS(NSUInteger, XTReqPolicy) {
 
 
 
-@interface XTResponseDBModel : XTDBModel
+@interface XTResponseDBModel : NSObject
 
 @property (nonatomic,copy) NSString     *requestUrl     ; // as UNIQUE KEY
 @property (nonatomic,copy) NSString     *response       ; // response string

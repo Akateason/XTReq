@@ -9,11 +9,6 @@ pod 'Masonry'
 pod 'AFNetworking'
 pod 'YYModel'
 pod 'SVProgressHUD'
-
 pod 'XTFMDB'
-
-
-
-  # Pods for XTReq
 
 end

@@ -9,6 +9,7 @@
 #import "XTResponseDBModel.h"
 #import "NSDate+XTFMDB_Tick.h"
 #import "NSString+XTReq_Extend.h"
+#import <XTFMDB.h>
 
 @implementation XTResponseDBModel
 @synthesize response = _response ;
@@ -58,14 +59,12 @@
     dbModel.response = respStr ;
     dbModel.cachePolicy = policy ;
     dbModel.overTimeSec = timeout ;
-    dbModel.createTime = [NSDate xt_getNowTick] ;
-    dbModel.updateTime = dbModel.createTime ;
     return dbModel ;
 }
 
 - (BOOL)isOverTime {
     NSDate *now = [NSDate date] ;
-    NSDate *dateUpdate = [NSDate xt_getDateWithTick:self.updateTime] ;
+    NSDate *dateUpdate = [NSDate xt_getDateWithTick:self.xt_updateTime] ;
     NSDate *dateWillTimeout = [NSDate dateWithTimeInterval:self.overTimeSec
                                                  sinceDate:dateUpdate] ;
     NSComparisonResult result = [dateWillTimeout compare:now] ;

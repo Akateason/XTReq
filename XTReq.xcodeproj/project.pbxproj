@@ -21,6 +21,7 @@
 		8F785BCB1ECBDB07005D5ECC /* XTReqSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BC41ECBDB07005D5ECC /* XTReqSessionManager.m */; };
 		8F785BCC1ECBDB07005D5ECC /* XTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BC61ECBDB07005D5ECC /* XTRequest.m */; };
 		8F785BCD1ECBDB07005D5ECC /* XTResponseDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BC81ECBDB07005D5ECC /* XTResponseDBModel.m */; };
+		8FC5F4B321806754009B4042 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8FC5F4B221806753009B4042 /* Podfile */; };
 		8FC8214F20E737660068AE5E /* XTReq.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 8FC8214E20E737660068AE5E /* XTReq.podspec */; };
 		BEEA1322E8065A0F82C0FA60 /* libPods-XTReq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEEC9E70B54B97213FAD3C3 /* libPods-XTReq.a */; };
 /* End PBXBuildFile section */
@@ -55,6 +56,7 @@
 		8F785BC71ECBDB07005D5ECC /* XTResponseDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTResponseDBModel.h; sourceTree = "<group>"; };
 		8F785BC81ECBDB07005D5ECC /* XTResponseDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTResponseDBModel.m; sourceTree = "<group>"; };
 		8FC5F2CF21775B7E009B4042 /* XTReqConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XTReqConst.h; sourceTree = "<group>"; };
+		8FC5F4B221806753009B4042 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		8FC8214E20E737660068AE5E /* XTReq.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = XTReq.podspec; sourceTree = "<group>"; };
 		A6519CB82D2757CB09350DD2 /* Pods-XTReq.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XTReq.release.xcconfig"; path = "Pods/Target Support Files/Pods-XTReq/Pods-XTReq.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,6 +84,7 @@
 		8F785B9A1ECBDAE3005D5ECC = {
 			isa = PBXGroup;
 			children = (
+				8FC5F4B221806753009B4042 /* Podfile */,
 				8FC8214E20E737660068AE5E /* XTReq.podspec */,
 				8F19861F20C968270082662A /* README.md */,
 				8F785BA51ECBDAE3005D5ECC /* XTReq */,
@@ -217,6 +220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FC5F4B321806754009B4042 /* Podfile in Resources */,
 				8F785BB61ECBDAE3005D5ECC /* LaunchScreen.storyboard in Resources */,
 				8F785BB31ECBDAE3005D5ECC /* Assets.xcassets in Resources */,
 				8F19862020C968270082662A /* README.md in Resources */,

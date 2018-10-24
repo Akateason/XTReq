@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "XTReq.h"
 #import <YYModel.h>
+#import <XTFMDB.h>
 
 @interface AppDelegate ()
 
@@ -20,8 +21,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // config cache req .
+    [XTFMDBBase sharedInstance].isDebugMode = YES ;
     [XTReqSessionManager shareInstance].isDebug = YES ;
-    
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
     NSString *path = [paths objectAtIndex:0];

@@ -312,7 +312,7 @@
                  }
                  else {
                      resModel.response = [json yy_modelToJSONString] ;
-                     resModel.updateTime = [NSDate xt_getNowTick] ;
+                     resModel.xt_updateTime = [NSDate xt_getNowTick] ;
                      [resModel xt_update] ; // db update
                  }
              }
@@ -340,8 +340,7 @@
                       [resModel xt_insert] ; // db insert
                   }
                   else {
-                      resModel.response = [json yy_modelToJSONString] ;
-                      resModel.updateTime = [NSDate xt_getNowTick] ;
+                      resModel.response = [json yy_modelToJSONString] ;                      
                       [resModel xt_update] ; // db update
                   }
               }
