@@ -23,12 +23,11 @@
 		8F785BCD1ECBDB07005D5ECC /* XTResponseDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BC81ECBDB07005D5ECC /* XTResponseDBModel.m */; };
 		8FC5F4B321806754009B4042 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8FC5F4B221806753009B4042 /* Podfile */; };
 		8FC8214F20E737660068AE5E /* XTReq.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 8FC8214E20E737660068AE5E /* XTReq.podspec */; };
-		BEEA1322E8065A0F82C0FA60 /* libPods-XTReq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CEEC9E70B54B97213FAD3C3 /* libPods-XTReq.a */; };
+		B9D3522C7E0EE3470E4F534A /* Pods_XTReq.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E88A3FBB6F3B15F75C41117D /* Pods_XTReq.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1E5D39551A0715AEF157A2B5 /* Pods-XTReq.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XTReq.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XTReq/Pods-XTReq.debug.xcconfig"; sourceTree = "<group>"; };
-		3CEEC9E70B54B97213FAD3C3 /* libPods-XTReq.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XTReq.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F19861F20C968270082662A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8F2BFD7A203EA8040013394D /* NSString+XTReq_Extend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+XTReq_Extend.h"; sourceTree = "<group>"; };
 		8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+XTReq_Extend.m"; sourceTree = "<group>"; };
@@ -59,6 +58,7 @@
 		8FC5F4B221806753009B4042 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		8FC8214E20E737660068AE5E /* XTReq.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = XTReq.podspec; sourceTree = "<group>"; };
 		A6519CB82D2757CB09350DD2 /* Pods-XTReq.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XTReq.release.xcconfig"; path = "Pods/Target Support Files/Pods-XTReq/Pods-XTReq.release.xcconfig"; sourceTree = "<group>"; };
+		E88A3FBB6F3B15F75C41117D /* Pods_XTReq.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XTReq.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEEA1322E8065A0F82C0FA60 /* libPods-XTReq.a in Frameworks */,
+				B9D3522C7E0EE3470E4F534A /* Pods_XTReq.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,7 +76,7 @@
 		0B8D1553CB5937352381A4B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3CEEC9E70B54B97213FAD3C3 /* libPods-XTReq.a */,
+				E88A3FBB6F3B15F75C41117D /* Pods_XTReq.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -170,7 +170,7 @@
 				8F785B9F1ECBDAE3005D5ECC /* Sources */,
 				8F785BA01ECBDAE3005D5ECC /* Frameworks */,
 				8F785BA11ECBDAE3005D5ECC /* Resources */,
-				0EED41CB211BE80EBEE9492D /* [CP] Copy Pods Resources */,
+				C4986B75E3FC9EA471512FD9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -232,24 +232,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0EED41CB211BE80EBEE9492D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-XTReq/Pods-XTReq-resources.sh",
-				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XTReq/Pods-XTReq-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B3EBBA7A8FB25AC683F8E7ED /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -266,6 +248,38 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C4986B75E3FC9EA471512FD9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-XTReq/Pods-XTReq-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/XTFMDB/XTFMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XTFMDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XTReq/Pods-XTReq-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

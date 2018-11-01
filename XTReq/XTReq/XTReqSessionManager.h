@@ -15,7 +15,7 @@
 // Global timeout
 static const float kTIMEOUT = 15.f ;
 
-@import AFNetworking ;
+#import <AFNetworking/AFNetworking.h>
 
 @interface XTReqSessionManager : AFHTTPSessionManager
 

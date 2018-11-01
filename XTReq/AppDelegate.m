@@ -8,8 +8,8 @@
 
 #import "AppDelegate.h"
 #import "XTReq.h"
-#import <YYModel.h>
-#import <XTFMDB.h>
+#import <YYModel/YYModel.h>
+#import <XTFMDB/XTFMDB.h>
 
 @interface AppDelegate ()
 

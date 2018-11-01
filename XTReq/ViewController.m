@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "XTReq.h"
-#import <YYModel.h>
+#import <YYModel/YYModel.h>
 
 @interface ViewController ()
 
