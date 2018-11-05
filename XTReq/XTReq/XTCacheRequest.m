@@ -22,153 +22,6 @@
     [XTResponseDBModel xt_createTable] ;
 }
 
-#pragma mark - get
-
-+ (void)cacheGET:(NSString *)url
-          header:(NSDictionary *)header
-      parameters:(NSDictionary *)param
-      completion:(void(^)(id json))completion
-{
-    [self cacheGET:url
-            header:header
-        parameters:param
-               hud:NO
-            policy:XTReqPolicy_NeverCache_WaitReturn
-     overTimeIfNeed:0
-        completion:completion] ;
-}
-
-+ (void)cacheGET:(NSString *)url
-          header:(NSDictionary *)header
-      parameters:(NSDictionary *)param
-     judgeResult:(XTReqSaveJudgment (^)(id json))completion
-{
-    [self cacheGET:url
-            header:header
-        parameters:param
-               hud:NO
-            policy:XTReqPolicy_NeverCache_WaitReturn
-     overTimeIfNeed:0
-       judgeResult:completion] ;
-}
-
-+ (void)cacheGET:(NSString *)url
-          header:(NSDictionary *)header
-      parameters:(NSDictionary *)param
-             hud:(BOOL)hud
-          policy:(XTReqPolicy)cachePolicy
-   overTimeIfNeed:(int)overTimeIfNeed
-      completion:(void(^)(id json))completion
-{
-    [self cacheGET:url
-            header:header
-        parameters:param
-               hud:hud
-            policy:cachePolicy
-     overTimeIfNeed:overTimeIfNeed
-       judgeResult:^XTReqSaveJudgment(id json) {
-           if (completion) completion(json) ;
-           return XTReqSaveJudgment_willSave ;
-       }] ;
-}
-
-+ (void)cacheGET:(NSString *)url
-          header:(NSDictionary *)header
-      parameters:(NSDictionary *)param
-             hud:(BOOL)hud
-          policy:(XTReqPolicy)cachePolicy
-   overTimeIfNeed:(int)overTimeIfNeed
-     judgeResult:(XTReqSaveJudgment (^)(id json))completion
-{
-    [self cachedReq:XTRequestMode_GET_MODE
-                url:url
-                hud:hud
-             header:header
-              param:param
-               body:nil
-             policy:cachePolicy
-      overTimeIfNeed:overTimeIfNeed
-        judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
-            return completion(json) ;
-        }] ;
-}
-
-#pragma mark - post
-
-+ (void)cachePOST:(NSString *)url
-           header:(NSDictionary *)header
-       parameters:(NSDictionary *)param
-       completion:(void(^)(id json))completion
-{
-    [self cachePOST:url
-             header:header
-         parameters:param
-               body:nil
-                hud:NO
-             policy:XTReqPolicy_NeverCache_WaitReturn
-      overTimeIfNeed:0
-         completion:completion] ;
-}
-
-+ (void)cachePOST:(NSString *)url
-           header:(NSDictionary *)header
-       parameters:(NSDictionary *)param
-      judgeResult:(XTReqSaveJudgment (^)(id json))completion
-{
-    [self cachePOST:url
-             header:header
-         parameters:param
-               body:nil
-                hud:NO
-             policy:XTReqPolicy_NeverCache_WaitReturn
-      overTimeIfNeed:0
-        judgeResult:completion] ;
-}
-
-+ (void)cachePOST:(NSString *)url
-           header:(NSDictionary *)header
-       parameters:(NSDictionary *)param
-             body:(NSString *)body
-              hud:(BOOL)hud
-           policy:(XTReqPolicy)cachePolicy
-    overTimeIfNeed:(int)overTimeIfNeed
-       completion:(void(^)(id json))completion
-{
-    [self cachePOST:url
-             header:header
-         parameters:param
-               body:body
-                hud:YES
-             policy:cachePolicy
-      overTimeIfNeed:overTimeIfNeed
-        judgeResult:^XTReqSaveJudgment(id json) {
-            if (completion) completion(json) ;
-            return XTReqSaveJudgment_willSave ;
-         }] ;
-}
-
-+ (void)cachePOST:(NSString *)url
-           header:(NSDictionary *)header
-       parameters:(NSDictionary *)param
-             body:(NSString *)body
-              hud:(BOOL)hud
-           policy:(XTReqPolicy)cachePolicy
-    overTimeIfNeed:(int)overTimeIfNeed
-      judgeResult:(XTReqSaveJudgment(^)(id json))completion
-{
-    [self cachedReq:XTRequestMode_POST_MODE
-                url:url
-                hud:hud
-             header:header
-              param:param
-               body:body
-             policy:cachePolicy
-      overTimeIfNeed:overTimeIfNeed
-        judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
-            return completion(json) ;
-        }] ;
-}
-
 #pragma mark - main
 
 + (void)cachedReq:(XTRequestMode)reqMode
@@ -179,8 +32,8 @@
              body:(NSString *)body
            policy:(XTReqPolicy)cachePolicy
     overTimeIfNeed:(int)overTimeIfNeed
-      judgeResult:(XTReqSaveJudgment(^)(BOOL isNewest, id json))completion
-{
+      judgeResult:(XTReqSaveJudgment(^)(BOOL isNewest, id json))completion {
+    
     NSString *strUniqueKey = [self getUniqueKeyWithUrl:url
                                                 header:header
                                                  param:param
@@ -265,8 +118,8 @@
              body:(NSString *)body
            policy:(XTReqPolicy)cachePolicy
     overTimeIfNeed:(int)overTimeIfNeed
-       completion:(void(^)(BOOL isNewest, id json))completion
-{
+       completion:(void(^)(BOOL isNewest, id json))completion {
+    
     [self cachedReq:reqMode
                 url:url
                 hud:hud
@@ -290,64 +143,32 @@
                         param:(NSDictionary *)param
                          body:(NSString *)body
                 responseModel:(XTResponseDBModel *)resModel
-                   completion:(XTReqSaveJudgment(^)(id json))completion
-{
-    if (requestType == XTRequestMode_GET_MODE) {
-        [self GETWithUrl:url
-                  header:header
-              parameters:param
-                     hud:hud
-                 success:^(id json) {
-                 
-                 XTReqSaveJudgment flag = -1 ;
-                 if (completion) flag = completion(json) ; // return .
-                 // 请求为空 . 不做更新
-                 if (!json) return ;
-                 // 外部禁止了缓存
-                 if (flag == XTReqSaveJudgment_NotSave) return ;
-                 // db
-                 if (!resModel.response) {
-                     resModel.response = [json yy_modelToJSONString] ;
-                     [resModel xt_insert] ; // db insert
-                 }
-                 else {
-                     resModel.response = [json yy_modelToJSONString] ;
-                     resModel.xt_updateTime = [NSDate xt_getNowTick] ;
-                     [resModel xt_update] ; // db update
-                 }
-             }
-                    fail:^{
-                        if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
-                    }] ;
-    }
-    else if (requestType == XTRequestMode_POST_MODE) {
-        [self POSTWithUrl:url
-                   header:header
-               parameters:param
-                  rawBody:body
-                      hud:hud
-                  success:^(id json) {
-                  
-                  XTReqSaveJudgment flag = -1 ;
-                  if (completion) flag = completion(json) ; // return .
-                  // 请求为空 . 不做更新
-                  if (!json) return ;
-                  // 外部禁止了缓存
-                  if (flag == XTReqSaveJudgment_NotSave) return ;
-                  // db
-                  if (!resModel.response) {
-                      resModel.response = [json yy_modelToJSONString] ;
-                      [resModel xt_insert] ; // db insert
-                  }
-                  else {
-                      resModel.response = [json yy_modelToJSONString] ;                      
-                      [resModel xt_update] ; // db update
-                  }
-              }
-                     fail:^{
-                         if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
-              }] ;
-    }
+                   completion:(XTReqSaveJudgment(^)(id json))completion {
+    
+    [self reqWithUrl:url mode:requestType header:header parameters:param rawBody:body hud:hud success:^(id json, NSURLResponse *response) {
+        
+        XTReqSaveJudgment flag = -1 ;
+        if (completion) flag = completion(json) ; // return .
+        // 请求为空 . 不做更新
+        if (!json) return ;
+        // 外部禁止了缓存
+        if (flag == XTReqSaveJudgment_NotSave) return ;
+        // db
+        if (!resModel.response) {
+            resModel.response = [json yy_modelToJSONString] ;
+            [resModel xt_insert] ; // db insert
+        }
+        else {
+            resModel.response = [json yy_modelToJSONString] ;
+            resModel.xt_updateTime = [NSDate xt_getNowTick] ;
+            [resModel xt_update] ; // db update
+        }
+        
+    } fail:^(NSError *error) {
+
+        if (completion) completion([self.class getJsonWithStr:resModel.response]) ;
+
+    }] ;
 }
 
 + (id)getJsonWithStr:(NSString *)jsonStr {

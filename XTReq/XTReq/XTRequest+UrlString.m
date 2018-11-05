@@ -27,7 +27,6 @@
     NSString *finalUrl = [self getFinalUrlWithBaseUrl:url param:param] ;
     if (header) finalUrl = [finalUrl stringByAppendingString:[NSString stringWithFormat:@"&%@",[self dicToString:header]]] ;
     if (body) finalUrl = [finalUrl stringByAppendingString:[NSString stringWithFormat:@"&%@",body]] ;
-//    NSLog(@"xt_UniqueKey : %@",finalUrl) ;
     return finalUrl ;
 }
 
@@ -58,6 +57,5 @@
     }
     return result ;
 }
-
 
 @end

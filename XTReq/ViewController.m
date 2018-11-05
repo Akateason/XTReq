@@ -22,22 +22,19 @@
 - (IBAction)cancelReqAction:(id)sender {
     
     NSURLSessionDataTask *task1 =
-    [XTRequest GETWithUrl:kURLstr
-               parameters:nil
-                  success:^(id json) {
-                      
-                  } fail:^{
-                      
-                  }] ;
+    [XTRequest reqWithUrl:kURLstr mode:XTRequestMode_GET_MODE header:nil parameters:nil rawBody:nil hud:NO success:^(id json, NSURLResponse *response) {
+        
+    } fail:^(NSError *error) {
+        
+    }] ;
+    
     
     NSURLSessionDataTask *task2 =
-    [XTRequest GETWithUrl:kURLstr2
-               parameters:nil
-                  success:^(id json) {
-                  
-              } fail:^{
-                  
-              }] ;
+    [XTRequest reqWithUrl:kURLstr2 mode:XTRequestMode_GET_MODE header:nil parameters:nil rawBody:nil hud:NO success:^(id json, NSURLResponse *response) {
+        
+    } fail:^(NSError *error) {
+        
+    }] ;
     
 //    cancel 1
 //    [task1 cancel] ;
@@ -49,22 +46,18 @@
 
 - (IBAction)asyncAction:(id)sender
 {
-    [XTRequest GETWithUrl:kURLstr
-               parameters:nil
-                  success:^(id json) {
-                      NSLog(@"async") ;
-                      [self showInfoInAlert:[json yy_modelToJSONString]] ;
-                  } fail:^{
-                      
-                  }] ;
+    [XTRequest reqWithUrl:kURLstr mode:XTRequestMode_GET_MODE header:nil parameters:nil rawBody:nil hud:NO success:^(id json, NSURLResponse *response) {
+        
+        [self showInfoInAlert:[json yy_modelToJSONString]] ;
+
+    } fail:^(NSError *error) {
+        
+    }] ;
 }
 
 - (IBAction)syncAction:(id)sender
 {
-    id result = [XTRequest syncWithReqMode:XTRequestMode_GET_MODE
-                                       url:kURLstr
-                                    header:nil
-                                parameters:nil] ;
+    id result = [XTRequest syncWithReqMode:XTRequestMode_GET_MODE timeout:0 url:kURLstr header:nil parameters:nil] ;
     [self showInfoInAlert:[result yy_modelToJSONString]] ;
 }
 
@@ -79,6 +72,7 @@
                        policy:XTReqPolicy_NeverCache_IRTU
                 overTimeIfNeed:0
                   judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
+                      
                       [self showInfoInAlert:[json yy_modelToJSONString]] ;
                       return XTReqSaveJudgment_willSave ;
                   }] ;
@@ -86,18 +80,24 @@
 }
 
 - (IBAction)cacheJudgeResult:(id)sender {
-    [XTCacheRequest cacheGET:kURLstr2
-                      header:nil
-                  parameters:nil
-                 judgeResult:^XTReqSaveJudgment(id json) {
-                     if (!json) {
-                         return XTReqSaveJudgment_NotSave ; // 数据格式不对! 不缓存!
-                     }
-                     else {
-                         [self showInfoInAlert:[json yy_modelToJSONString]] ;
-                         return XTReqSaveJudgment_willSave ;
-                     }
-                 }] ;
+    [XTCacheRequest cachedReq:XTRequestMode_GET_MODE
+                          url:kURLstr2
+                          hud:YES
+                       header:nil
+                        param:nil
+                         body:nil
+                       policy:XTReqPolicy_NeverCache_WaitReturn
+               overTimeIfNeed:0
+                  judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
+                      
+        if (!json) {
+            return XTReqSaveJudgment_NotSave ; // 数据格式不对! 不缓存!
+        }
+        else {
+            [self showInfoInAlert:[json yy_modelToJSONString]] ;
+            return XTReqSaveJudgment_willSave ;
+        }
+    }] ;
 }
 
 - (void)showInfoInAlert:(NSString *)info

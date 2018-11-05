@@ -30,98 +30,20 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
 #define XT_GET_PARAM                         NSMutableDictionary *param = [XTRequest getParameters] ;
 
 @interface XTRequest : XTReqSessionManager
-
-// param
 + (NSMutableDictionary *)getParameters ;
++ (void)cancelAllRequest ;
 
 #pragma mark - async
-
-// GET
-/**
- get url + param
- */
-+ (NSURLSessionDataTask *)GETWithUrl:(NSString *)url
-                          parameters:(NSDictionary *)dict
-                             success:(void (^)(id json))success
-                                fail:(void (^)(void))fail ;
-/**
- get url + header + param + hud
- */
-+ (NSURLSessionDataTask *)GETWithUrl:(NSString *)url
-                              header:(NSDictionary *)header
-                          parameters:(NSDictionary *)dict
-                                 hud:(BOOL)hud
-                             success:(void (^)(id json))success
-                                fail:(void (^)(void))fail ;
-
-// POST
-/**
- post url + param
- */
-+ (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
-                           parameters:(NSDictionary *)dict
-                              success:(void (^)(id json))success
-                                 fail:(void (^)(void))fail ;
-/**
- post url + param + header + hud
- */
-+ (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
-                               header:(NSDictionary *)header
-                           parameters:(NSDictionary *)dict
-                                  hud:(BOOL)hud
-                              success:(void (^)(id json))success
-                                 fail:(void (^)(void))fail ;
-/**
- post url + param + header + rawbody + hud
- */
-+ (NSURLSessionDataTask *)POSTWithUrl:(NSString *)url
-                               header:(NSDictionary *)header
-                           parameters:(NSDictionary *)param
-                              rawBody:(NSString *)rawBody
-                                  hud:(BOOL)hud
-                              success:(void (^)(id json))success
-                                 fail:(void (^)(void))fail ;
-
-/**
- main body method
- */
 + (NSURLSessionDataTask *)reqWithUrl:(NSString *)url
                                 mode:(XTRequestMode)mode
                               header:(NSDictionary *)header
                           parameters:(NSDictionary *)param
                              rawBody:(NSString *)rawBody
                                  hud:(BOOL)hud
-                             success:(void (^)(id json))success
-                                fail:(void (^)(NSError *error, id response))fail ;
-
-// PUT
-/**
- put url + param + header + hud
- */
-+ (NSURLSessionDataTask *)PUTWithUrl:(NSString *)url
-                              header:(NSDictionary *)header
-                                 hud:(BOOL)hud
-                          parameters:(NSDictionary *)dict
-                             success:(void (^)(NSURLSessionDataTask * task ,id json))success
-                                fail:(void (^)(void))fail ;
-
-// UPLOAD one File
-+ (void)uploadFileWithData:(NSData *)fileData
-                    urlStr:(NSString *)urlString
-                    header:(NSDictionary *)header
-                  progress:(nullable void (^)(float))progressValueBlock
-                  complete:(void (^)(id responseObject))completion ;
-
-// DOWNLOAD one File
-+ (void)downLoadFileWithSavePath:(NSString *)savePath
-                   fromUrlString:(NSString *)urlString
-                          header:(NSDictionary *)header
-                downLoadProgress:(void (^)(float progressVal))progress
-                         success:(void (^)(id response, id dataFile))success
-                            fail:(void (^)(NSError *error))fail ;
+                             success:(void (^)(id json, NSURLResponse *response))success
+                                fail:(void (^)(NSError *error))fail ;
 
 #pragma mark - sync
-
 + (id)syncWithReqMode:(XTRequestMode)mode
               timeout:(int)timeout
                   url:(NSString *)url
@@ -133,10 +55,21 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
                header:(NSDictionary *)header
            parameters:(NSDictionary *)dict ;
 
-/**
- cancel all req
- */
-+ (void)cancelAllRequest ;
+#pragma mark - upload download
+// UPLOAD one File
++ (NSURLSessionUploadTask *)uploadFileWithData:(NSData *)fileData
+                                        urlStr:(NSString *)urlString
+                                        header:(NSDictionary *)header
+                                      progress:(nullable void (^)(float))progressValueBlock
+                                       success:(void (^)(NSURLResponse *response, id responseObject))success
+                                          fail:(void (^)(NSError *error))fail ;
+// DOWNLOAD one File
++ (NSURLSessionDownloadTask *)downLoadFileWithSavePath:(NSString *)savePath
+                                         fromUrlString:(NSString *)urlString
+                                                header:(NSDictionary *)header
+                                      downLoadProgress:(void (^)(float progressVal))progress
+                                               success:(void (^)(NSURLResponse *response, id dataFile))success
+                                                  fail:(void (^)(NSError *error))fail ;
 
 @end
 
