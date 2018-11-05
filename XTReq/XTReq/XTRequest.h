@@ -16,8 +16,6 @@
 #import "XTReqSessionManager.h"
 @class NSURLSessionDataTask ;
 
-extern NSString *const kStringBadNetwork ;
-
 // req mode
 typedef NS_ENUM(NSInteger, XTRequestMode) {
     XTRequestMode_GET_MODE  ,

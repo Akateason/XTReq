@@ -9,12 +9,13 @@
 
 #import "XTReqSessionManager.h"
 
+// Global timeout
+static const float kTIMEOUT = 15.f ;
+
+
+
 @implementation XTReqSessionManager
-
-#pragma mark --
-
 static XTReqSessionManager *_instance = nil;
-
 + (instancetype)shareInstance {
     static dispatch_once_t onceToken ;
     dispatch_once(&onceToken, ^{
@@ -52,7 +53,29 @@ static XTReqSessionManager *_instance = nil;
     return _instance;
 }
 
-#pragma mark --
+#pragma mark -
+- (float)timeout {
+    if (!_timeout) {
+        _timeout = kTIMEOUT ;
+    }
+    return _timeout ;
+}
+
+- (NSString *)tipRequestFailed {
+    if (!_tipRequestFailed) {
+        _tipRequestFailed = @"网络不太通畅..." ; //请求失败
+    }
+    return _tipRequestFailed ;
+}
+
+- (NSString *)tipBadNetwork {
+    if (!_tipBadNetwork) {
+        _tipBadNetwork = @"网络未连接, 请检查您的网络..." ;
+    }
+    return _tipBadNetwork ;
+}
+
+#pragma mark -
 // reset manager for share next time .
 - (void)reset {
     self.requestSerializer  = [AFHTTPRequestSerializer serializer] ;
@@ -61,6 +84,9 @@ static XTReqSessionManager *_instance = nil;
     self.requestSerializer.timeoutInterval = kTIMEOUT ;
     self.completionQueue = NULL ;
 }
+
+
+
 
 
 @end

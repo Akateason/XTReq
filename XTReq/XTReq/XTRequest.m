@@ -11,9 +11,6 @@
 #import "YYModel.h"
 #import "XTReqConst.h"
 
-NSString *const kStringBadNetwork        = @"网络请求失败" ;
-
-
 @implementation XTRequest
 
 #pragma mark --
@@ -115,7 +112,7 @@ NSString *const kStringBadNetwork        = @"网络请求失败" ;
                                                }
                                                else {
                                                    if (fail) fail(error) ;
-                                                   if (hud) [SVProgressHUD showErrorWithStatus:kStringBadNetwork] ;
+                                                   if (hud) [SVProgressHUD showErrorWithStatus:[XTReqSessionManager shareInstance].tipRequestFailed] ;
                                                }
                                                
                                                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -153,7 +150,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
         manager.requestSerializer  = [AFHTTPRequestSerializer serializer] ;
         manager.responseSerializer = [AFJSONResponseSerializer serializer] ;
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:ACCEPTABLE_CONTENT_TYPES,nil] ;
-        manager.requestSerializer.timeoutInterval = timeout ?: kTIMEOUT ;
+        manager.requestSerializer.timeoutInterval = timeout ?: [XTReqSessionManager shareInstance].timeout ;
         manager.completionQueue = xt_getCompletionQueue() ;
         if (header) {
             for (NSString *key in header) {
