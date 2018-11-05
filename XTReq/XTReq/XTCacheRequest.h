@@ -13,9 +13,10 @@
 #import "XTResponseDBModel.h"
 
 typedef NS_ENUM(NSUInteger, XTReqSaveJudgment) {
-    XTReqSaveJudgment_willSave      = 0 ,
-    XTReqSaveJudgment_NotSave       = 1 ,
-} ;
+    XTReqSaveJudgment_willSave = 0,
+    XTReqSaveJudgment_NotSave  = 1,
+};
+
 
 @interface XTCacheRequest : XTRequest
 
@@ -24,7 +25,7 @@ typedef NS_ENUM(NSUInteger, XTReqSaveJudgment) {
  config when App is launching .
  @param dbPath      local path string .
  */
-+ (void)configXTCacheReqWhenAppDidLaunchWithDBPath:(NSString *)dbPath ;
++ (void)configXTCacheReqWhenAppDidLaunchWithDBPath:(NSString *)dbPath;
 
 
 #pragma mark - cache req
@@ -52,7 +53,7 @@ typedef NS_ENUM(NSUInteger, XTReqSaveJudgment) {
              body:(NSString *)body
            policy:(XTReqPolicy)cachePolicy
    overTimeIfNeed:(int)overTimeIfNeed
-      judgeResult:(XTReqSaveJudgment(^)(BOOL isNewest, id json))completion ;
+      judgeResult:(XTReqSaveJudgment (^)(BOOL isNewest, id json))completion;
 
 /**
  XTCacheRequest completion MAIN FUNC
@@ -65,15 +66,6 @@ typedef NS_ENUM(NSUInteger, XTReqSaveJudgment) {
              body:(NSString *)body
            policy:(XTReqPolicy)cachePolicy
    overTimeIfNeed:(int)overTimeIfNeed
-       completion:(void(^)(BOOL isNewest, id json))completion ;
+       completion:(void (^)(BOOL isNewest, id json))completion;
 
 @end
-
-
-
-
-
-
-
-
-

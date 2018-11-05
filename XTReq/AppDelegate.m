@@ -11,24 +11,25 @@
 #import <YYModel/YYModel.h>
 #import <XTFMDB/XTFMDB.h>
 
+
 @interface AppDelegate ()
 
 @end
 
+
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // config cache req .
-    [XTFMDBBase sharedInstance].isDebugMode = YES ;
-    [XTReqSessionManager shareInstance].isDebug = YES ;
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    [XTFMDBBase sharedInstance].isDebugMode     = YES;
+    [XTReqSessionManager shareInstance].isDebug = YES;
+
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path = [paths objectAtIndex:0];
-    path = [path stringByAppendingString:@"/teason"] ;
-    [XTCacheRequest configXTCacheReqWhenAppDidLaunchWithDBPath:path] ;
-    
+    path           = [path stringByAppendingString:@"/teason"];
+    [XTCacheRequest configXTCacheReqWhenAppDidLaunchWithDBPath:path];
+
     return YES;
 }
 

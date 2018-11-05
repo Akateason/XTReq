@@ -8,46 +8,43 @@
 
 #import "NSString+XTReq_Extend.h"
 
+
 @implementation NSString (XTReq_Extend)
 
-- (NSString *)minusSpaceStr
-{
-    NSCharacterSet *whitespaces = [NSCharacterSet whitespaceCharacterSet] ;
-    NSPredicate *noEmptyStrings = [NSPredicate predicateWithFormat:@"SELF != ''"] ;
-    
-    NSArray *parts = [self componentsSeparatedByCharactersInSet:whitespaces] ;
-    NSArray *filteredArray = [parts filteredArrayUsingPredicate:noEmptyStrings] ;
-    
-    return [filteredArray componentsJoinedByString:@" "] ;
+- (NSString *)minusSpaceStr {
+    NSCharacterSet *whitespaces = [NSCharacterSet whitespaceCharacterSet];
+    NSPredicate *noEmptyStrings = [NSPredicate predicateWithFormat:@"SELF != ''"];
+
+    NSArray *parts         = [self componentsSeparatedByCharactersInSet:whitespaces];
+    NSArray *filteredArray = [parts filteredArrayUsingPredicate:noEmptyStrings];
+
+    return [filteredArray componentsJoinedByString:@" "];
 }
 
-- (NSString *)minusReturnStr
-{
-    NSString *content = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] ;
-    content = [content stringByReplacingOccurrencesOfString:@"\r" withString:@""] ;
-    content = [content stringByReplacingOccurrencesOfString:@"\n" withString:@""] ;
-    
-    return content ;
+- (NSString *)minusReturnStr {
+    NSString *content = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    content           = [content stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    content           = [content stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+
+    return content;
 }
 
 
-static NSString *const kSingleQuotes = @"&SingleQuotes&" ;
+static NSString *const kSingleQuotes = @"&SingleQuotes&";
 
 // 转义单引号  '  -> \'
-- (NSString *)encodeTransferredMeaningForSingleQuotes
-{
-    NSString *content = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] ;
-    content = [content stringByReplacingOccurrencesOfString:@"\'" withString:kSingleQuotes] ;
-//    NSLog(@"content : %@",content) ;
-    return content ;
+- (NSString *)encodeTransferredMeaningForSingleQuotes {
+    NSString *content = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    content           = [content stringByReplacingOccurrencesOfString:@"\'" withString:kSingleQuotes];
+    //    NSLog(@"content : %@",content) ;
+    return content;
 }
 
 // 转义单引号  \' -> '
-- (NSString *)decodeTransferredMeaningForSingleQuotes
-{
-    NSString *content = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] ;
-    content = [content stringByReplacingOccurrencesOfString:kSingleQuotes withString:@"\'"] ;
-    return content ;
+- (NSString *)decodeTransferredMeaningForSingleQuotes {
+    NSString *content = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    content           = [content stringByReplacingOccurrencesOfString:kSingleQuotes withString:@"\'"];
+    return content;
 }
 
 

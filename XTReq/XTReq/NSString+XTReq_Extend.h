@@ -8,16 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface NSString (XTReq_Extend)
 // 去除空格.
-- (NSString *)minusSpaceStr ;
+- (NSString *)minusSpaceStr;
 
 // \n
-- (NSString *)minusReturnStr ;
+- (NSString *)minusReturnStr;
 
 // 转义单引号  '  -> \'
-- (NSString *)encodeTransferredMeaningForSingleQuotes ;
+- (NSString *)encodeTransferredMeaningForSingleQuotes;
 // 转义单引号  \' -> '
-- (NSString *)decodeTransferredMeaningForSingleQuotes ;
+- (NSString *)decodeTransferredMeaningForSingleQuotes;
 
 @end

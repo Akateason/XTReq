@@ -8,19 +8,20 @@
 
 #import "XTRequest.h"
 
+
 @interface XTRequest (UrlString)
 
 + (NSString *)getFinalUrlWithBaseUrl:(NSString *)baseUrlStr
-                            trailStr:(NSString *)strPartOfUrl ;
+                            trailStr:(NSString *)strPartOfUrl;
 
 + (NSString *)getFinalUrlWithBaseUrl:(NSString *)baseUrlStr
-                               param:(NSDictionary *)diction ;
+                               param:(NSDictionary *)diction;
 
 + (NSString *)getUniqueKeyWithUrl:(NSString *)url
                            header:(NSDictionary *)header
                             param:(NSDictionary *)param
-                             body:(NSString *)body ;
+                             body:(NSString *)body;
 
-+ (NSString *)getTrailUrlInGetReqModeWithDic:(NSDictionary *)dict ;
++ (NSString *)getTrailUrlInGetReqModeWithDic:(NSDictionary *)dict;
 
 @end

@@ -14,22 +14,23 @@
 
 
 #import "XTReqSessionManager.h"
-@class NSURLSessionDataTask ;
+@class NSURLSessionDataTask;
 
 // req mode
 typedef NS_ENUM(NSInteger, XTRequestMode) {
-    XTRequestMode_GET_MODE  ,
-    XTRequestMode_POST_MODE ,
-    XTRequestMode_PUT_MODE  ,
-    XTRequestMode_DELETE_MODE  ,
-} ;
+    XTRequestMode_GET_MODE,
+    XTRequestMode_POST_MODE,
+    XTRequestMode_PUT_MODE,
+    XTRequestMode_DELETE_MODE,
+};
 
 // get PARAM
-#define XT_GET_PARAM                         NSMutableDictionary *param = [XTRequest getParameters] ;
+#define XT_GET_PARAM NSMutableDictionary *param = [XTRequest getParameters];
+
 
 @interface XTRequest : XTReqSessionManager
-+ (NSMutableDictionary *)getParameters ;
-+ (void)cancelAllRequest ;
++ (NSMutableDictionary *)getParameters;
++ (void)cancelAllRequest;
 
 #pragma mark - async
 + (NSURLSessionDataTask *)reqWithUrl:(NSString *)url
@@ -39,19 +40,19 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
                              rawBody:(NSString *)rawBody
                                  hud:(BOOL)hud
                              success:(void (^)(id json, NSURLResponse *response))success
-                                fail:(void (^)(NSError *error))fail ;
+                                fail:(void (^)(NSError *error))fail;
 
 #pragma mark - sync
 + (id)syncWithReqMode:(XTRequestMode)mode
               timeout:(int)timeout
                   url:(NSString *)url
                header:(NSDictionary *)header
-           parameters:(NSDictionary *)dict ;
+           parameters:(NSDictionary *)dict;
 
 + (id)syncWithReqMode:(XTRequestMode)mode
                   url:(NSString *)url
                header:(NSDictionary *)header
-           parameters:(NSDictionary *)dict ;
+           parameters:(NSDictionary *)dict;
 
 #pragma mark - upload download
 // UPLOAD one File
@@ -60,18 +61,13 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
                                         header:(NSDictionary *)header
                                       progress:(nullable void (^)(float))progressValueBlock
                                        success:(void (^)(NSURLResponse *response, id responseObject))success
-                                          fail:(void (^)(NSError *error))fail ;
+                                          fail:(void (^)(NSError *error))fail;
 // DOWNLOAD one File
 + (NSURLSessionDownloadTask *)downLoadFileWithSavePath:(NSString *)savePath
                                          fromUrlString:(NSString *)urlString
                                                 header:(NSDictionary *)header
                                       downLoadProgress:(void (^)(float progressVal))progress
                                                success:(void (^)(NSURLResponse *response, id dataFile))success
-                                                  fail:(void (^)(NSError *error))fail ;
+                                                  fail:(void (^)(NSError *error))fail;
 
 @end
-
-
-
-
-

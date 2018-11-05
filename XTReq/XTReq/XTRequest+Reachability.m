@@ -8,26 +8,27 @@
 
 #import "XTRequest+Reachability.h"
 
+
 @implementation XTRequest (Reachability)
 
 + (void)startMonitor {
-    [[AFNetworkReachabilityManager sharedManager] startMonitoring] ;
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 }
 
 + (void)stopMonitor {
-    [[AFNetworkReachabilityManager sharedManager] stopMonitoring] ;
+    [[AFNetworkReachabilityManager sharedManager] stopMonitoring];
 }
 
 + (NSString *)netWorkStatus {
-    return [[AFNetworkReachabilityManager sharedManager] localizedNetworkReachabilityStatusString] ;
+    return [[AFNetworkReachabilityManager sharedManager] localizedNetworkReachabilityStatusString];
 }
 
 + (BOOL)isWifi {
-    return [[AFNetworkReachabilityManager sharedManager] isReachableViaWiFi] ;
+    return [[AFNetworkReachabilityManager sharedManager] isReachableViaWiFi];
 }
 
 + (BOOL)isReachable {
-    return [[AFNetworkReachabilityManager sharedManager] isReachable] ;
+    return [[AFNetworkReachabilityManager sharedManager] isReachable];
 }
 
 @end
