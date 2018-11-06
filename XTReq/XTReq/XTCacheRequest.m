@@ -119,18 +119,21 @@
            policy:(XTReqPolicy)cachePolicy
    overTimeIfNeed:(int)overTimeIfNeed
        completion:(void (^)(BOOL isNewest, id json))completion {
-    [self cachedReq:reqMode
-                   url:url
-                   hud:hud
-                header:header
-                 param:param
-                  body:body
-                policy:cachePolicy
-        overTimeIfNeed:overTimeIfNeed
-           judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
-               if (completion) completion(isNewest, json);
-               return XTReqSaveJudgment_willSave;
-           }];
+    [self cachedReq:reqMode url:url hud:hud header:header param:param body:body policy:cachePolicy overTimeIfNeed:overTimeIfNeed judgeResult:^XTReqSaveJudgment(BOOL isNewest, id json) {
+
+        if (completion) completion(isNewest, json);
+        return XTReqSaveJudgment_willSave;
+    }];
+}
+
++ (void)cachedReq:(XTRequestMode)reqMode
+              url:(NSString *)url
+              hud:(BOOL)hud
+           header:(NSDictionary *)header
+            param:(NSDictionary *)param
+             body:(NSString *)body
+      judgeResult:(XTReqSaveJudgment (^)(BOOL isNewest, id json))completion {
+    [self cachedReq:reqMode url:url hud:hud header:header param:param body:body policy:XTReqPolicy_NeverCache_WaitReturn overTimeIfNeed:0 judgeResult:completion];
 }
 
 #pragma mark - private

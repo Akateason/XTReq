@@ -68,4 +68,15 @@ typedef NS_ENUM(NSUInteger, XTReqSaveJudgment) {
    overTimeIfNeed:(int)overTimeIfNeed
        completion:(void (^)(BOOL isNewest, id json))completion;
 
+/**
+ judgeResult with default policy
+ */
++ (void)cachedReq:(XTRequestMode)reqMode
+              url:(NSString *)url
+              hud:(BOOL)hud
+           header:(NSDictionary *)header
+            param:(NSDictionary *)param
+             body:(NSString *)body
+      judgeResult:(XTReqSaveJudgment (^)(BOOL isNewest, id json))completion;
+
 @end
