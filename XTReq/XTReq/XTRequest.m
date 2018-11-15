@@ -128,18 +128,17 @@
                                  hud:(BOOL)hud
                              success:(void (^)(id json, NSURLResponse *response))success
                              failure:(void (^)(NSURLSessionDataTask *task, NSError *error))fail {
-    
     __block NSURLSessionDataTask *task =
-    [self reqWithUrl:url mode:mode header:header parameters:param rawBody:rawBody hud:hud completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        
-        if (error) {
-            if (fail) fail(task,error) ;
-        }
-        else {
-            if (success) success(responseObject,response) ;
-        }
-    }] ;
-    return task ;
+        [self reqWithUrl:url mode:mode header:header parameters:param rawBody:rawBody hud:hud completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+
+            if (error) {
+                if (fail) fail(task, error);
+            }
+            else {
+                if (success) success(responseObject, response);
+            }
+        }];
+    return task;
 }
 
 

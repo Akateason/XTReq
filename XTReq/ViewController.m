@@ -23,15 +23,15 @@
 
 - (IBAction)cancelReqAction:(id)sender {
     NSURLSessionDataTask *task1 =
-    [XTRequest reqWithUrl:kURLstr mode:XTRequestMode_GET_MODE header:nil parameters:nil rawBody:nil hud:NO completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        
-    }];
+        [XTRequest reqWithUrl:kURLstr mode:XTRequestMode_GET_MODE header:nil parameters:nil rawBody:nil hud:NO completionHandler:^(NSURLResponse *response, id responseObject, NSError *error){
+
+        }];
 
 
     NSURLSessionDataTask *task2 =
-    [XTRequest reqWithUrl:kURLstr2 mode:XTRequestMode_GET_MODE header:nil parameters:nil rawBody:nil hud:NO completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        
-    }];
+        [XTRequest reqWithUrl:kURLstr2 mode:XTRequestMode_GET_MODE header:nil parameters:nil rawBody:nil hud:NO completionHandler:^(NSURLResponse *response, id responseObject, NSError *error){
+
+        }];
 
     //    cancel 1
     //    [task1 cancel] ;
@@ -43,10 +43,9 @@
 
 - (IBAction)asyncAction:(id)sender {
     [XTRequest reqWithUrl:kURLstr mode:XTRequestMode_GET_MODE header:nil parameters:nil rawBody:nil hud:NO completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        
+
         [self showInfoInAlert:[responseObject yy_modelToJSONString]];
-    }] ;
-    
+    }];
 }
 
 - (IBAction)syncAction:(id)sender {
