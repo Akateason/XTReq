@@ -25,7 +25,7 @@
     NSURLSessionDataTask *task1 =
         [XTRequest reqWithUrl:kURLstr mode:XTRequestMode_GET_MODE header:nil parameters:nil rawBody:nil hud:NO success:^(id json, NSURLResponse *response) {
 
-        } fail:^(NSError *error){
+        } failure:^(NSURLSessionDataTask *task, NSError *error){
 
         }];
 
@@ -33,7 +33,7 @@
     NSURLSessionDataTask *task2 =
         [XTRequest reqWithUrl:kURLstr2 mode:XTRequestMode_GET_MODE header:nil parameters:nil rawBody:nil hud:NO success:^(id json, NSURLResponse *response) {
 
-        } fail:^(NSError *error){
+        } failure:^(NSURLSessionDataTask *task, NSError *error){
 
         }];
 
@@ -50,7 +50,7 @@
 
         [self showInfoInAlert:[json yy_modelToJSONString]];
 
-    } fail:^(NSError *error){
+    } failure:^(NSURLSessionDataTask *task, NSError *error){
 
     }];
 }

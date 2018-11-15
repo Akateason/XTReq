@@ -68,7 +68,7 @@
                              rawBody:(NSString *)rawBody
                                  hud:(BOOL)hud
                              success:(void (^)(id json, NSURLResponse *response))success
-                                fail:(void (^)(NSError *error))fail {
+                             failure:(void (^)(NSURLSessionDataTask *task, NSError *error))fail {
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         if (hud) [SVProgressHUD show];
@@ -81,7 +81,7 @@
     if (error) {
         if (fail) {
             dispatch_async([XTReqSessionManager shareInstance].completionQueue ?: dispatch_get_main_queue(), ^{
-                fail(error);
+                fail(nil, error);
             });
         }
         return nil;
@@ -99,7 +99,7 @@
         [request setHTTPBody:dataBody];
     }
 
-    NSURLSessionDataTask *task =
+    __block NSURLSessionDataTask *task =
         [[XTReqSessionManager shareInstance] dataTaskWithRequest:request
                                                   uploadProgress:nil
                                                 downloadProgress:nil
@@ -113,7 +113,7 @@
                                                        if (success) success(responseObject, response);
                                                    }
                                                    else {
-                                                       if (fail) fail(error);
+                                                       if (fail) fail(task, error);
                                                        if (hud) [SVProgressHUD showErrorWithStatus:[XTReqSessionManager shareInstance].tipRequestFailed];
                                                    }
 
@@ -228,7 +228,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
                                         header:(NSDictionary *)header
                                       progress:(nullable void (^)(float))progressValueBlock
                                        success:(void (^)(NSURLResponse *response, id responseObject))success
-                                          fail:(void (^)(NSError *error))fail {
+                                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))fail {
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     });
@@ -244,13 +244,13 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
         }
     }
 
-    NSURLSessionUploadTask *uploadTask =
+    __block NSURLSessionUploadTask *uploadTask =
         [manager uploadTaskWithRequest:request fromData:fileData progress:^(NSProgress *_Nonnull uploadProgress) {
             if (progressValueBlock) progressValueBlock(uploadProgress.fractionCompleted);
         } completionHandler:^(NSURLResponse *_Nonnull response, id _Nullable responseObject, NSError *_Nullable error) {
             if (error) {
                 XTREQLog(@"xt upload Error: %@", error);
-                if (fail) fail(error);
+                if (fail) fail(uploadTask, error);
             }
             else {
                 XTREQLog(@"xt upload Success: %@", responseObject);
@@ -267,7 +267,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
                                                 header:(NSDictionary *)header
                                       downLoadProgress:(void (^)(float progressVal))progress
                                                success:(void (^)(NSURLResponse *response, id dataFile))success
-                                                  fail:(void (^)(NSError *error))fail {
+                                               failure:(void (^)(NSURLSessionDownloadTask *task, NSError *error))fail {
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     });
@@ -282,7 +282,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
         }
     }
 
-    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress *_Nonnull downloadProgress) {
+    __block NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress *_Nonnull downloadProgress) {
         XTREQLog(@"url: %@ \n下载进度：%.0f％", urlString, downloadProgress.fractionCompleted * 100);
         if (progress) progress(downloadProgress.fractionCompleted);
     } destination:^NSURL *_Nonnull(NSURL *_Nonnull targetPath, NSURLResponse *_Nonnull response) {
@@ -290,7 +290,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
     } completionHandler:^(NSURLResponse *_Nonnull response, NSURL *_Nullable filePath, NSError *_Nullable error) {
         if (error) {
             XTREQLog(@"xt download fail error:%@ ", error);
-            if (fail) fail(error);
+            if (fail) fail(downloadTask, error);
         }
         else {
             XTREQLog(@"xt download success : %@", [response yy_modelToJSONString]);

@@ -165,7 +165,7 @@
             [resModel xt_update]; // db update
         }
 
-    } fail:^(NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
 
         if (completion) completion([self.class getJsonWithStr:resModel.response]);
 

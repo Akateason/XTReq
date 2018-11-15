@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
                              rawBody:(NSString *)rawBody
                                  hud:(BOOL)hud
                              success:(void (^)(id json, NSURLResponse *response))success
-                                fail:(void (^)(NSError *error))fail;
+                             failure:(void (^)(NSURLSessionDataTask *task, NSError *error))fail;
 
 #pragma mark - sync
 + (id)syncWithReqMode:(XTRequestMode)mode
@@ -61,13 +61,13 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
                                         header:(NSDictionary *)header
                                       progress:(nullable void (^)(float))progressValueBlock
                                        success:(void (^)(NSURLResponse *response, id responseObject))success
-                                          fail:(void (^)(NSError *error))fail;
+                                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))fail;
 // DOWNLOAD one File
 + (NSURLSessionDownloadTask *)downLoadFileWithSavePath:(NSString *)savePath
                                          fromUrlString:(NSString *)urlString
                                                 header:(NSDictionary *)header
                                       downLoadProgress:(void (^)(float progressVal))progress
                                                success:(void (^)(NSURLResponse *response, id dataFile))success
-                                                  fail:(void (^)(NSError *error))fail;
+                                               failure:(void (^)(NSURLSessionDownloadTask *task, NSError *error))fail;
 
 @end
