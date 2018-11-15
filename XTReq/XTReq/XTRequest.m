@@ -28,7 +28,7 @@
                    rawbody:(NSString *)rawbody
                   response:(id)json
                      error:(NSError *)error {
-    XTREQLog(@"URL: %@ ,\nmode: %@ ,\nheader: %@ ,\nparam: %@ ,\nbody: %@ ,\nsuccess: %@ ,\nfail: %@ \n", url, [self modeStr:mode], header, param, rawbody, [json yy_modelToJSONString], error);
+    XTREQLog(@"\nURL: %@ ,\nmode: %@ ,\nheader: %@ ,\nparam: %@ ,\nbody: %@ ,\nsuccess: %@ ,\nfail: %@ \n", url, [self modeStr:mode], header, param, rawbody, [json yy_modelToJSONString], error);
 }
 
 + (NSString *)modeStr:(XTRequestMode)mode {
@@ -98,7 +98,7 @@
         [request setHTTPBody:dataBody];
     }
 
-    __block NSURLSessionDataTask *task =
+    NSURLSessionDataTask *task =
         [[XTReqSessionManager shareInstance] dataTaskWithRequest:request
                                                   uploadProgress:nil
                                                 downloadProgress:nil
@@ -118,6 +118,28 @@
                                                }];
     [task resume];
     return task;
+}
+
++ (NSURLSessionDataTask *)reqWithUrl:(NSString *)url
+                                mode:(XTRequestMode)mode
+                              header:(NSDictionary *)header
+                          parameters:(NSDictionary *)param
+                             rawBody:(NSString *)rawBody
+                                 hud:(BOOL)hud
+                             success:(void (^)(id json, NSURLResponse *response))success
+                             failure:(void (^)(NSURLSessionDataTask *task, NSError *error))fail {
+    
+    __block NSURLSessionDataTask *task =
+    [self reqWithUrl:url mode:mode header:header parameters:param rawBody:rawBody hud:hud completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        
+        if (error) {
+            if (fail) fail(task,error) ;
+        }
+        else {
+            if (success) success(responseObject,response) ;
+        }
+    }] ;
+    return task ;
 }
 
 
