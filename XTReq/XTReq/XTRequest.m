@@ -67,8 +67,7 @@
                           parameters:(NSDictionary *)param
                              rawBody:(NSString *)rawBody
                                  hud:(BOOL)hud
-                             success:(void (^)(id json, NSURLResponse *response))success
-                             failure:(void (^)(NSURLSessionDataTask *task, NSError *error))fail {
+                   completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler {
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         if (hud) [SVProgressHUD show];
@@ -79,9 +78,9 @@
     // url , param
     NSMutableURLRequest *request = [[XTReqSessionManager shareInstance].requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:url relativeToURL:[XTReqSessionManager shareInstance].baseURL] absoluteString] parameters:param error:&error];
     if (error) {
-        if (fail) {
+        if (completionHandler) {
             dispatch_async([XTReqSessionManager shareInstance].completionQueue ?: dispatch_get_main_queue(), ^{
-                fail(nil, error);
+                completionHandler(nil, nil, error);
             });
         }
         return nil;
@@ -109,14 +108,12 @@
                                                    [self logTheReqInfoOfUrl:url mode:mode header:header param:param rawbody:rawBody response:responseObject error:error];
                                                    [[XTReqSessionManager shareInstance] reset];
 
-                                                   if (!error) {
-                                                       if (success) success(responseObject, response);
+                                                   if (completionHandler) {
+                                                       if (hud && error) {
+                                                           [SVProgressHUD showErrorWithStatus:[XTReqSessionManager shareInstance].tipRequestFailed];
+                                                       }
+                                                       completionHandler(response, responseObject, error);
                                                    }
-                                                   else {
-                                                       if (fail) fail(task, error);
-                                                       if (hud) [SVProgressHUD showErrorWithStatus:[XTReqSessionManager shareInstance].tipRequestFailed];
-                                                   }
-
                                                    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                                                }];
     [task resume];

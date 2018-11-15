@@ -39,8 +39,8 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
                           parameters:(NSDictionary *)param
                              rawBody:(NSString *)rawBody
                                  hud:(BOOL)hud
-                             success:(void (^)(id json, NSURLResponse *response))success
-                             failure:(void (^)(NSURLSessionDataTask *task, NSError *error))fail;
+                   completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
+
 
 #pragma mark - sync
 + (id)syncWithReqMode:(XTRequestMode)mode
