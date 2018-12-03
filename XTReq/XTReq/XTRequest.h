@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
     XTRequestMode_POST_MODE,
     XTRequestMode_PUT_MODE,
     XTRequestMode_DELETE_MODE,
+    XTRequestMode_PATCH_MODE,
 };
 
 // get PARAM

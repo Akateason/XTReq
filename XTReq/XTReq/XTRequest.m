@@ -38,6 +38,7 @@
         case XTRequestMode_POST_MODE: method   = @"POST"; break;
         case XTRequestMode_PUT_MODE: method    = @"PUT"; break;
         case XTRequestMode_DELETE_MODE: method = @"DELETE"; break;
+        case XTRequestMode_PATCH_MODE: method  = @"PATCH"; break;
         default:
             break;
     }
@@ -220,6 +221,15 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
             } break;
             case XTRequestMode_DELETE_MODE: {
                 [manager DELETE:url parameters:dict success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
+                    XTREQLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@", url, header, dict, [responseObject yy_modelToJSONString]);
+                    result = responseObject;
+                    dispatch_semaphore_signal(semaphore);
+                } failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
+                    dispatch_semaphore_signal(semaphore);
+                }];
+            } break;
+            case XTRequestMode_PATCH_MODE: {
+                [manager PATCH:url parameters:dict success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
                     XTREQLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@", url, header, dict, [responseObject yy_modelToJSONString]);
                     result = responseObject;
                     dispatch_semaphore_signal(semaphore);
