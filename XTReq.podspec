@@ -136,6 +136,6 @@ Pod::Spec.new do |s|
   s.dependency  "XTFMDB","> 2.0.0"
   s.dependency  "YYModel"
   s.dependency  "SVProgressHUD"
-
+  s.dependency  "ReactiveObjC"
 
 end

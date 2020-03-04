@@ -15,5 +15,6 @@
 #import "XTRequest+Reachability.h"
 #import "XTCacheRequest.h"
 #import "XTReqSessionManager.h"
+#import "XTRequest+RAC.h"
 
 #endif /* XTReq_h */

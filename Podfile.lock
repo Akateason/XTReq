@@ -18,6 +18,7 @@ PODS:
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - Masonry (1.1.0)
+  - ReactiveObjC (3.1.1)
   - SVProgressHUD (2.2.5)
   - XTFMDB (2.0.1):
     - FMDB
@@ -27,6 +28,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - Masonry
+  - ReactiveObjC
   - SVProgressHUD
   - XTFMDB
   - YYModel
@@ -36,6 +38,7 @@ SPEC REPOS:
     - AFNetworking
     - FMDB
     - Masonry
+    - ReactiveObjC
     - SVProgressHUD
     - XTFMDB
     - YYModel
@@ -44,10 +47,11 @@ SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   XTFMDB: 52ca734600b9f798c9e4109f528e24a69058cab6
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: d9c39944e7d1f222dbebd7b6c8d2c556b8ad2f2a
+PODFILE CHECKSUM: 388afa6a14ddf3479248d09755637f13b5c7db9b
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.8.4
