@@ -49,7 +49,7 @@
 
 + (instancetype)newDefaultModelWithKey:(NSString *)urlStr
                                    val:(NSString *)respStr
-                                policy:(int)policy
+                                policy:(NSUInteger)policy
                               overTime:(int)timeout {
     if (!policy) policy                                              = XTResponseCachePolicyNeverUseCache; // default policy
     if (policy == XTResponseCachePolicyOverTime && !timeout) timeout = 60 * 60;                            // 1hour default timeout if need .

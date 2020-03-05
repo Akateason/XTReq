@@ -61,7 +61,7 @@ typedef NS_OPTIONS(NSUInteger, XTReqPolicy) {
 
 + (instancetype)newDefaultModelWithKey:(NSString *)urlStr
                                    val:(NSString *)respStr
-                                policy:(int)policy
+                                policy:(NSUInteger)policy
                               overTime:(int)timeout;
 // is overTime ?
 - (BOOL)isOverTime;

@@ -34,6 +34,7 @@
            policy:(XTReqPolicy)cachePolicy
    overTimeIfNeed:(int)overTimeIfNeed
       judgeResult:(XTReqSaveJudgment (^)(BOOL isNewest, id json))completion {
+    
     NSString *strUniqueKey = [self getUniqueKeyWithUrl:url
                                                 header:header
                                                  param:param
@@ -146,6 +147,7 @@
                          body:(NSString *)body
                 responseModel:(XTResponseDBModel *)resModel
                    completion:(XTReqSaveJudgment (^)(id json))completion {
+
     [self reqWithUrl:url mode:requestType header:header parameters:param rawBody:body hud:hud success:^(id json, NSURLResponse *response) {
 
         XTReqSaveJudgment flag = -1;
