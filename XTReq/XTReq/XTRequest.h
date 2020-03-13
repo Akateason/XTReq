@@ -28,6 +28,7 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
 // get PARAM
 #define XT_GET_PARAM NSMutableDictionary *param = [XTRequest getParameters];
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface XTRequest : XTReqSessionManager
 + (NSMutableDictionary *)getParameters;
@@ -36,47 +37,50 @@ typedef NS_ENUM(NSInteger, XTRequestMode) {
 #pragma mark - async
 + (NSURLSessionDataTask *)reqWithUrl:(NSString *)url
                                 mode:(XTRequestMode)mode
-                              header:(NSDictionary *)header
-                          parameters:(NSDictionary *)param
-                             rawBody:(NSString *)rawBody
+                              header:(NSDictionary *_Nullable)header
+                          parameters:(NSDictionary *_Nullable)param
+                             rawBody:(NSString *_Nullable)rawBody
                                  hud:(BOOL)hud
-                   completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
+                   completionHandler:(void (^_Nullable)(NSURLResponse *response, id responseObject, NSError *error))completionHandler;
 
 + (NSURLSessionDataTask *)reqWithUrl:(NSString *)url
                                 mode:(XTRequestMode)mode
-                              header:(NSDictionary *)header
-                          parameters:(NSDictionary *)param
-                             rawBody:(NSString *)rawBody
+                              header:(NSDictionary *_Nullable)header
+                          parameters:(NSDictionary *_Nullable)param
+                             rawBody:(NSString *_Nullable)rawBody
                                  hud:(BOOL)hud
-                             success:(void (^)(id json, NSURLResponse *response))success
-                             failure:(void (^)(NSURLSessionDataTask *task, NSError *error))fail;
+                             success:(void (^_Nullable)(id json, NSURLResponse *response))success
+                             failure:(void (^_Nullable)(NSURLSessionDataTask *task, NSError *error))fail;
 
 #pragma mark - sync
 + (id)syncWithReqMode:(XTRequestMode)mode
               timeout:(int)timeout
-                  url:(NSString *)url
-               header:(NSDictionary *)header
-           parameters:(NSDictionary *)dict;
+                  url:(NSString *_Nullable)url
+               header:(NSDictionary *_Nullable)header
+           parameters:(NSDictionary *_Nullable)dict;
 
 + (id)syncWithReqMode:(XTRequestMode)mode
-                  url:(NSString *)url
-               header:(NSDictionary *)header
-           parameters:(NSDictionary *)dict;
+                  url:(NSString *_Nullable)url
+               header:(NSDictionary *_Nullable)header
+           parameters:(NSDictionary *_Nullable)dict;
 
 #pragma mark - upload download
 // UPLOAD one File
 + (NSURLSessionUploadTask *)uploadFileWithData:(NSData *)fileData
                                         urlStr:(NSString *)urlString
-                                        header:(NSDictionary *)header
-                                      progress:(nullable void (^)(float))progressValueBlock
+                                        header:(NSDictionary *_Nullable)header
+                                      progress:(void (^_Nullable)(float progressVal))progressValueBlock
                                        success:(void (^)(NSURLResponse *response, id responseObject))success
-                                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))fail;
+                                       failure:(void (^_Nullable)(NSURLSessionDataTask *task, NSError *error))fail;
 // DOWNLOAD one File
 + (NSURLSessionDownloadTask *)downLoadFileWithSavePath:(NSString *)savePath
                                          fromUrlString:(NSString *)urlString
-                                                header:(NSDictionary *)header
-                                      downLoadProgress:(void (^)(float progressVal))progress
+                                                header:(NSDictionary *_Nullable)header
+                                      downLoadProgress:(void (^_Nullable)(float progressVal))progress
                                                success:(void (^)(NSURLResponse *response, id dataFile))success
-                                               failure:(void (^)(NSURLSessionDownloadTask *task, NSError *error))fail;
+                                               failure:(void (^_Nullable)(NSURLSessionDownloadTask *task, NSError *error))fail;
 
 @end
+
+
+NS_ASSUME_NONNULL_END

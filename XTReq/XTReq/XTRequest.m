@@ -254,7 +254,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
 + (NSURLSessionUploadTask *)uploadFileWithData:(NSData *)fileData
                                         urlStr:(NSString *)urlString
                                         header:(NSDictionary *)header
-                                      progress:(nullable void (^)(float))progressValueBlock
+                                      progress:(nullable void (^)(float progressVal))progressValueBlock
                                        success:(void (^)(NSURLResponse *response, id responseObject))success
                                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))fail {
     dispatch_async(dispatch_get_main_queue(), ^{
