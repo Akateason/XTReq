@@ -76,6 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSURLSessionDownloadTask *)downLoadFileWithSavePath:(NSString *)savePath
                                          fromUrlString:(NSString *)urlString
                                                 header:(NSDictionary *_Nullable)header
+                                            autoResume:(BOOL)autoResume
                                       downLoadProgress:(void (^_Nullable)(float progressVal))progress
                                                success:(void (^)(NSURLResponse *response, id dataFile))success
                                                failure:(void (^_Nullable)(NSURLSessionDownloadTask *task, NSError *error))fail;

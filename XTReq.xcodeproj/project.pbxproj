@@ -24,6 +24,9 @@
 		8F86B81C240F457D000108FC /* XTRequest+RAC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F86B81B240F457D000108FC /* XTRequest+RAC.m */; };
 		8FC5F4B321806754009B4042 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8FC5F4B221806753009B4042 /* Podfile */; };
 		8FC8214F20E737660068AE5E /* XTReq.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 8FC8214E20E737660068AE5E /* XTReq.podspec */; };
+		8FE27E57241E169100075C6D /* XTDownloadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE27E56241E169100075C6D /* XTDownloadTask.m */; };
+		8FE27E5D241E1FDD00075C6D /* XTDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE27E5C241E1FDD00075C6D /* XTDownloader.m */; };
+		8FE27E66241E5D9B00075C6D /* DownloadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE27E65241E5D9B00075C6D /* DownloadVC.m */; };
 		B9D3522C7E0EE3470E4F534A /* Pods_XTReq.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E88A3FBB6F3B15F75C41117D /* Pods_XTReq.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +63,12 @@
 		8FC5F2CF21775B7E009B4042 /* XTReqConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XTReqConst.h; sourceTree = "<group>"; };
 		8FC5F4B221806753009B4042 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8FC8214E20E737660068AE5E /* XTReq.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = XTReq.podspec; sourceTree = "<group>"; };
+		8FE27E55241E169100075C6D /* XTDownloadTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XTDownloadTask.h; sourceTree = "<group>"; };
+		8FE27E56241E169100075C6D /* XTDownloadTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XTDownloadTask.m; sourceTree = "<group>"; };
+		8FE27E5B241E1FDD00075C6D /* XTDownloader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XTDownloader.h; sourceTree = "<group>"; };
+		8FE27E5C241E1FDD00075C6D /* XTDownloader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XTDownloader.m; sourceTree = "<group>"; };
+		8FE27E64241E5D9B00075C6D /* DownloadVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadVC.h; sourceTree = "<group>"; };
+		8FE27E65241E5D9B00075C6D /* DownloadVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadVC.m; sourceTree = "<group>"; };
 		A6519CB82D2757CB09350DD2 /* Pods-XTReq.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XTReq.release.xcconfig"; path = "Pods/Target Support Files/Pods-XTReq/Pods-XTReq.release.xcconfig"; sourceTree = "<group>"; };
 		E88A3FBB6F3B15F75C41117D /* Pods_XTReq.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XTReq.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -113,6 +122,8 @@
 				8F785BAA1ECBDAE3005D5ECC /* AppDelegate.m */,
 				8F785BAC1ECBDAE3005D5ECC /* ViewController.h */,
 				8F785BAD1ECBDAE3005D5ECC /* ViewController.m */,
+				8FE27E64241E5D9B00075C6D /* DownloadVC.h */,
+				8FE27E65241E5D9B00075C6D /* DownloadVC.m */,
 				8F785BAF1ECBDAE3005D5ECC /* Main.storyboard */,
 				8F785BB21ECBDAE3005D5ECC /* Assets.xcassets */,
 				8F785BB41ECBDAE3005D5ECC /* LaunchScreen.storyboard */,
@@ -151,8 +162,20 @@
 				8F785BC81ECBDB07005D5ECC /* XTResponseDBModel.m */,
 				8F2BFD7A203EA8040013394D /* NSString+XTReq_Extend.h */,
 				8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */,
+				8FE27E54241E165B00075C6D /* downloader */,
 			);
 			path = XTReq;
+			sourceTree = "<group>";
+		};
+		8FE27E54241E165B00075C6D /* downloader */ = {
+			isa = PBXGroup;
+			children = (
+				8FE27E55241E169100075C6D /* XTDownloadTask.h */,
+				8FE27E56241E169100075C6D /* XTDownloadTask.m */,
+				8FE27E5B241E1FDD00075C6D /* XTDownloader.h */,
+				8FE27E5C241E1FDD00075C6D /* XTDownloader.m */,
+			);
+			path = downloader;
 			sourceTree = "<group>";
 		};
 		F8584687362E298ADE067AEA /* Pods */ = {
@@ -299,6 +322,9 @@
 				8F785BAE1ECBDAE3005D5ECC /* ViewController.m in Sources */,
 				8F785BAB1ECBDAE3005D5ECC /* AppDelegate.m in Sources */,
 				8F2BFFCA203FC2670013394D /* XTRequest+UrlString.m in Sources */,
+				8FE27E57241E169100075C6D /* XTDownloadTask.m in Sources */,
+				8FE27E66241E5D9B00075C6D /* DownloadVC.m in Sources */,
+				8FE27E5D241E1FDD00075C6D /* XTDownloader.m in Sources */,
 				8F785BA81ECBDAE3005D5ECC /* main.m in Sources */,
 				8F785BCC1ECBDB07005D5ECC /* XTRequest.m in Sources */,
 				8F44616821464F2C00A6D322 /* XTRequest+Reachability.m in Sources */,

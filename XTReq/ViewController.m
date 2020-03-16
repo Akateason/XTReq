@@ -9,10 +9,13 @@
 #import "ViewController.h"
 #import "XTReq.h"
 #import <YYModel/YYModel.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+
 
 
 @interface ViewController ()
-
+@property (weak, nonatomic) IBOutlet UIButton *btDownload;
+@property (nonatomic, strong) NSURLSessionDownloadTask *task;
 @end
 
 
@@ -104,16 +107,16 @@
 }
 
 
-- (IBAction)downloadAction:(id)sender {
+- (IBAction)downloadAction:(UIButton *)bt {
+    bt.selected = !bt.selected;
     
-    
-    
-    
+    if (!bt.selected) {
+        [self.task suspend];
+        self.task = nil; // 有问题 , 要做断点
+    } else {
+        [self.task resume];
+    }
 }
-
-
-
-
 
 
 
@@ -126,11 +129,56 @@
     [super viewDidLoad];
 
     [XTRequest startMonitor];
+    
+    RAC(self.btDownload, backgroundColor) =
+    [RACObserve(self.btDownload, selected) map:^UIColor * _Nullable(id  _Nullable value) {
+        return ![value intValue] ? [UIColor greenColor] : [UIColor redColor];
+    }];
+    
+    
+
+    
+    
+    
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
+- (NSURLSessionDownloadTask *)task {
+    if (!_task) {
+        NSString *url = @"http://dldir1.qq.com/qqfile/QQforMac/QQ_V5.4.0.dmg";
+        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        path = [path stringByAppendingString:@"/a.dmg"];
+        
+        _task =
+        [XTRequest downLoadFileWithSavePath:path
+                              fromUrlString:url
+                                     header:nil
+                                 autoResume:NO
+                           downLoadProgress:^(float progressVal) {
+            
+            [self.btDownload setTitle:[NSString stringWithFormat:@"%@%%",@(progressVal*100)] forState:0];
+            
+        }
+                                     success:^(NSURLResponse * _Nonnull response, id  _Nonnull dataFile) {
+                        
+            [SVProgressHUD showSuccessWithStatus:@"下载成功"];
+            
+        } failure:^(NSURLSessionDownloadTask * _Nonnull task, NSError * _Nonnull error) {
+            
+            [SVProgressHUD showErrorWithStatus:error.description];
+            
+        }];
+    }
+    return _task;
+}
+
+
 
 @end

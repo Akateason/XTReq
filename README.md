@@ -11,7 +11,7 @@ pod 'XTReq'
 
 # XTRequest
 
-Based on [XTFMDB](https://github.com/Akateason/XTFMDB) & AFNetworking
+Based on [XTFMDB](https://github.com/Akateason/XTFMDB) & AFNetworking & ReactiveCocoa
 1.  share one manager .
 2.  async and sync .
 3.  GET / POST / PUT , fast append HTTP header / formdata / rawbody
@@ -21,6 +21,7 @@ Based on [XTFMDB](https://github.com/Akateason/XTFMDB) & AFNetworking
 7. upload images
 8. download
 9. reachability
+10. RAC signal
 
 #  XTCacheRequest
 1.  Persistent save the response of requests .

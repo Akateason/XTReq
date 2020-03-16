@@ -15,5 +15,6 @@ pod 'YYModel'
 pod 'SVProgressHUD'
 pod 'XTFMDB'
 pod 'ReactiveObjC'
+pod 'XTBase'
 
 end
