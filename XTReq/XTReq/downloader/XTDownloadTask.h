@@ -1,10 +1,11 @@
 //
 //  XTDownloadTask.h
 //  XTReq
+//  Download Class : Resume From Break Points
 //
 //  Created by teason23 on 2020/3/15.
 //  Copyright © 2020 teaason. All rights reserved.
-//  Download Class : Resume From Break Points
+//
 
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
@@ -18,7 +19,9 @@ typedef NS_ENUM(NSUInteger, XTDownloadTaskState) {
 };
 
 @interface XTDownloadTask : NSObject
-
+/**
+new
+*/
 + (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl;
 
 + (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl

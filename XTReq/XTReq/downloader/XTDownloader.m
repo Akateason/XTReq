@@ -10,14 +10,13 @@
 
 
 @interface XTDownloader ()
-@property(nonatomic, strong) NSOperationQueue *operationQueue;
-@property(nonatomic, strong) NSMutableArray *privateDownloadingArray;
-@property(nonatomic, assign) NSInteger currentActiveTaskCount;
-
-
+@property (nonatomic, strong) NSOperationQueue   *operationQueue;
+@property (nonatomic, strong) NSMutableArray     *privateDownloadingArray;
+@property (nonatomic, assign) NSInteger          currentActiveTaskCount;
 @end
 
 @implementation XTDownloader
+
 #pragma mark - Life Cycle
 
 + (XTDownloader *)sharedInstance {
@@ -55,7 +54,7 @@
     
     task.downloadState = XTDownloadTaskStateWaiting;
     [self.privateDownloadingArray addObject:task];
-        
+    
     if (_currentActiveTaskCount < _maxActiveDownloadCount) {
         // 当前并发数小于最大并发数，直接下载
         [self startTask:task];
@@ -93,7 +92,5 @@
 - (void)resumeAll {
     
 }
-
-
 
 @end

@@ -22,6 +22,7 @@
 		8F785BCC1ECBDB07005D5ECC /* XTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BC61ECBDB07005D5ECC /* XTRequest.m */; };
 		8F785BCD1ECBDB07005D5ECC /* XTResponseDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BC81ECBDB07005D5ECC /* XTResponseDBModel.m */; };
 		8F86B81C240F457D000108FC /* XTRequest+RAC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F86B81B240F457D000108FC /* XTRequest+RAC.m */; };
+		8FC2EE35241F718900029B52 /* XTDownloadTask+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC2EE34241F718900029B52 /* XTDownloadTask+Extension.m */; };
 		8FC5F4B321806754009B4042 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8FC5F4B221806753009B4042 /* Podfile */; };
 		8FC8214F20E737660068AE5E /* XTReq.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 8FC8214E20E737660068AE5E /* XTReq.podspec */; };
 		8FE27E57241E169100075C6D /* XTDownloadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE27E56241E169100075C6D /* XTDownloadTask.m */; };
@@ -60,6 +61,8 @@
 		8F785BC81ECBDB07005D5ECC /* XTResponseDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTResponseDBModel.m; sourceTree = "<group>"; };
 		8F86B81A240F457D000108FC /* XTRequest+RAC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XTRequest+RAC.h"; sourceTree = "<group>"; };
 		8F86B81B240F457D000108FC /* XTRequest+RAC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "XTRequest+RAC.m"; sourceTree = "<group>"; };
+		8FC2EE33241F718900029B52 /* XTDownloadTask+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XTDownloadTask+Extension.h"; sourceTree = "<group>"; };
+		8FC2EE34241F718900029B52 /* XTDownloadTask+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "XTDownloadTask+Extension.m"; sourceTree = "<group>"; };
 		8FC5F2CF21775B7E009B4042 /* XTReqConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XTReqConst.h; sourceTree = "<group>"; };
 		8FC5F4B221806753009B4042 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8FC8214E20E737660068AE5E /* XTReq.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = XTReq.podspec; sourceTree = "<group>"; };
@@ -172,6 +175,8 @@
 			children = (
 				8FE27E55241E169100075C6D /* XTDownloadTask.h */,
 				8FE27E56241E169100075C6D /* XTDownloadTask.m */,
+				8FC2EE33241F718900029B52 /* XTDownloadTask+Extension.h */,
+				8FC2EE34241F718900029B52 /* XTDownloadTask+Extension.m */,
 				8FE27E5B241E1FDD00075C6D /* XTDownloader.h */,
 				8FE27E5C241E1FDD00075C6D /* XTDownloader.m */,
 			);
@@ -325,6 +330,7 @@
 				8FE27E57241E169100075C6D /* XTDownloadTask.m in Sources */,
 				8FE27E66241E5D9B00075C6D /* DownloadVC.m in Sources */,
 				8FE27E5D241E1FDD00075C6D /* XTDownloader.m in Sources */,
+				8FC2EE35241F718900029B52 /* XTDownloadTask+Extension.m in Sources */,
 				8F785BA81ECBDAE3005D5ECC /* main.m in Sources */,
 				8F785BCC1ECBDB07005D5ECC /* XTRequest.m in Sources */,
 				8F44616821464F2C00A6D322 /* XTRequest+Reachability.m in Sources */,

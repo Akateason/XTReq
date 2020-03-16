@@ -10,11 +10,8 @@
 #import "XTDownloadTask.h"
 
 
-
-
-
-
 @interface XTDownloader : NSObject
+
 + (XTDownloader *)sharedInstance;
 
 /**
@@ -39,8 +36,6 @@
  */
 - (BOOL)addTask:(XTDownloadTask *)task;
 
-
-
 /**
  暂停下载任务
 
@@ -62,10 +57,7 @@
  */
 - (void)removeTask:(XTDownloadTask *)task;
 
-
 - (void)pauseAll;
 - (void)resumeAll;
-
-
 
 @end
