@@ -16,5 +16,7 @@
 #import "XTCacheRequest.h"
 #import "XTReqSessionManager.h"
 #import "XTRequest+RAC.h"
+#import "XTDownloadTask.h"
+
 
 #endif /* XTReq_h */
