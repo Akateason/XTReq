@@ -9,6 +9,7 @@
 #import "DownloadVC.h"
 #import "XTDownloader.h"
 #import <ReactiveObjC/ReactiveObjC.h>
+#import <Social/Social.h>
 
 @interface DownloadVC ()
 @property (nonatomic, strong) XTDownloadTask *task;
@@ -31,6 +32,24 @@
 }
 
 - (IBAction)start:(id)sender {
+    NSString *shareText = @"分享的标题";
+    NSURL *shareUrl = [NSURL URLWithString:@"https://baidu.com"];
+    NSArray *activityItemsArray = @[shareText,shareUrl];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItemsArray applicationActivities:nil];
+    activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable   activityType,
+                                            BOOL completed,
+                                            NSArray * _Nullable returnedItems,
+                                            NSError * _Nullable activityError) {
+
+        NSLog(@"activityType: %@,\n completed: %d,\n returnedItems:%@,\n activityError:%@",activityType,completed,returnedItems,activityError);
+        
+    };
+
+    [self presentViewController:activityVC animated:YES completion:nil];
+    
+    
+
+    
     
 }
 

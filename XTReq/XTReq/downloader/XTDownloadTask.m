@@ -116,7 +116,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
 }
 
 
-#pragma mark - 下载相关
+#pragma mark -
 
 - (void)observeDownloadProgress:(void (^)(XTDownloadTask *task, float progress))progressBlock
              downloadCompletion:(void (^)(XTDownloadTask *task, BOOL isComplete))completionBlock {

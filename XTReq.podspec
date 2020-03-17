@@ -52,9 +52,9 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "teason" => "teason.xie@cootek.cn" }
+  s.author             = { "teason" => "akateason@qq.com" }
   # Or just: s.author    = "teason"
-  # s.authors            = { "teason" => "teason.xie@cootek.cn" }
+  # s.authors            = { "teason" => "akateason@qq.com" }
   # s.social_media_url   = "http://twitter.com/teason"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -89,7 +89,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "XTReq/XTReq"
+  s.source_files  = "XTReq/XTReq","XTReq/XTReq/downloader"
 #  s.exclude_files = "Classes/Exclude"
 
   s.public_header_files = "XTReq/XTReq/*.h"
