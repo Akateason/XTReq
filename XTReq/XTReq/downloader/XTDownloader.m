@@ -57,14 +57,10 @@
     
     if (_currentActiveTaskCount < _maxActiveDownloadCount) {
         // 当前并发数小于最大并发数，直接下载
-        [self startTask:task];
+        [self resumeTask:task];
     }
     
     return YES;
-}
-
-- (void)startTask:(XTDownloadTask *)task {
-    
 }
 
 - (void)pauseTask:(XTDownloadTask *)task {
