@@ -16,6 +16,7 @@ typedef void(^BlkDownloadProgress)(XTDownloadTask *task, float pgs);
 typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
 
 @interface XTDownloadTask ()
+@property (copy, nonatomic) NSDictionary                *header;
 @property (copy, nonatomic) BlkDownloadProgress         blkDownloadPgs;
 @property (copy, nonatomic) BlkDownloadTaskComplete     blkCompletion;
 @end
@@ -23,11 +24,12 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
 @implementation XTDownloadTask
 
 + (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl
+                          header:(NSDictionary *)header
                       targetPath:(NSString *)targetPath {
     
     if (!targetPath) targetPath = [self createDefaultPath];
-    
     XTDownloadTask *task = [[XTDownloadTask alloc] init];
+    task.header = header;
     task.downloadUrl = downloadUrl;
     task.filename = [[downloadUrl absoluteString] lastPathComponent];
     task.fileType = [task.filename pathExtension];
@@ -36,8 +38,9 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
     return task;
 }
 
-+ (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl {
-    return [self downloadTask:downloadUrl targetPath:nil];
++ (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl
+                          header:(NSDictionary *)header {
+    return [self downloadTask:downloadUrl header:header targetPath:nil];
 }
 
 - (AFURLSessionManager *)manager {
@@ -56,6 +59,11 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
         // 设置HTTP请求头中的Range
         NSString *range = [NSString stringWithFormat:@"bytes=%zd-", self.currentLength];
         [request setValue:range forHTTPHeaderField:@"Range"];
+        if (self.header) {
+            for (NSString *key in self.header) {
+                [request setValue:self.header[key] forHTTPHeaderField:key];
+            }
+        }
         
         @weakify(self)
         _sessionDownloadTask = [self.manager dataTaskWithRequest:request

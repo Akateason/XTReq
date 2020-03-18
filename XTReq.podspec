@@ -89,10 +89,9 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "XTReq/XTReq","XTReq/XTReq/downloader"
+  s.source_files  = "XTReq/XTReq","XTReq/XTReq/Downloader","XTReq/XTReq/Cache"
 #  s.exclude_files = "Classes/Exclude"
-
-  s.public_header_files = "XTReq/XTReq/*.h","XTReq/XTReq/downloader/*.h"
+  s.public_header_files = "XTReq/XTReq/*.h","XTReq/XTReq/Downloader/*.h","XTReq/XTReq/Cache/*.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

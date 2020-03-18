@@ -159,18 +159,26 @@
 				8F2BFFC9203FC2670013394D /* XTRequest+UrlString.m */,
 				8F785BC31ECBDB07005D5ECC /* XTReqSessionManager.h */,
 				8F785BC41ECBDB07005D5ECC /* XTReqSessionManager.m */,
-				8F785BBE1ECBDB07005D5ECC /* XTCacheRequest.h */,
-				8F785BBF1ECBDB07005D5ECC /* XTCacheRequest.m */,
-				8F785BC71ECBDB07005D5ECC /* XTResponseDBModel.h */,
-				8F785BC81ECBDB07005D5ECC /* XTResponseDBModel.m */,
-				8F2BFD7A203EA8040013394D /* NSString+XTReq_Extend.h */,
-				8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */,
-				8FE27E54241E165B00075C6D /* downloader */,
+				8FACF8702421D8E200A9AD3B /* Cache */,
+				8FE27E54241E165B00075C6D /* Downloader */,
 			);
 			path = XTReq;
 			sourceTree = "<group>";
 		};
-		8FE27E54241E165B00075C6D /* downloader */ = {
+		8FACF8702421D8E200A9AD3B /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				8F785BBE1ECBDB07005D5ECC /* XTCacheRequest.h */,
+				8F785BBF1ECBDB07005D5ECC /* XTCacheRequest.m */,
+				8F2BFD7A203EA8040013394D /* NSString+XTReq_Extend.h */,
+				8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */,
+				8F785BC71ECBDB07005D5ECC /* XTResponseDBModel.h */,
+				8F785BC81ECBDB07005D5ECC /* XTResponseDBModel.m */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		8FE27E54241E165B00075C6D /* Downloader */ = {
 			isa = PBXGroup;
 			children = (
 				8FE27E55241E169100075C6D /* XTDownloadTask.h */,
@@ -180,7 +188,7 @@
 				8FE27E5B241E1FDD00075C6D /* XTDownloader.h */,
 				8FE27E5C241E1FDD00075C6D /* XTDownloader.m */,
 			);
-			path = downloader;
+			path = Downloader;
 			sourceTree = "<group>";
 		};
 		F8584687362E298ADE067AEA /* Pods */ = {

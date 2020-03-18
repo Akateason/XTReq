@@ -22,10 +22,12 @@ typedef NS_ENUM(NSUInteger, XTDownloadTaskState) {
 /**
 new
 */
-+ (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl;
++ (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl
+                          header:(NSDictionary *)header;
 
 + (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl
-                      targetPath:(NSString *)targetPath;
+                      targetPath:(NSString *)targetPath
+                          header:(NSDictionary *)header;
 
 
 /**
