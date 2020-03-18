@@ -92,7 +92,7 @@ Pod::Spec.new do |s|
   s.source_files  = "XTReq/XTReq","XTReq/XTReq/downloader"
 #  s.exclude_files = "Classes/Exclude"
 
-  s.public_header_files = "XTReq/XTReq/*.h"
+  s.public_header_files = "XTReq/XTReq/*.h","XTReq/XTReq/downloader/*.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

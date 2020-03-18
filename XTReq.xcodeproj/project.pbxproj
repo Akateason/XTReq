@@ -65,7 +65,7 @@
 		8FC2EE34241F718900029B52 /* XTDownloadTask+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "XTDownloadTask+Extension.m"; sourceTree = "<group>"; };
 		8FC5F2CF21775B7E009B4042 /* XTReqConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XTReqConst.h; sourceTree = "<group>"; };
 		8FC5F4B221806753009B4042 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		8FC8214E20E737660068AE5E /* XTReq.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = XTReq.podspec; sourceTree = "<group>"; };
+		8FC8214E20E737660068AE5E /* XTReq.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = XTReq.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8FE27E55241E169100075C6D /* XTDownloadTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XTDownloadTask.h; sourceTree = "<group>"; };
 		8FE27E56241E169100075C6D /* XTDownloadTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XTDownloadTask.m; sourceTree = "<group>"; };
 		8FE27E5B241E1FDD00075C6D /* XTDownloader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XTDownloader.h; sourceTree = "<group>"; };
