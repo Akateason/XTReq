@@ -268,7 +268,15 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
     [request setHTTPMethod:@"POST"];
     if (header) {
         for (NSString *key in header) {
-            [request setValue:header[key] forHTTPHeaderField:key];
+            @autoreleasepool {
+                NSString *val;
+                if ([header[key] isKindOfClass:[NSNumber class]]) {
+                    val = [header[key] stringValue];
+                } else {
+                    val = header[key];
+                }
+                [request setValue:val forHTTPHeaderField:key];
+            }
         }
     }
 

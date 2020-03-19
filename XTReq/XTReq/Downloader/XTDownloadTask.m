@@ -25,13 +25,14 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
 
 + (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl
                           header:(NSDictionary *)header
+                        fileName:(NSString *)fileName
                       targetPath:(NSString *)targetPath {
     
     if (!targetPath) targetPath = [self createDefaultPath];
     XTDownloadTask *task = [[XTDownloadTask alloc] init];
     task.header = header;
     task.downloadUrl = downloadUrl;
-    task.filename = [[downloadUrl absoluteString] lastPathComponent];
+    task.filename = fileName;
     task.fileType = [task.filename pathExtension];
     task.folderPath = targetPath;
     task.downloadState = XTDownloadTaskStateWaiting;
@@ -39,8 +40,9 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
 }
 
 + (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl
-                          header:(NSDictionary *)header {
-    return [self downloadTask:downloadUrl header:header targetPath:nil];
+                          header:(NSDictionary *)header
+                        fileName:(NSString *)fileName {
+    return [self downloadTask:downloadUrl header:header fileName:fileName targetPath:nil];
 }
 
 - (AFURLSessionManager *)manager {
