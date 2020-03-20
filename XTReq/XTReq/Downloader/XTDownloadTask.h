@@ -27,9 +27,9 @@ new
                         fileName:(NSString *)fileName;
 
 + (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl
-                      targetPath:(NSString *)targetPath
                           header:(NSDictionary *)header
-                        fileName:(NSString *)fileName;
+                        fileName:(NSString *)fileName
+                      targetPath:(NSString *)targetPath;
 
 
 /**

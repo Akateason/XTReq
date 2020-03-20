@@ -23,7 +23,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
 
 @implementation XTDownloadTask
 
-+ (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl
++ (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl                      
                           header:(NSDictionary *)header
                         fileName:(NSString *)fileName
                       targetPath:(NSString *)targetPath {

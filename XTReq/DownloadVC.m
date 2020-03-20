@@ -63,7 +63,7 @@
 
 - (XTDownloadTask *)task {
     if (!_task) {
-        _task = [XTDownloadTask downloadTask:[NSURL URLWithString:@"http://dldir1.qq.com/qqfile/QQforMac/QQ_V5.4.0.dmg"]];
+        _task = [XTDownloadTask downloadTask:[NSURL URLWithString:@"http://dldir1.qq.com/qqfile/QQforMac/QQ_V5.4.0.dmg"] header:nil fileName:@"QQ_V5.4.0.dmg"];
     }
     return _task;
 }
