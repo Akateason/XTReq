@@ -72,6 +72,17 @@ NS_ASSUME_NONNULL_BEGIN
                                       progress:(void (^_Nullable)(float progressVal))progressValueBlock
                                        success:(void (^)(NSURLResponse *response, id responseObject))success
                                        failure:(void (^_Nullable)(NSURLSessionDataTask *task, NSError *error))fail;
+
+// Creating an Upload Task for a Multi-Part Request
++ (NSURLSessionUploadTask *)multipartFormDataUploadPath:(NSString *)path
+                                                 urlStr:(NSString *)urlStr
+                                                 header:(NSDictionary *_Nullable)header
+                                                bodyDic:(NSDictionary *_Nullable)body
+                                               progress:(nullable void (^_Nullable)(float progressVal))progressValueBlock
+                                                success:(void (^)(NSURLResponse *response, id responseObject))success
+                                                failure:(void (^_Nullable)(NSURLSessionDataTask *task, NSError *error))fail ;
+    
+    
 // DOWNLOAD one File
 + (NSURLSessionDownloadTask *)downLoadFileWithSavePath:(NSString *)savePath
                                          fromUrlString:(NSString *)urlString

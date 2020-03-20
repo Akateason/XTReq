@@ -10,7 +10,7 @@
 #import "SVProgressHUD.h"
 #import "YYModel.h"
 #import "XTReqConst.h"
-
+#import "XTRequest+UrlString.h"
 
 @implementation XTRequest
 
@@ -298,6 +298,62 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
     return uploadTask;
 }
 
+
++ (NSURLSessionUploadTask *)multipartFormDataUploadPath:(NSString *)path
+                                                 urlStr:(NSString *)urlStr
+                                                 header:(NSDictionary *)header
+                                                bodyDic:(NSDictionary *)body
+                                               progress:(nullable void (^)(float progressVal))progressValueBlock
+                                                success:(void (^)(NSURLResponse *response, id responseObject))success
+                                                failure:(void (^)(NSURLSessionDataTask *task, NSError *error))fail {
+    
+    NSString *fileName = [path lastPathComponent];
+    NSString *mimeType = [XTRequest getFilesMimeTypeFromPath:path];
+    NSMutableURLRequest *request =
+    [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST"
+                                                               URLString:urlStr
+                                                              parameters:body
+                                               constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        [formData appendPartWithFileURL:[NSURL fileURLWithPath:path] name:@"file" fileName:fileName mimeType:mimeType error:nil];
+        
+    } error:nil];
+    
+    if (header) {
+        for (NSString *key in header.allKeys) {
+            if (![key isEqualToString:@"Content-Type"]) { // 避免Content-Type覆盖,server返回500;
+                [request setValue:header[key] forHTTPHeaderField:key];
+            }
+        }
+    }
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]] ;
+
+    __block NSURLSessionUploadTask *uploadTask =
+    [manager uploadTaskWithStreamedRequest:request
+                                  progress:^(NSProgress * _Nonnull uploadProgress) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (progressValueBlock) {
+                progressValueBlock(uploadProgress.fractionCompleted);
+            }
+        });
+    } completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (error) {
+            XTREQLog(@"xt upload Failed: %@", error);
+            if (fail) {
+                fail(uploadTask,error);
+            }
+        } else {
+            XTREQLog(@"xt upload Success: %@", responseObject);
+            if (success) {
+                success(response,responseObject);
+            }
+        }
+    }];
+    [uploadTask resume];
+    return uploadTask;
+}
+
 + (NSURLSessionDownloadTask *)downLoadFileWithSavePath:(NSString *)savePath
                                          fromUrlString:(NSString *)urlString
                                                 header:(NSDictionary *_Nullable)header
@@ -346,72 +402,5 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
     if ( autoResume )[downloadTask resume];
     return downloadTask;
 }
-
-
-
-//- (NSURLSessionDataTask *)downloadTask:(NSString *)urlStr {
-//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-//    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-//
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlStr]];
-//
-//    NSString *range = [NSString stringWithFormat:@"bytes=%zd-", self.currentLength];
-//    [request setValue:range forHTTPHeaderField:@"Range"];
-//
-//    __weak typeof(self) weakSelf = self;
-//    NSURLSessionDataTask *_downloadTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-//        NSLog(@"dataTaskWithRequest");
-//
-//
-//        weakSelf.currentLength = 0;
-//        weakSelf.fileLength = 0;
-//
-//        [weakSelf.fileHandle closeFile];
-//        weakSelf.fileHandle = nil;
-//
-//    }];
-//
-//    [manager setDataTaskDidReceiveResponseBlock:^NSURLSessionResponseDisposition(NSURLSession * _Nonnull session, NSURLSessionDataTask * _Nonnull dataTask, NSURLResponse * _Nonnull response) {
-//        NSLog(@"NSURLSessionResponseDisposition");
-//
-//
-//        weakSelf.fileLength = response.expectedContentLength + self.currentLength;
-//
-//        NSString *path = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"QQ_V5.4.0.dmg"];
-//        NSLog(@"File downloaded to: %@",path);
-//
-//        NSFileManager *manager = [NSFileManager defaultManager];
-//        if (![manager fileExistsAtPath:path]) {
-//            [manager createFileAtPath:path contents:nil attributes:nil];
-//        }
-//        weakSelf.fileHandle = [NSFileHandle fileHandleForWritingAtPath:path];
-//        return NSURLSessionResponseAllow;
-//    }];
-//
-//    [manager setDataTaskDidReceiveDataBlock:^(NSURLSession * _Nonnull session, NSURLSessionDataTask * _Nonnull dataTask, NSData * _Nonnull data) {
-//        NSLog(@"setDataTaskDidReceiveDataBlock");
-//
-//        [weakSelf.fileHandle seekToEndOfFile];
-//        [weakSelf.fileHandle writeData:data];
-//        weakSelf.currentLength += data.length;
-//
-//        NSOperationQueue* mainQueue = [NSOperationQueue mainQueue];
-//        [mainQueue addOperationWithBlock:^{
-//
-//            if (weakSelf.fileLength == 0) {
-//                weakSelf.progressView.progress = 0.0;
-//                weakSelf.progressLabel.text = [NSString stringWithFormat:@"当前下载进度:00.00%%"];
-//            } else {
-//                weakSelf.progressView.progress =  1.0 * weakSelf.currentLength / weakSelf.fileLength;
-//                weakSelf.progressLabel.text = [NSString stringWithFormat:@"当前下载进度:%.2f%%",100.0 * weakSelf.currentLength / weakSelf.fileLength];
-//            }
-//
-//        }];
-//    }];
-//
-//    return _downloadTask;
-//}
-
-
 
 @end

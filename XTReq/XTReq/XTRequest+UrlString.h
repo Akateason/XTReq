@@ -24,4 +24,6 @@
 
 + (NSString *)getTrailUrlInGetReqModeWithDic:(NSDictionary *)dict;
 
++ (NSString *)getFilesMimeTypeFromPath:(NSString *)path;
+
 @end

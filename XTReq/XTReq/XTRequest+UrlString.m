@@ -59,4 +59,18 @@
     return result;
 }
 
++ (NSString *)getFilesMimeTypeFromPath:(NSString *)path {
+    if (![[[NSFileManager alloc] init] fileExistsAtPath:path]) {
+        return nil;
+    }
+    
+    CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)[path pathExtension], NULL);
+    CFStringRef MIMEType = UTTypeCopyPreferredTagWithClass (UTI, kUTTagClassMIMEType);
+    CFRelease(UTI);
+    if (!MIMEType) {
+        return @"application/octet-stream";
+    }
+    return (__bridge NSString *)(MIMEType);
+}
+
 @end
