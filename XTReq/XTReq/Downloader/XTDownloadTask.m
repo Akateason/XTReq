@@ -85,11 +85,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
                 self.manager = nil;
             }
             
-            self.blkCompletion(self, isComplete);
-            if (isComplete) {
-                self.blkDownloadPgs = nil ;
-                self.blkCompletion = nil ;
-            }
+            if (self.blkCompletion) self.blkCompletion(self, isComplete);
         }];
         
         [self.manager setDataTaskDidReceiveResponseBlock:^NSURLSessionResponseDisposition(NSURLSession * _Nonnull session, NSURLSessionDataTask * _Nonnull dataTask, NSURLResponse * _Nonnull response) {
