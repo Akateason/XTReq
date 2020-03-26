@@ -78,20 +78,23 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
             if (isComplete) {
                 // 清空长度
                 self.currentLength = 0;
+                self.curTmpLength = 0;
                 self.fileLength = 0;
                 // 关闭fileHandle
                 [self.fileHandle closeFile];
                 self.fileHandle = nil;
                 self.manager = nil;
+            } else {
+                self.downloadState = XTDownloadTaskStateFailed;
             }
-            
+                        
             if (self.blkCompletion) self.blkCompletion(self, isComplete);
         }];
         
         [self.manager setDataTaskDidReceiveResponseBlock:^NSURLSessionResponseDisposition(NSURLSession * _Nonnull session, NSURLSessionDataTask * _Nonnull dataTask, NSURLResponse * _Nonnull response) {
             @strongify(self)
             // 获得下载文件的总长度：请求下载的文件长度 + 当前已经下载的文件长度
-            self.fileLength = response.expectedContentLength + self.currentLength;
+            self.fileLength = response.expectedContentLength + self.currentLength + self.curTmpLength;
             // 创建一个空的文件到沙盒中
             NSFileManager *manager = [NSFileManager defaultManager];
             if (![manager fileExistsAtPath:resumePath]) {
@@ -108,13 +111,13 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
             // 指定数据的写入位置 -- 文件内容的最后面
             [self.fileHandle seekToEndOfFile];
             [self.fileHandle writeData:data];
-            self.currentLength += data.length;
-            if (self.currentLength == self.fileLength) {
+            self.curTmpLength += data.length;
+            if (self.curTmpLength + self.currentLength == self.fileLength) {
                 self.downloadState = XTDownloadTaskStateDownloaded;
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (self.blkDownloadPgs) self.blkDownloadPgs(self, (1.0 * self.currentLength / self.fileLength));
+                if (self.blkDownloadPgs) self.blkDownloadPgs(self, (1.0 * (self.currentLength + self.curTmpLength) / self.fileLength));
             });
         }];
     }
@@ -134,7 +137,8 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
 - (void)offlineResume {
     self.downloadState = XTDownloadTaskStateDownloading;
     NSInteger currentLength = [self fileLengthForPath:[self destinationPath]];
-    if (currentLength > 0) self.currentLength = currentLength;
+    self.currentLength = currentLength;
+    self.curTmpLength = 0;
     
     [self.sessionDownloadTask resume];
 }
@@ -142,6 +146,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
 - (void)offlinePause {
     self.downloadState = XTDownloadTaskStatePaused;
     [self.sessionDownloadTask suspend];
+//    self.sessionDownloadTask = nil;
 }
 
 
