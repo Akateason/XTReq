@@ -265,6 +265,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
     AFURLSessionManager *manager             = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     NSURL *URL                               = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request             = [NSMutableURLRequest requestWithURL:URL];
+    request.timeoutInterval = 3600;
     [request setHTTPMethod:@"POST"];
     if (header) {
         for (NSString *key in header) {
@@ -318,6 +319,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
         [formData appendPartWithFileURL:[NSURL fileURLWithPath:path] name:@"file" fileName:fileName mimeType:mimeType error:nil];
         
     } error:nil];
+    request.timeoutInterval = 3600;
     
     if (header) {
         for (NSString *key in header.allKeys) {
