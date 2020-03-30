@@ -50,6 +50,7 @@
     XTUploadTask *uTask = [XTUploadTask new];
     uTask.uploadState = XTUploadTaskStateWaiting;
     
+    uTask.sessionUploadTask =
     [XTRequest multipartFormDataUploadPath:path urlStr:urlStr header:header bodyDic:body progress:progressValueBlock success:^(NSURLResponse * _Nonnull response, id  _Nonnull responseObject) {
         
         uTask.uploadState = XTUploadTaskStateUploaded;
