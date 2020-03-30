@@ -57,7 +57,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
     if (!_sessionDownloadTask) {
         NSURL *url = self.downloadUrl;
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        request.timeoutInterval = 3600;
+        request.timeoutInterval = 60*3;
         NSString *resumePath = [self destinationPath];
         // 设置HTTP请求头中的Range
         NSString *range = [NSString stringWithFormat:@"bytes=%zd-", self.currentLength];
