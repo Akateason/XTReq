@@ -1,26 +1,49 @@
 PODS:
-  - AFNetworking (3.2.1):
-    - AFNetworking/NSURLSession (= 3.2.1)
-    - AFNetworking/Reachability (= 3.2.1)
-    - AFNetworking/Security (= 3.2.1)
-    - AFNetworking/Serialization (= 3.2.1)
-    - AFNetworking/UIKit (= 3.2.1)
-  - AFNetworking/NSURLSession (3.2.1):
+  - AFNetworking (4.0.0):
+    - AFNetworking/NSURLSession (= 4.0.0)
+    - AFNetworking/Reachability (= 4.0.0)
+    - AFNetworking/Security (= 4.0.0)
+    - AFNetworking/Serialization (= 4.0.0)
+    - AFNetworking/UIKit (= 4.0.0)
+  - AFNetworking/NSURLSession (4.0.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.2.1)
-  - AFNetworking/Security (3.2.1)
-  - AFNetworking/Serialization (3.2.1)
-  - AFNetworking/UIKit (3.2.1):
+  - AFNetworking/Reachability (4.0.0)
+  - AFNetworking/Security (4.0.0)
+  - AFNetworking/Serialization (4.0.0)
+  - AFNetworking/UIKit (4.0.0):
     - AFNetworking/NSURLSession
+  - CocoaLumberjack (3.6.1):
+    - CocoaLumberjack/Core (= 3.6.1)
+  - CocoaLumberjack/Core (3.6.1)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - Masonry (1.1.0)
+  - MJRefresh (3.3.1)
   - ReactiveObjC (3.1.1)
+  - SDWebImage (5.6.1):
+    - SDWebImage/Core (= 5.6.1)
+  - SDWebImage/Core (5.6.1)
+  - SSZipArchive (2.2.2)
   - SVProgressHUD (2.2.5)
-  - XTFMDB (2.0.1):
+  - UIFontWDCustomLoader (0.1.0)
+  - "UITableView+FDTemplateLayoutCell (1.6)"
+  - Valet (2.4.2)
+  - XTBase (1.5.0):
+    - CocoaLumberjack (= 3.6.1)
+    - Masonry
+    - MJRefresh
+    - ReactiveObjC
+    - SDWebImage
+    - SSZipArchive
+    - SVProgressHUD
+    - UIFontWDCustomLoader
+    - "UITableView+FDTemplateLayoutCell"
+    - Valet (= 2.4.2)
+    - YYModel
+  - XTFMDB (2.0.6):
     - FMDB
     - YYModel
   - YYModel (1.0.4)
@@ -30,28 +53,45 @@ DEPENDENCIES:
   - Masonry
   - ReactiveObjC
   - SVProgressHUD
+  - XTBase
   - XTFMDB
   - YYModel
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
+    - CocoaLumberjack
     - FMDB
     - Masonry
+    - MJRefresh
     - ReactiveObjC
+    - SDWebImage
+    - SSZipArchive
     - SVProgressHUD
+    - UIFontWDCustomLoader
+    - "UITableView+FDTemplateLayoutCell"
+    - Valet
+    - XTBase
     - XTFMDB
     - YYModel
 
 SPEC CHECKSUMS:
-  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  AFNetworking: d9fdf484a3c723ec3c558a41cc5754c7e845ee77
+  CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
+  SDWebImage: 7edb9c3ea661e77a66661f7f044de8c1b55d1120
+  SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  XTFMDB: 52ca734600b9f798c9e4109f528e24a69058cab6
+  UIFontWDCustomLoader: 233f0f83e543b8f24a6299d7fc773be9d704fe22
+  "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
+  Valet: 14463ef24fab8fd5809044ecedb61484b799fdd6
+  XTBase: a923c1bccae9415ea563f8260f154e1b329dafb0
+  XTFMDB: 0891f3355697ebbc3d75f373bcda34329f2d5d94
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 388afa6a14ddf3479248d09755637f13b5c7db9b
+PODFILE CHECKSUM: bb3080313cef396b98cc2b8a5af112afac115841
 
 COCOAPODS: 1.8.4

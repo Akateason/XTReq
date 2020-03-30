@@ -295,7 +295,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
             }
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         }];
-    [uploadTask resume];
+
     return uploadTask;
 }
 
@@ -352,7 +352,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
             }
         }
     }];
-    [uploadTask resume];
+    
     return uploadTask;
 }
 

@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
 
-typedef NS_ENUM(NSUInteger, XTDownloadTaskState) {
+typedef NS_ENUM(NSInteger, XTDownloadTaskState) {
     XTDownloadTaskStateFailed   = -1,
     XTDownloadTaskStateWaiting  = 0,
     XTDownloadTaskStateDownloading,
@@ -44,7 +44,7 @@ new
 /**
  state
  */
-@property(nonatomic)          XTDownloadTaskState downloadState;
+@property (nonatomic)         XTDownloadTaskState downloadState;
 @property (nonatomic, strong) NSURLSessionDataTask *sessionDownloadTask;
 @property (nonatomic, strong) AFURLSessionManager *manager;
 @property (nonatomic, assign) NSInteger fileLength;
