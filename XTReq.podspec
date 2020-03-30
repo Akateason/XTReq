@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "XTReq"
-  s.version      = "4.0.1"
+  s.version      = "4.0.2"
   s.summary      = "基于AFNetworking,代码最少,支持缓存的多种方案"
 
   # This description is used to generate tags and improve search results.
@@ -131,7 +131,7 @@ Pod::Spec.new do |s|
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   
-  s.dependency  "AFNetworking"
+  s.dependency  "AFNetworking","4.0.0"
   s.dependency  "XTFMDB","> 2.0.0"
   s.dependency  "YYModel"
   s.dependency  "SVProgressHUD"
