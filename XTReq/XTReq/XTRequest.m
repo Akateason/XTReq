@@ -173,54 +173,55 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:ACCEPTABLE_CONTENT_TYPES, nil];
         manager.requestSerializer.timeoutInterval         = timeout ?: [XTReqSessionManager shareInstance].timeout;
         manager.completionQueue                           = xt_getCompletionQueue();
-        if (header) {
-            for (NSString *key in header) {
-                [manager.requestSerializer setValue:header[key]
-                                 forHTTPHeaderField:key];
-            }
-        }
+                
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
         switch (mode) {
             case XTRequestMode_GET_MODE: {
                 [manager GET:url
-                    parameters:dict
+                  parameters:dict
+                     headers:header
                     progress:nil
-                    success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
+                     success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
                         XTREQLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@", url, header, dict, [responseObject yy_modelToJSONString]);
                         result = responseObject;
                         dispatch_semaphore_signal(semaphore);
-                    }
-                    failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
+                }
+                     failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
                         dispatch_semaphore_signal(semaphore);
-                    }];
+                }];
             } break;
             case XTRequestMode_POST_MODE: {
                 [manager POST:url
-                    parameters:dict
-                    progress:nil
-                    success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
+                   parameters:dict
+                      headers:header
+                     progress:nil
+                      success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
                         XTREQLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@ ", url, header, dict, [responseObject yy_modelToJSONString]);
                         result = responseObject;
                         dispatch_semaphore_signal(semaphore);
-                    }
-                    failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
+                }
+                      failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
                         dispatch_semaphore_signal(semaphore);
-                    }];
+                }];
             } break;
             case XTRequestMode_PUT_MODE: {
                 [manager PUT:url
-                    parameters:dict
-                    success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
+                  parameters:dict
+                     headers:header
+                     success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
                         XTREQLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@", url, header, dict, [responseObject yy_modelToJSONString]);
                         result = responseObject;
                         dispatch_semaphore_signal(semaphore);
-                    }
-                    failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
+                }
+                     failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
                         dispatch_semaphore_signal(semaphore);
-                    }];
+                }];
             } break;
             case XTRequestMode_DELETE_MODE: {
-                [manager DELETE:url parameters:dict success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
+                [manager DELETE:url
+                     parameters:dict
+                        headers:header
+                        success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
                     XTREQLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@", url, header, dict, [responseObject yy_modelToJSONString]);
                     result = responseObject;
                     dispatch_semaphore_signal(semaphore);
@@ -229,7 +230,10 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
                 }];
             } break;
             case XTRequestMode_PATCH_MODE: {
-                [manager PATCH:url parameters:dict success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
+                [manager PATCH:url
+                    parameters:dict
+                       headers:header
+                       success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
                     XTREQLog(@"url : %@ \n header : %@\n param : %@ \n resp \n %@", url, header, dict, [responseObject yy_modelToJSONString]);
                     result = responseObject;
                     dispatch_semaphore_signal(semaphore);

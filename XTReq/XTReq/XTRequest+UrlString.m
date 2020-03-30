@@ -7,7 +7,7 @@
 //
 
 #import "XTRequest+UrlString.h"
-
+#import <CoreServices/CoreServices.h>
 
 @implementation XTRequest (UrlString)
 

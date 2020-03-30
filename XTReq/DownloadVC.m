@@ -7,9 +7,9 @@
 //
 
 #import "DownloadVC.h"
-#import "XTDownloader.h"
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <Social/Social.h>
+#import "XTDownloadTask.h"
 
 @interface DownloadVC ()
 @property (nonatomic, strong) XTDownloadTask *task;
@@ -54,11 +54,11 @@
 }
 
 - (IBAction)pause:(id)sender {
-    [[XTDownloader sharedInstance] pauseTask:self.task];
+    [self.task offlinePause];
 }
 
 - (IBAction)resume:(id)sender {
-    [[XTDownloader sharedInstance] resumeTask:self.task];
+    [self.task offlineResume];
 }
 
 - (XTDownloadTask *)task {
