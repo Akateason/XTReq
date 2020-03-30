@@ -7,7 +7,11 @@
 //
 
 #import "XTRequest.h"
-
+#import <CoreServices/CoreServices.h>
+#import <CommonCrypto/CommonDigest.h>
+#import <CoreFoundation/CoreFoundation.h>
+#import <CoreServices/UTType.h>
+#import <CoreServices/UTCoreTypes.h>
 
 @interface XTRequest (UrlString)
 

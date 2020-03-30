@@ -11,12 +11,12 @@
 
 #import "XTReqConst.h"
 #import "XTRequest.h"
-#import "XTRequest+UrlString.h"
 #import "XTRequest+Reachability.h"
 #import "XTCacheRequest.h"
 #import "XTReqSessionManager.h"
 #import "XTRequest+RAC.h"
 #import "XTDownloadTask.h"
 #import "XTUploadTask.h"
+#import "XTRequest+UrlString.h"
 
 #endif /* XTReq_h */
