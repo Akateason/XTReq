@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "XTReq"
-  s.version      = "4.0.6"
+  s.version      = "4.0.7"
   s.summary      = "基于AFNetworking,代码最少,支持缓存的多种方案"
 
   # This description is used to generate tags and improve search results.
