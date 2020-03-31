@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, XTUploadTaskState) {
     XTUploadTaskStateUploaded,
 };
 
-NS_ASSUME_NONNULL_BEGIN
+
 
 @interface XTUploadTask : NSObject
 
@@ -46,4 +46,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
+

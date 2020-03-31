@@ -75,7 +75,21 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
                                                completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
             @strongify(self)
             NSLog(@"session completionHandler");
-            BOOL isComplete = self.downloadState == XTDownloadTaskStateDownloaded;
+            
+            BOOL isComplete;
+            if (error && error.code == -1005) { // 网络中断
+                isComplete = NO;
+            }
+            else {
+                int statusCode = [[response valueForKey:@"statusCode"] intValue];
+                if (statusCode == 404) {
+                    isComplete = NO;
+                } else {
+                    isComplete = self.downloadState == XTDownloadTaskStateDownloaded;
+                }
+            }
+            
+            
             if (isComplete) {
                 // 清空长度
                 self.currentLength = 0;
