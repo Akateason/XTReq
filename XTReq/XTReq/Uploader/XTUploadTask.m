@@ -19,6 +19,7 @@
                              failure:(void (^)(NSError *error))fail {
 
     XTUploadTask *uTask = [XTUploadTask new];
+    uTask.isMultipart = NO;
     uTask.uploadState = XTUploadTaskStateWaiting;
     
     uTask.sessionUploadTask =
@@ -49,6 +50,7 @@
     
     XTUploadTask *uTask = [XTUploadTask new];
     uTask.uploadState = XTUploadTaskStateWaiting;
+    uTask.isMultipart = YES;
     
     uTask.sessionUploadTask =
     [XTRequest multipartFormDataUploadPath:path urlStr:urlStr header:header bodyDic:body progress:progressValueBlock success:^(NSURLResponse * _Nonnull response, id  _Nonnull responseObject) {

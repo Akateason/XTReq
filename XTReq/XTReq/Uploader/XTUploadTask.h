@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic)  NSURLSessionUploadTask   *sessionUploadTask;
 @property (nonatomic)          XTUploadTaskState        uploadState;
-
+@property (nonatomic)          BOOL                     isMultipart;
 
 - (void)pause ;
 - (void)resume ;
