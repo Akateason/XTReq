@@ -20,7 +20,7 @@
 
     XTUploadTask *uTask = [XTUploadTask new];
     uTask.isMultipart = NO;
-    uTask.uploadState = XTUploadTaskStateWaiting;
+    uTask.state = XTReqTaskStateWaiting;
     
     uTask.sessionUploadTask =
     [XTRequest uploadFileWithData:fileData
@@ -33,12 +33,12 @@
         
     } success:^(NSURLResponse * _Nonnull response, id  _Nonnull responseObject) {
         
-        uTask.uploadState = XTUploadTaskStateUploaded;
+        uTask.state = XTReqTaskStateSuccessed;
         if (success) success(response, responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
         
-        uTask.uploadState = XTUploadTaskStateFailed;
+        uTask.state = XTReqTaskStateFailed;
         if (fail) fail(error);
         
     }];
@@ -57,7 +57,7 @@
                                       failure:(void (^)(NSError *error))fail {
     
     XTUploadTask *uTask = [XTUploadTask new];
-    uTask.uploadState = XTUploadTaskStateWaiting;
+    uTask.state = XTReqTaskStateWaiting;
     uTask.isMultipart = YES;
     
     uTask.sessionUploadTask =
@@ -73,12 +73,12 @@
     }
                                    success:^(NSURLResponse * _Nonnull response, id  _Nonnull responseObject) {
         
-        uTask.uploadState = XTUploadTaskStateUploaded;
+        uTask.state = XTReqTaskStateSuccessed;
         if (success) success(response, responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
         
-        uTask.uploadState = XTUploadTaskStateFailed;
+        uTask.state = XTReqTaskStateFailed;
         if (fail) fail(error);
         
     }];
@@ -90,12 +90,12 @@
 
 
 - (void)pause {
-    self.uploadState = XTUploadTaskStatePaused;
+    self.state = XTReqTaskStatePaused;
     [self.sessionUploadTask suspend];
 }
 
 - (void)resume {
-    self.uploadState = XTUploadTaskStateUploading;
+    self.state = XTReqTaskStateDoing;
     [self.sessionUploadTask resume];
 }
 

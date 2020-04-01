@@ -35,7 +35,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
     task.filename = fileName;
     task.fileType = [task.filename pathExtension];
     task.folderPath = targetPath;
-    task.downloadState = XTDownloadTaskStateWaiting;
+    task.state = XTReqTaskStateWaiting;
     return task;
 }
 
@@ -85,7 +85,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
                 if (statusCode == 404) {
                     isComplete = NO;
                 } else {
-                    isComplete = self.downloadState == XTDownloadTaskStateDownloaded;
+                    isComplete = self.state == XTReqTaskStateSuccessed;
                 }
             }
             
@@ -100,7 +100,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
                 self.fileHandle = nil;
                 self.manager = nil;
             } else {
-                self.downloadState = XTDownloadTaskStateFailed;
+                self.state = XTReqTaskStateFailed;
             }
                         
             if (self.blkCompletion) self.blkCompletion(self, isComplete);
@@ -128,7 +128,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
             [self.fileHandle writeData:data];
             self.curTmpLength += data.length;
             if (self.curTmpLength + self.currentLength == self.fileLength) {
-                self.downloadState = XTDownloadTaskStateDownloaded;
+                self.state = XTReqTaskStateSuccessed;
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -152,7 +152,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
 }
 
 - (void)offlineResume {
-    self.downloadState = XTDownloadTaskStateDownloading;
+    self.state = XTReqTaskStateDoing;
     NSInteger currentLength = [self fileLengthForPath:[self destinationPath]];
     self.currentLength = currentLength;
     self.curTmpLength = 0;
@@ -161,7 +161,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
 }
 
 - (void)offlinePause {
-    self.downloadState = XTDownloadTaskStatePaused;
+    self.state = XTReqTaskStatePaused;
     [self.sessionDownloadTask suspend];
 //    self.sessionDownloadTask = nil;
 }

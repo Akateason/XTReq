@@ -7,23 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef NS_ENUM(NSInteger, XTUploadTaskState) {
-    XTUploadTaskStateFailed   = -1,
-    XTUploadTaskStateWaiting  = 0,
-    XTUploadTaskStateUploading,
-    XTUploadTaskStatePaused,
-    XTUploadTaskStateUploaded,
-};
+#import "XTReqTask.h"
 
 
 
-@interface XTUploadTask : NSObject
+@interface XTUploadTask : XTReqTask
 
 + (XTUploadTask *)uploadFileWithData:(NSData *)fileData
                               urlStr:(NSString *)urlString
                               header:(NSDictionary *)header
-                            progress:(nullable void (^)(float progressVal))progressValueBlock
+                            progress:(void (^)(float progressVal))progressValueBlock
                              success:(void (^)(NSURLResponse *response, id responseObject))success
                              failure:(void (^)(NSError *error))fail ;
 
@@ -31,16 +24,15 @@ typedef NS_ENUM(NSInteger, XTUploadTaskState) {
                                        urlStr:(NSString *)urlStr
                                        header:(NSDictionary *)header
                                       bodyDic:(NSDictionary *)body
-                                     progress:(nullable void (^)(float progressVal))progressValueBlock
+                                     progress:(void (^)(float progressVal))progressValueBlock
                                       success:(void (^)(NSURLResponse *response, id responseObject))success
                                       failure:(void (^)(NSError *error))fail ;
 
 
 
 @property (strong, nonatomic)  NSURLSessionUploadTask   *sessionUploadTask;
-@property (nonatomic)          XTUploadTaskState        uploadState;
 @property (nonatomic)          BOOL                     isMultipart;
-@property (nonatomic)          float                    pgs;
+
 
 - (void)pause ;
 - (void)resume ;

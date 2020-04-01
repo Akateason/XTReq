@@ -9,16 +9,11 @@
 
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
+#import "XTReqTask.h"
 
-typedef NS_ENUM(NSInteger, XTDownloadTaskState) {
-    XTDownloadTaskStateFailed   = -1,
-    XTDownloadTaskStateWaiting  = 0,
-    XTDownloadTaskStateDownloading,
-    XTDownloadTaskStatePaused,
-    XTDownloadTaskStateDownloaded,
-};
 
-@interface XTDownloadTask : NSObject
+
+@interface XTDownloadTask : XTReqTask
 /**
 new
 */
@@ -44,13 +39,11 @@ new
 /**
  state
  */
-@property (nonatomic)         XTDownloadTaskState downloadState;
 @property (nonatomic, strong) NSURLSessionDataTask *sessionDownloadTask;
 @property (nonatomic, strong) AFURLSessionManager *manager;
 @property (nonatomic, assign) NSInteger fileLength;
 @property (nonatomic, assign) NSInteger currentLength;
 @property (nonatomic, assign) NSInteger curTmpLength;
-@property (nonatomic, assign) float pgs;
 @property (nonatomic, strong) NSFileHandle *fileHandle;
 @property (nonatomic, assign) CGFloat downloadSpeed; // TODO. speed
 
