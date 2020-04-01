@@ -21,9 +21,9 @@ typedef NS_ENUM(NSInteger, XTReqTaskState) {
 
 @interface XTReqTask : NSObject
 
-@property (nonatomic)  XTReqTaskState   state;
-@property (nonatomic)  float            pgs;
-@property (nonatomic)  NSNumber         *fileLengthNum;
+@property (nonatomic)         XTReqTaskState   state;
+@property (nonatomic)         float            pgs;
+@property (strong, nonatomic) id               userInfo;
 
 @end
 
