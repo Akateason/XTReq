@@ -40,6 +40,7 @@ typedef NS_ENUM(NSInteger, XTUploadTaskState) {
 @property (strong, nonatomic)  NSURLSessionUploadTask   *sessionUploadTask;
 @property (nonatomic)          XTUploadTaskState        uploadState;
 @property (nonatomic)          BOOL                     isMultipart;
+@property (nonatomic)          float                    pgs;
 
 - (void)pause ;
 - (void)resume ;

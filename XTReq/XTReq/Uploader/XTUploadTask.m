@@ -23,7 +23,15 @@
     uTask.uploadState = XTUploadTaskStateWaiting;
     
     uTask.sessionUploadTask =
-    [XTRequest uploadFileWithData:fileData urlStr:urlString header:header progress:progressValueBlock success:^(NSURLResponse * _Nonnull response, id  _Nonnull responseObject) {
+    [XTRequest uploadFileWithData:fileData
+                           urlStr:urlString
+                           header:header
+                         progress:^(float progressVal) {
+
+        uTask.pgs = progressVal;
+        if (progressValueBlock) progressValueBlock(progressVal);
+        
+    } success:^(NSURLResponse * _Nonnull response, id  _Nonnull responseObject) {
         
         uTask.uploadState = XTUploadTaskStateUploaded;
         if (success) success(response, responseObject);
@@ -53,7 +61,17 @@
     uTask.isMultipart = YES;
     
     uTask.sessionUploadTask =
-    [XTRequest multipartFormDataUploadPath:path urlStr:urlStr header:header bodyDic:body progress:progressValueBlock success:^(NSURLResponse * _Nonnull response, id  _Nonnull responseObject) {
+    [XTRequest multipartFormDataUploadPath:path
+                                    urlStr:urlStr
+                                    header:header
+                                   bodyDic:body
+                                  progress:^(float progressVal) {
+                                      
+        uTask.pgs = progressVal;
+        if (progressValueBlock) progressValueBlock(progressVal);
+        
+    }
+                                   success:^(NSURLResponse * _Nonnull response, id  _Nonnull responseObject) {
         
         uTask.uploadState = XTUploadTaskStateUploaded;
         if (success) success(response, responseObject);

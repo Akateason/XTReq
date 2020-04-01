@@ -132,7 +132,9 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (self.blkDownloadPgs) self.blkDownloadPgs(self, (1.0 * (self.currentLength + self.curTmpLength) / self.fileLength));
+                self.pgs = (1.0 * (self.currentLength + self.curTmpLength) / self.fileLength);
+                
+                if (self.blkDownloadPgs) self.blkDownloadPgs(self, self.pgs);
             });
         }];
     }
