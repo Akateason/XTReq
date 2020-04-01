@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "XTReq"
-  s.version      = "4.0.9"
+  s.version      = "4.1.0"
   s.summary      = "基于AFNetworking,代码最少,支持缓存的多种方案"
   s.description  = "Based on AFNetworing and sqlite encapsulation, simple APIs and persistent storage requests."
                   
