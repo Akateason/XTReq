@@ -21,11 +21,16 @@ typedef NS_ENUM(NSInteger, XTReqTaskState) {
 
 @interface XTReqTask : NSObject
 
+@property (copy, nonatomic)   NSString         *identifier; //PK
 @property (nonatomic)         XTReqTaskState   state;
 @property (nonatomic)         float            pgs;
 @property (strong, nonatomic) id               userInfo; // anyObject
-@property (strong, nonatomic) NSDictionary     *requestInfo;
 
+// Request Info
+@property (copy, nonatomic)   NSString         *strURL;
+@property (copy, nonatomic)   NSDictionary     *header;
+@property (copy, nonatomic)   NSDictionary     *param;
+@property (copy, nonatomic)   NSDictionary     *body;
 
 @end
 
