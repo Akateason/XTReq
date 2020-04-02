@@ -159,9 +159,9 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
     [self.sessionDownloadTask resume];
 }
 
-- (void)offlinePause {
+- (void)offlinePause { // 假暂停
     self.state = XTReqTaskStatePaused;
-    [self.sessionDownloadTask cancel]; // 假暂停
+    [self.sessionDownloadTask cancel];
     self.sessionDownloadTask = nil;
 }
 
