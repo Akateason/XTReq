@@ -8,6 +8,7 @@
 
 #import "XTUploadTask.h"
 #import "XTRequest.h"
+#import <YYModel/YYModel.h>
 
 @implementation XTUploadTask
 
@@ -21,8 +22,9 @@
     XTUploadTask *uTask = [XTUploadTask new];
     uTask.isMultipart = NO;
     uTask.state = XTReqTaskStateWaiting;
-    uTask.strURL = urlString;
     uTask.header = header;
+    uTask.strURL = urlString;
+        
     
     uTask.sessionUploadTask =
     [XTRequest uploadFileWithData:fileData
@@ -63,6 +65,7 @@
     uTask.isMultipart = YES;
     uTask.strURL = urlStr;
     uTask.header = header;
+    uTask.body = body;        
     
     uTask.sessionUploadTask =
     [XTRequest multipartFormDataUploadPath:path

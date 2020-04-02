@@ -31,8 +31,9 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
     
     if (!targetPath) targetPath = [self createDefaultPath];
     XTDownloadTask *task = [[XTDownloadTask alloc] init];
-    task.header = header;
     task.strURL = downloadUrl;
+    task.header = header;    
+    
     task.filename = fileName;
     task.fileType = [task.filename pathExtension];
     task.folderPath = targetPath;
@@ -166,7 +167,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
     self.sessionDownloadTask = nil;
 }
 
-#pragma mark - database
+#pragma mark - database 供外部做数据库持久化, 可不用.
 
 // props Sqlite Keywords
 + (NSDictionary *)modelPropertiesSqliteKeywords {

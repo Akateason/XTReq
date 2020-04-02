@@ -25,12 +25,18 @@ typedef NS_ENUM(NSInteger, XTReqTaskState) {
 @property (nonatomic)         XTReqTaskState   state;
 @property (nonatomic)         float            pgs;
 @property (strong, nonatomic) id               userInfo; // anyObject
+@property (nonatomic)         int              isCompleted; //bool
 
-// Request Info
-@property (copy, nonatomic)   NSString         *strURL;
-@property (copy, nonatomic)   NSDictionary     *header;
-@property (copy, nonatomic)   NSDictionary     *param;
-@property (copy, nonatomic)   NSDictionary     *body;
+@property (copy, nonatomic) NSString *strURL;
+
+@property (copy, nonatomic) NSDictionary *header;
+@property (copy, nonatomic) NSString *strHeader;
+
+@property (copy, nonatomic) NSDictionary *param;
+@property (copy, nonatomic) NSString *strParam;
+
+@property (copy, nonatomic) NSDictionary *body;
+@property (copy, nonatomic) NSString *strBody;
 
 @end
 
