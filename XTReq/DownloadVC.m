@@ -26,8 +26,8 @@
     [self.task observeDownloadProgress:^(XTDownloadTask *task, float progress) {
         @strongify(self)
         self.lb.text = [NSString stringWithFormat:@"下载中: %.2f%%", progress * 100];
-    } downloadCompletion:^(XTDownloadTask *task, BOOL isComplete) {
-        NSLog(@"%@", isComplete?@"成功":@"失败");
+    } downloadCompletion:^(XTDownloadTask *task, XTReqTaskState state) {
+        NSLog(@"%@", @(state)) ;
     }];
 }
 

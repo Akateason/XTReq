@@ -13,7 +13,7 @@
 
 
 typedef void(^BlkDownloadProgress)(XTDownloadTask *task, float pgs);
-typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
+typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState state);
 
 @interface XTDownloadTask ()
 @property (copy, nonatomic) BlkDownloadProgress         blkDownloadPgs;
@@ -109,7 +109,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
                 self.manager = nil;
             }
                         
-            if (self.blkCompletion) self.blkCompletion(self, isComplete);
+            if (self.blkCompletion) self.blkCompletion(self, self.state);
         }];
         
         [self.manager setDataTaskDidReceiveResponseBlock:^NSURLSessionResponseDisposition(NSURLSession * _Nonnull session, NSURLSessionDataTask * _Nonnull dataTask, NSURLResponse * _Nonnull response) {
@@ -151,7 +151,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
 #pragma mark - Func
 
 - (void)observeDownloadProgress:(void (^)(XTDownloadTask *task, float progress))progressBlock
-             downloadCompletion:(void (^)(XTDownloadTask *task, BOOL isComplete))completionBlock {
+             downloadCompletion:(void (^)(XTDownloadTask *task, XTReqTaskState state))completionBlock {
     
     if (progressBlock) self.blkDownloadPgs = progressBlock;
     if (completionBlock) self.blkCompletion = completionBlock;

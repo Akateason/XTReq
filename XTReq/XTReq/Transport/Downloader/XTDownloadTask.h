@@ -51,7 +51,7 @@ new
  observe progress and completion
 */
 - (void)observeDownloadProgress:(void (^)(XTDownloadTask *task, float progress))progressBlock
-             downloadCompletion:(void (^)(XTDownloadTask *task, BOOL isComplete))completionBlock;
+             downloadCompletion:(void (^)(XTDownloadTask *task, XTReqTaskState state))completionBlock;
 
 
 @end
