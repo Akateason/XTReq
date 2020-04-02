@@ -33,17 +33,12 @@ new
 @property (nonatomic, copy)   NSString   *filename;
 @property (nonatomic, copy)   NSString   *fileType;
 @property (nonatomic, copy)   NSString   *folderPath;
-
+@property (nonatomic, assign) NSInteger  finalLength; // 外部存取
 
 /**
  state
  */
 @property (nonatomic, strong) NSURLSessionDataTask *sessionDownloadTask;
-@property (nonatomic, strong) AFURLSessionManager *manager;
-@property (nonatomic, assign) NSInteger fileLength;
-@property (nonatomic, assign) NSInteger currentLength;
-@property (nonatomic, assign) NSInteger curTmpLength;
-@property (nonatomic, strong) NSFileHandle *fileHandle;
 @property (nonatomic, assign) CGFloat downloadSpeed; // TODO. speed
 
 /**

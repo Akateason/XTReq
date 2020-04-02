@@ -28,15 +28,10 @@ typedef NS_ENUM(NSInteger, XTReqTaskState) {
 @property (nonatomic)         int              isCompleted; //bool
 
 @property (copy, nonatomic) NSString *strURL;
-
 @property (copy, nonatomic) NSDictionary *header;
-@property (copy, nonatomic) NSString *strHeader;
-
 @property (copy, nonatomic) NSDictionary *param;
-@property (copy, nonatomic) NSString *strParam;
-
 @property (copy, nonatomic) NSDictionary *body;
-@property (copy, nonatomic) NSString *strBody;
+
 
 @end
 

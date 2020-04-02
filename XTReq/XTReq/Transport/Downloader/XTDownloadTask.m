@@ -18,6 +18,11 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
 @interface XTDownloadTask ()
 @property (copy, nonatomic) BlkDownloadProgress         blkDownloadPgs;
 @property (copy, nonatomic) BlkDownloadTaskComplete     blkCompletion;
+@property (nonatomic, strong) AFURLSessionManager *manager;
+@property (nonatomic, assign) NSInteger fileLength;
+@property (nonatomic, assign) NSInteger currentLength;
+@property (nonatomic, assign) NSInteger curTmpLength;
+@property (nonatomic, strong) NSFileHandle *fileHandle;
 @end
 
 @implementation XTDownloadTask
@@ -32,7 +37,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
     if (!targetPath) targetPath = [self createDefaultPath];
     XTDownloadTask *task = [[XTDownloadTask alloc] init];
     task.strURL = downloadUrl;
-    task.header = header;    
+    task.header = header;
     
     task.filename = fileName;
     task.fileType = [task.filename pathExtension];
@@ -183,12 +188,15 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
              @"state",
              @"sessionDownloadTask",
              @"manager",
-             @"fileLength",
              @"currentLength",
              @"curTmpLength",
+             @"fileLength",
              @"fileHandle",
              @"downloadSpeed",
+             @"blkCompletion",
+             @"blkDownloadPgs",
     ];
 }
+
 
 @end
