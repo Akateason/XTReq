@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+
 
 typedef NS_ENUM(NSInteger, XTReqTaskState) {
     XTReqTaskStateFailed   = -1,
@@ -39,4 +39,4 @@ typedef NS_ENUM(NSInteger, XTReqTaskState) {
 
 
 
-NS_ASSUME_NONNULL_END
+

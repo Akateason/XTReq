@@ -21,6 +21,8 @@
     XTUploadTask *uTask = [XTUploadTask new];
     uTask.isMultipart = NO;
     uTask.state = XTReqTaskStateWaiting;
+    uTask.strURL = urlString;
+    uTask.header = header;
     
     uTask.sessionUploadTask =
     [XTRequest uploadFileWithData:fileData
@@ -59,6 +61,8 @@
     XTUploadTask *uTask = [XTUploadTask new];
     uTask.state = XTReqTaskStateWaiting;
     uTask.isMultipart = YES;
+    uTask.strURL = urlStr;
+    uTask.header = header;
     
     uTask.sessionUploadTask =
     [XTRequest multipartFormDataUploadPath:path

@@ -16,14 +16,15 @@ typedef void(^BlkDownloadProgress)(XTDownloadTask *task, float pgs);
 typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
 
 @interface XTDownloadTask ()
-@property (copy, nonatomic) NSDictionary                *header;
 @property (copy, nonatomic) BlkDownloadProgress         blkDownloadPgs;
 @property (copy, nonatomic) BlkDownloadTaskComplete     blkCompletion;
 @end
 
 @implementation XTDownloadTask
 
-+ (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl                      
+#pragma mark - life
+
++ (XTDownloadTask *)downloadTask:(NSString *)downloadUrl
                           header:(NSDictionary *)header
                         fileName:(NSString *)fileName
                       targetPath:(NSString *)targetPath {
@@ -31,7 +32,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
     if (!targetPath) targetPath = [self createDefaultPath];
     XTDownloadTask *task = [[XTDownloadTask alloc] init];
     task.header = header;
-    task.downloadUrl = downloadUrl;
+    task.strURL = downloadUrl;
     task.filename = fileName;
     task.fileType = [task.filename pathExtension];
     task.folderPath = targetPath;
@@ -39,7 +40,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
     return task;
 }
 
-+ (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl
++ (XTDownloadTask *)downloadTask:(NSString *)downloadUrl
                           header:(NSDictionary *)header
                         fileName:(NSString *)fileName {
     return [self downloadTask:downloadUrl header:header fileName:fileName targetPath:nil];
@@ -55,7 +56,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
 
 - (NSURLSessionDataTask *)sessionDownloadTask {
     if (!_sessionDownloadTask) {
-        NSURL *url = self.downloadUrl;
+        NSURL *url = [NSURL URLWithString:self.strURL] ;
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         request.timeoutInterval = 60*3;
         NSString *resumePath = [self destinationPath];
@@ -141,7 +142,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
 }
 
 
-#pragma mark -
+#pragma mark - Func
 
 - (void)observeDownloadProgress:(void (^)(XTDownloadTask *task, float progress))progressBlock
              downloadCompletion:(void (^)(XTDownloadTask *task, BOOL isComplete))completionBlock {
@@ -165,5 +166,28 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
     self.sessionDownloadTask = nil;
 }
 
+#pragma mark - database
+
+// props Sqlite Keywords
++ (NSDictionary *)modelPropertiesSqliteKeywords {
+    return @{
+        @"identifier":@"UNIQUE",
+    };
+}
+
+// ignore Properties . these properties will not join db CURD .
++ (NSArray *)ignoreProperties {
+    return @[@"pgs",
+             @"userInfo",
+             @"state",
+             @"sessionDownloadTask",
+             @"manager",
+             @"fileLength",
+             @"currentLength",
+             @"curTmpLength",
+             @"fileHandle",
+             @"downloadSpeed",
+    ];
+}
 
 @end

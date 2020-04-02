@@ -17,11 +17,11 @@
 /**
 new
 */
-+ (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl
++ (XTDownloadTask *)downloadTask:(NSString *)downloadUrl
                           header:(NSDictionary *)header
                         fileName:(NSString *)fileName;
 
-+ (XTDownloadTask *)downloadTask:(NSURL *)downloadUrl
++ (XTDownloadTask *)downloadTask:(NSString *)downloadUrl
                           header:(NSDictionary *)header
                         fileName:(NSString *)fileName
                       targetPath:(NSString *)targetPath;
@@ -30,7 +30,6 @@ new
 /**
  info
  */
-@property (nonatomic, strong) NSURL      *downloadUrl;
 @property (nonatomic, copy)   NSString   *filename;
 @property (nonatomic, copy)   NSString   *fileType;
 @property (nonatomic, copy)   NSString   *folderPath;
