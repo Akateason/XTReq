@@ -23,8 +23,15 @@ typedef NS_ENUM(NSInteger, XTReqTaskState) {
 
 @property (nonatomic)         XTReqTaskState   state;
 @property (nonatomic)         float            pgs;
-@property (strong, nonatomic) id               userInfo;
+@property (strong, nonatomic) id               userInfo; // anyObject
+@property (strong, nonatomic) NSDictionary     *requestInfo;
+
 
 @end
+
+
+
+
+
 
 NS_ASSUME_NONNULL_END

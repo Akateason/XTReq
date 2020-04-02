@@ -74,22 +74,23 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
                                                 downloadProgress:nil
                                                completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
             @strongify(self)
-            NSLog(@"session completionHandler");
+            NSLog(@"download completionHandler");
             
             BOOL isComplete;
             if (error && error.code == -1005) { // 网络中断
                 isComplete = NO;
+                self.state = XTReqTaskStateFailed;
             }
             else {
                 int statusCode = [[response valueForKey:@"statusCode"] intValue];
-                if (statusCode == 404) {
+                if (statusCode > 400 && statusCode < 599) {
                     isComplete = NO;
+                    self.state = XTReqTaskStateFailed;
                 } else {
                     isComplete = self.state == XTReqTaskStateSuccessed;
                 }
             }
-            
-            
+                        
             if (isComplete) {
                 // 清空长度
                 self.currentLength = 0;
@@ -99,8 +100,6 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
                 [self.fileHandle closeFile];
                 self.fileHandle = nil;
                 self.manager = nil;
-            } else {
-                self.state = XTReqTaskStateFailed;
             }
                         
             if (self.blkCompletion) self.blkCompletion(self, isComplete);
@@ -162,8 +161,8 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, BOOL isComplete);
 
 - (void)offlinePause {
     self.state = XTReqTaskStatePaused;
-    [self.sessionDownloadTask suspend];
-//    self.sessionDownloadTask = nil;
+    [self.sessionDownloadTask cancel]; // 假暂停
+    self.sessionDownloadTask = nil;
 }
 
 

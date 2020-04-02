@@ -173,8 +173,8 @@
 				8F2BFFC9203FC2670013394D /* XTRequest+UrlString.m */,
 				8F785BC31ECBDB07005D5ECC /* XTReqSessionManager.h */,
 				8F785BC41ECBDB07005D5ECC /* XTReqSessionManager.m */,
-				8F19EC9F2434C0BB00AD65A3 /* Transport */,
 				8FACF8702421D8E200A9AD3B /* Cache */,
+				8F19EC9F2434C0BB00AD65A3 /* Transport */,
 			);
 			path = XTReq;
 			sourceTree = "<group>";
