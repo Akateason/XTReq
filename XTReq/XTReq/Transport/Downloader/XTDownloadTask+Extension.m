@@ -8,9 +8,6 @@
 
 #import "XTDownloadTask+Extension.h"
 
-
-
-
 @implementation XTDownloadTask (Extension)
 
 #pragma mark - Private Methods

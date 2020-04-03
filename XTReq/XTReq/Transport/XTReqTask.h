@@ -33,7 +33,6 @@ typedef NS_ENUM(NSInteger, XTReqTaskState) {
 @property (copy, nonatomic) NSDictionary *param;
 @property (copy, nonatomic) NSDictionary *body;
 
-
 @end
 
 
