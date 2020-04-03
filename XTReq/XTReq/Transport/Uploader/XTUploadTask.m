@@ -20,7 +20,7 @@
                              failure:(void (^)(NSError *error))fail {
 
     XTUploadTask *uTask = [XTUploadTask new];
-    uTask.isMultipart = NO;
+    uTask.isMultipartFormData = NO;
     uTask.state = XTReqTaskStateWaiting;
     uTask.header = header;
     uTask.strURL = urlString;
@@ -62,7 +62,7 @@
     
     XTUploadTask *uTask = [XTUploadTask new];
     uTask.state = XTReqTaskStateWaiting;
-    uTask.isMultipart = YES;
+    uTask.isMultipartFormData = YES;
     uTask.strURL = urlStr;
     uTask.header = header;
     uTask.body = body;        

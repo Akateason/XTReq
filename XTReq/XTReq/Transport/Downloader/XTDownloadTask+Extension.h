@@ -19,7 +19,7 @@
 
 + (NSString *)createDefaultPath ;
 
-+ (void)handleDownloadFolder:(NSString *)folder ;
++ (void)createDownloadFolderIfNotExist:(NSString *)folder ;
 
 - (NSInteger)fileLengthForPath:(NSString *)path ;
 

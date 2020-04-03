@@ -31,7 +31,7 @@
 
 
 @property (strong, nonatomic)  NSURLSessionUploadTask   *sessionUploadTask;
-@property (nonatomic)          BOOL                     isMultipart;
+@property (nonatomic)          BOOL                     isMultipartFormData;
 
 
 - (void)resume ;

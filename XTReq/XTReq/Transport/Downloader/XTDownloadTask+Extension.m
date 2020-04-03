@@ -19,11 +19,11 @@
 + (NSString *)createDefaultPath {
     NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString *downloadFolder = [documents stringByAppendingPathComponent:@"downloader"];
-    [self handleDownloadFolder:downloadFolder];
+    [self createDownloadFolderIfNotExist:downloadFolder];
     return downloadFolder;
 }
 
-+ (void)handleDownloadFolder:(NSString *)folder {
++ (void)createDownloadFolderIfNotExist:(NSString *)folder {
     BOOL isDir = NO;
     BOOL folderExist = [[NSFileManager defaultManager] fileExistsAtPath:folder isDirectory:&isDir];
     if (!folderExist || !isDir ) {
