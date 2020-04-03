@@ -11,6 +11,7 @@
 
 
 typedef NS_ENUM(NSInteger, XTReqTaskState) {
+    XTReqTaskStateCanceled = -2,
     XTReqTaskStateFailed   = -1,
     XTReqTaskStateWaiting  = 0,
     XTReqTaskStateDoing,

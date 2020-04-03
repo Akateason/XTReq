@@ -106,4 +106,9 @@
     [self.sessionUploadTask resume];
 }
 
+- (void)cancel {
+    self.state = XTReqTaskStateCanceled;
+    [self.sessionUploadTask cancel];
+}
+
 @end
