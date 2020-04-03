@@ -34,8 +34,8 @@
 @property (nonatomic)          BOOL                     isMultipart;
 
 
-- (void)pause ;
 - (void)resume ;
+- (void)pause ;
 - (void)cancel ;
 
 

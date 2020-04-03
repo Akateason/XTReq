@@ -47,7 +47,7 @@
         
     }];
     
-    [uTask resume];
+    
     
     return uTask;
 }
@@ -90,7 +90,7 @@
         
     }];
     
-    [uTask resume];
+    
     
     return uTask;
 }
