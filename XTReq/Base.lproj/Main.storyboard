@@ -76,7 +76,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E2g-fX-fQg">
                                 <rect key="frame" x="97.5" y="481" width="180" height="30"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="1Cu-44-Fbc"/>
                                     <constraint firstAttribute="width" constant="180" id="y4j-Al-IHm"/>
@@ -90,6 +89,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hzp-eW-yKR">
                                 <rect key="frame" x="47.5" y="535" width="280" height="30"/>
+                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="DoN-cQ-6xN"/>
                                     <constraint firstAttribute="width" constant="280" id="vxn-YA-z6O"/>
@@ -142,8 +142,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hh2-Ic-2d1">
-                                <rect key="frame" x="156" y="109" width="63" height="30"/>
-                                <state key="normal" title="taskStart"/>
+                                <rect key="frame" x="143" y="109" width="89" height="30"/>
+                                <state key="normal" title="see progress"/>
                                 <connections>
                                     <action selector="start:" destination="Aut-7K-caS" eventType="touchUpInside" id="R8I-F1-4c2"/>
                                 </connections>
@@ -162,8 +162,8 @@
                                     <action selector="resume:" destination="Aut-7K-caS" eventType="touchUpInside" id="Dk9-H3-OEz"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBq-uf-waz">
-                                <rect key="frame" x="136" y="343" width="103" height="53"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBq-uf-waz">
+                                <rect key="frame" x="136" y="342" width="103" height="53"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="44"/>
                                 <nil key="textColor"/>

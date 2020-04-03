@@ -17,6 +17,7 @@
 #import "XTRequest+RAC.h"
 #import "XTReqTask.h"
 #import "XTDownloadTask.h"
+#import "XTDownloadTask+Extension.h"
 #import "XTUploadTask.h"
 #import "XTRequest+UrlString.h"
 

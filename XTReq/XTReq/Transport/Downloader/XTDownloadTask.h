@@ -15,7 +15,24 @@
 
 @interface XTDownloadTask : XTReqTask
 /**
-new
+ info
+ */
+@property (nonatomic, copy)   NSString   *filename;
+@property (nonatomic, copy)   NSString   *fileType;
+@property (nonatomic, copy)   NSString   *folderPath;
+@property (nonatomic, assign) NSInteger  finalLength; // 外部存取
+@property (nonatomic, assign) CGFloat    downloadSpeed; // TODO:
+
+/**
+ task
+ */
+@property (nonatomic, strong) NSURLSessionDataTask *sessionDownloadTask;
+
+
+
+
+/**
+New a Download Task
 */
 + (XTDownloadTask *)downloadTask:(NSString *)downloadUrl
                           header:(NSDictionary *)header
@@ -26,34 +43,21 @@ new
                         fileName:(NSString *)fileName
                       targetPath:(NSString *)targetPath;
 
-
 /**
- info
- */
-@property (nonatomic, copy)   NSString   *filename;
-@property (nonatomic, copy)   NSString   *fileType;
-@property (nonatomic, copy)   NSString   *folderPath;
-@property (nonatomic, assign) NSInteger  finalLength; // 外部存取
-
-/**
- state
- */
-@property (nonatomic, strong) NSURLSessionDataTask *sessionDownloadTask;
-@property (nonatomic, assign) CGFloat downloadSpeed; // TODO. speed
-
-/**
- offline download (Resume From Break Points)
+ Offline download (Resume From Break Points)
 */
-- (void)offlineResume ;
-- (void)offlinePause ;
+- (void)offlineResume;
+- (void)offlinePause;
 
 /**
- observe progress and completion
+ Callback progress and completion
 */
 - (void)observeDownloadProgress:(void (^)(XTDownloadTask *task, float progress))progressBlock
-             downloadCompletion:(void (^)(XTDownloadTask *task, XTReqTaskState state))completionBlock;
+             downloadCompletion:(void (^)(XTDownloadTask *task, XTReqTaskState state, NSError *error))completionBlock;
 
 
+/// invalid
+- (void)invalidTask;
 @end
 
 
