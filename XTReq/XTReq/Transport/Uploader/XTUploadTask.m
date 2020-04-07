@@ -42,6 +42,10 @@
         
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
         
+        if (uTask.state == XTReqTaskStateCanceled) {
+            return ;
+        }
+        
         uTask.state = XTReqTaskStateFailed;
         if (fail) fail(error);
         
@@ -84,6 +88,10 @@
         if (success) success(response, responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
+        
+        if (uTask.state == XTReqTaskStateCanceled) {
+            return ;
+        }
         
         uTask.state = XTReqTaskStateFailed;
         if (fail) fail(error);
