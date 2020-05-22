@@ -12,7 +12,7 @@
 #import "NSDate+XTFMDB_Tick.h"
 #import "NSString+XTReq_Extend.h"
 #import "XTRequest+UrlString.h"
-
+#import "XTReqConst.h"
 
 @implementation XTCacheRequest
 
@@ -181,7 +181,7 @@
                                                  options:0
                                                    error:&error];
     if (!jsonObj) {
-        NSLog(@"xtreq json error : %@", error);
+        XTREQLog(@"xtreq json error : %@", error);
         return nil;
     }
     else

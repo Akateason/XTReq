@@ -9,6 +9,8 @@
 #import "XTUploadTask.h"
 #import "XTRequest.h"
 #import <YYModel/YYModel.h>
+#import "XTReqConst.h"
+#import <ReactiveObjC.h>
 
 @implementation XTUploadTask
 
@@ -25,34 +27,41 @@
     uTask.header = header;
     uTask.strURL = urlString;
         
-    
+    @weakify(uTask)
     uTask.sessionUploadTask =
     [XTRequest uploadFileWithData:fileData
                            urlStr:urlString
                            header:header
                          progress:^(float progressVal) {
 
+        @strongify(uTask)
         uTask.pgs = progressVal;
         if (progressValueBlock) progressValueBlock(progressVal);
-        
+        XTREQLog(@"upload PGS : %lf",progressVal);
+
     } success:^(NSURLResponse * _Nonnull response, id  _Nonnull responseObject) {
         
+        @strongify(uTask)
         uTask.state = XTReqTaskStateSuccessed;
-        if (success) success(response, responseObject);
+        if (success) {
+            success(response, responseObject);
+            XTREQLog(@"upload Success! : %@",uTask.identifier);
+        }
         
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
         
+        @strongify(uTask)
         if (uTask.state == XTReqTaskStateCanceled) {
             return ;
         }
         
         uTask.state = XTReqTaskStateFailed;
-        if (fail) fail(error);
-        
+        if (fail) {
+            fail(error);
+            XTREQLog(@"upload Fail! : %@\n%@",uTask.identifier,error);
+        }
     }];
-    
-    
-    
+            
     return uTask;
 }
 
@@ -71,35 +80,44 @@
     uTask.header = header;
     uTask.body = body;        
     
+    @weakify(uTask)
     uTask.sessionUploadTask =
     [XTRequest multipartFormDataUploadPath:path
                                     urlStr:urlStr
                                     header:header
                                    bodyDic:body
                                   progress:^(float progressVal) {
-                                      
+                               
+        @strongify(uTask)
         uTask.pgs = progressVal;
         if (progressValueBlock) progressValueBlock(progressVal);
-        
+        XTREQLog(@"upload PGS : %lf",progressVal);
+
     }
                                    success:^(NSURLResponse * _Nonnull response, id  _Nonnull responseObject) {
         
+        @strongify(uTask)
         uTask.state = XTReqTaskStateSuccessed;
-        if (success) success(response, responseObject);
-        
+        if (success) {
+            success(response, responseObject);
+            XTREQLog(@"upload Success! : %@",uTask.identifier);
+        }
+
     } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
         
+        @strongify(uTask)
         if (uTask.state == XTReqTaskStateCanceled) {
             return ;
         }
         
         uTask.state = XTReqTaskStateFailed;
-        if (fail) fail(error);
+        if (fail) {
+            fail(error);
+            XTREQLog(@"upload Fail! : %@\n%@",uTask.identifier,error);
+        }
         
     }];
-    
-    
-    
+            
     return uTask;
 }
 
@@ -107,16 +125,22 @@
 - (void)pause {
     self.state = XTReqTaskStatePaused;
     [self.sessionUploadTask suspend];
+    
+    XTREQLog(@"uploadTask: %@ PAUSE",self.identifier);
 }
 
 - (void)resume {
     self.state = XTReqTaskStateDoing;
     [self.sessionUploadTask resume];
+    
+    XTREQLog(@"uploadTask: %@ RESUME",self.identifier);
 }
 
 - (void)cancel {
     self.state = XTReqTaskStateCanceled;
     [self.sessionUploadTask cancel];
+    
+    XTREQLog(@"uploadTask: %@ CANCEL",self.identifier);
 }
 
 @end

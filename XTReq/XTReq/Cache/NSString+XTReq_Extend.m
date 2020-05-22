@@ -36,7 +36,7 @@ static NSString *const kSingleQuotes = @"&SingleQuotes&";
 - (NSString *)encodeTransferredMeaningForSingleQuotes {
     NSString *content = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     content           = [content stringByReplacingOccurrencesOfString:@"\'" withString:kSingleQuotes];
-    //    NSLog(@"content : %@",content) ;
+    //    XTREQLog(@"content : %@",content) ;
     return content;
 }
 

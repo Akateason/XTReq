@@ -383,7 +383,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
     }
 
     __block NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress *_Nonnull downloadProgress) {
-        XTREQLog(@"url: %@ \n下载进度：%.0f％", urlString, downloadProgress.fractionCompleted * 100);
+        XTREQLog(@"url: %@ \nDownload PGS：%.0f％", urlString, downloadProgress.fractionCompleted * 100);
         if (progress) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 progress(downloadProgress.fractionCompleted);

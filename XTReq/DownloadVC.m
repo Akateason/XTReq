@@ -12,6 +12,7 @@
 #import "XTDownloadTask.h"
 #import <XTBase/XTBase.h>
 #import "XTReq.h"
+#import "XTReqConst.h"
 
 @interface DownloadVC ()
 @property (nonatomic, strong) XTDownloadTask *task;
@@ -34,7 +35,7 @@
             b = NO;
         }
     } downloadCompletion:^(XTDownloadTask *task, XTReqTaskState state, NSError *error) {
-        NSLog(@"%@ , %@", @(state), error.localizedDescription) ;
+        XTREQLog(@"%@ , %@", @(state), error.localizedDescription) ;
         if (error) {
             USERDEFAULT_DELTE_VAL(@"len");
         }

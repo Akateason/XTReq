@@ -10,7 +10,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import <ReactiveObjC/ReactiveObjC.h>
 #import "XTDownloadTask+Extension.h"
-
+#import "XTReqConst.h"
 
 typedef void(^BlkDownloadProgress)(XTDownloadTask *task, float pgs);
 typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState state, NSError *error);
@@ -86,7 +86,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
                                                 downloadProgress:nil
                                                completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
             @strongify(self)
-            NSLog(@"🌞DownloadTask complete : %@ \n\n error.Desc : %@",response,error.localizedDescription);
+            XTREQLog(@"🌞DownloadTaskID %@ complete : %@ \n\n error.Desc : %@",self.identifier,response,error.localizedDescription);
             
             BOOL isComplete;
             if (error && error.code == -1005) { // 网络中断
@@ -167,7 +167,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
 
 - (void)offlineResume {
     if (self.state == XTReqTaskStateSuccessed) {
-        NSLog(@"已下载");
+        XTREQLog(@"id:%@ HAS ALREADY DOWNLOADED !",self.identifier);
         return;
     }
     
@@ -176,12 +176,16 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
     self.currentLength = currentLength;
     
     [self.sessionDownloadTask resume];
+    
+    XTREQLog(@"downloadTask: %@ RESUME",self.identifier);
 }
 
 - (void)offlinePause {
     self.state = XTReqTaskStatePaused;
     [_sessionDownloadTask suspend];
     _sessionDownloadTask = nil; // clear
+    
+    XTREQLog(@"downloadTask: %@ PAUSE",self.identifier);
 }
 
 - (void)invalidTask {
