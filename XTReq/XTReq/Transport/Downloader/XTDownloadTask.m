@@ -86,7 +86,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
                                                 downloadProgress:nil
                                                completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
             @strongify(self)
-            XTREQLog(@"🌞DownloadTaskID %@ complete : %@ \n\n error.Desc : %@",self.identifier,response,error.localizedDescription);
+            XTREQLog(@"🌞DownloadTaskID %@ complete : %@ \n\n error.Desc : %@",self.strURL,response,error.localizedDescription);
             
             BOOL isComplete;
             if (error && error.code == -1005) { // 网络中断
@@ -103,6 +103,12 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
                     _sessionDownloadTask = nil;
                 } else {
                     isComplete = self.state == XTReqTaskStateSuccessed;
+                    if (!isComplete) {
+                        isComplete = statusCode == 200 || statusCode == 206 ;
+                        if (isComplete && self.state != XTReqTaskStateSuccessed) self.state = XTReqTaskStateSuccessed;
+                    }
+                    
+                    
                 }
             }
                         
@@ -167,7 +173,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
 
 - (void)offlineResume {
     if (self.state == XTReqTaskStateSuccessed) {
-        XTREQLog(@"id:%@ HAS ALREADY DOWNLOADED !",self.identifier);
+        XTREQLog(@"id:%@ HAS ALREADY DOWNLOADED !",self.strURL);
         return;
     }
     
@@ -177,7 +183,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
     
     [self.sessionDownloadTask resume];
     
-    XTREQLog(@"downloadTask: %@ RESUME",self.identifier);
+    XTREQLog(@"downloadTask: %@ RESUME",self.strURL);
 }
 
 - (void)offlinePause {
@@ -185,7 +191,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
     [_sessionDownloadTask suspend];
     _sessionDownloadTask = nil; // clear
     
-    XTREQLog(@"downloadTask: %@ PAUSE",self.identifier);
+    XTREQLog(@"downloadTask: %@ PAUSE",self.strURL);
 }
 
 - (void)invalidTask {

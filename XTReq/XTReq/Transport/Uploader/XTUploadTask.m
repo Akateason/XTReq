@@ -126,21 +126,21 @@
     self.state = XTReqTaskStatePaused;
     [self.sessionUploadTask suspend];
     
-    XTREQLog(@"uploadTask: %@ PAUSE",self.identifier);
+    XTREQLog(@"uploadTask: %@ PAUSE",self.strURL);
 }
 
 - (void)resume {
     self.state = XTReqTaskStateDoing;
     [self.sessionUploadTask resume];
     
-    XTREQLog(@"uploadTask: %@ RESUME",self.identifier);
+    XTREQLog(@"uploadTask: %@ RESUME",self.strURL);
 }
 
 - (void)cancel {
     self.state = XTReqTaskStateCanceled;
     [self.sessionUploadTask cancel];
     
-    XTREQLog(@"uploadTask: %@ CANCEL",self.identifier);
+    XTREQLog(@"uploadTask: %@ CANCEL",self.strURL);
 }
 
 @end
