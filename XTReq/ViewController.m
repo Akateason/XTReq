@@ -153,6 +153,8 @@
 - (NSURLSessionDownloadTask *)task {
     if (!_task) {
         NSString *url = @"http://dldir1.qq.com/qqfile/QQforMac/QQ_V5.4.0.dmg";
+        
+//        NSString *url = @"https://uploader.shimo.im/f/aclPulKRX0k3rLxA.docx?download=1";
         NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         path = [path stringByAppendingString:@"/a.dmg"];
         

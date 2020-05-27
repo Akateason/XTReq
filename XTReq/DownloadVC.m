@@ -69,7 +69,9 @@
 
 - (XTDownloadTask *)task {
     if (!_task) {
-        _task = [XTDownloadTask downloadTask:@"http://dldir1.qq.com/qqfile/QQforMac/QQ_V5.4.0.dmg" header:nil fileName:@"QQ_V5.4.0.dmg"];
+        //        NSString *url = @"https://uploader.shimo.im/f/aclPulKRX0k3rLxA.docx?download=1";
+        _task = [XTDownloadTask downloadTask:@"http://ee-dev.shimowendang.com/uploader/proxy?url=http%3A%2F%2Fminio-service%3A9000%2Fshimo-assets%2Fs4zNhtgZILEzixNi%2F%25E6%2597%25A0%25E6%25A0%2587%25E9%25A2%2598.docx&download=1" header:nil fileName:@"2.doc"];
+//        _task = [XTDownloadTask downloadTask:@"http://dldir1.qq.com/qqfile/QQforMac/QQ_V5.4.0.dmg" header:nil fileName:@"QQ_V5.4.0.dmg"];
     }
     return _task;
 }

@@ -10,7 +10,7 @@
 #import "XTRequest.h"
 #import <YYModel/YYModel.h>
 #import "XTReqConst.h"
-#import <ReactiveObjC.h>
+#import <ReactiveObjC/ReactiveObjC.h>
 
 @implementation XTUploadTask
 
