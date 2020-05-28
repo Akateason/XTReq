@@ -18,7 +18,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
 @interface XTDownloadTask ()
 @property (copy, nonatomic)   BlkDownloadProgress       blkDownloadPgs;
 @property (copy, nonatomic)   BlkDownloadTaskComplete   blkCompletion;
-@property (nonatomic, strong) AFURLSessionManager       *manager;
+@property (nonatomic, strong) AFHTTPSessionManager      *manager;
 @property (nonatomic, assign) NSInteger                 currentLength;
 @property (nonatomic, assign) NSInteger                 fileLength;
 @property (nonatomic, strong) NSFileHandle              *fileHandle;
@@ -57,10 +57,12 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
 
 #pragma mark - getter
 
-- (AFURLSessionManager *)manager {
+- (AFHTTPSessionManager *)manager {
     if (!_manager) {
-        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        _manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        _manager                                           = [[AFHTTPSessionManager alloc] initWithBaseURL:nil];
+        _manager.requestSerializer                         = [AFHTTPRequestSerializer serializer];
+        _manager.responseSerializer                        = [AFHTTPResponseSerializer serializer];
+        _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/javascript", @"text/plain",@"application/vnd.openxmlformats-officedocument.wordprocessingml.document",@"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",@"image/jpeg",@"application/pdf", nil];
     }
     return _manager;
 }
