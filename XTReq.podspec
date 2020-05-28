@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "XTReq"
-  s.version      = "4.2.9"
+  s.version      = "4.2.10"
   s.summary      = "a iOS Request lib, based on AFNetworking ."
   s.description  = "Based on AFNetworing and sqlite encapsulation, simple APIs and persistent storage requests."
                   
