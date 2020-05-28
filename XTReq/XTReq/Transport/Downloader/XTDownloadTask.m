@@ -88,7 +88,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
                                                 downloadProgress:nil
                                                completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
             @strongify(self)
-            XTREQLog(@"🌞DownloadTaskID %@ complete : %@ \n\n error.Desc : %@",self.strURL,response,error.localizedDescription);
+            XTREQLog(@"🌞DownloadTaskID %@ complete : %@ \n\n error.Desc : %@\n\nerror: %@",self.strURL,response,error.localizedDescription, error);
             
             BOOL isComplete;
             if (error && error.code == -1005) { // 网络中断
