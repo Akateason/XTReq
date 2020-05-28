@@ -62,7 +62,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
         _manager                                           = [[AFHTTPSessionManager alloc] initWithBaseURL:nil];
         _manager.requestSerializer                         = [AFHTTPRequestSerializer serializer];
         _manager.responseSerializer                        = [AFHTTPResponseSerializer serializer];
-        _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/javascript", @"text/plain",@"application/vnd.openxmlformats-officedocument.wordprocessingml.document",@"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",@"image/jpeg",@"application/pdf", nil];
+        _manager.responseSerializer.acceptableContentTypes = nil; // let AFN accept all content-types .  https://stackoverflow.com/questions/28983213/afnetworking-accept-all-content-types
     }
     return _manager;
 }
