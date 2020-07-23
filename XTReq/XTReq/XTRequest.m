@@ -267,6 +267,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
 
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager             = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    manager.operationQueue.maxConcurrentOperationCount = 5;
     NSURL *URL                               = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request             = [NSMutableURLRequest requestWithURL:URL];
     request.timeoutInterval = 60;
@@ -334,7 +335,8 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
     }
     
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]] ;
-
+    manager.operationQueue.maxConcurrentOperationCount = 5;
+    
     __block NSURLSessionUploadTask *uploadTask =
     [manager uploadTaskWithStreamedRequest:request
                                   progress:^(NSProgress * _Nonnull uploadProgress) {

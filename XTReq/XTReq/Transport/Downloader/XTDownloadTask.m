@@ -63,6 +63,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
         _manager.requestSerializer                         = [AFHTTPRequestSerializer serializer];
         _manager.responseSerializer                        = [AFHTTPResponseSerializer serializer];
         _manager.responseSerializer.acceptableContentTypes = nil; // let AFN accept all content-types .  https://stackoverflow.com/questions/28983213/afnetworking-accept-all-content-types
+        _manager.operationQueue.maxConcurrentOperationCount = 5;
     }
     return _manager;
 }
