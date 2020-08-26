@@ -13,7 +13,9 @@ static XTDownloadSessionManager *_instance = nil;
 + (instancetype)shareInstance {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _instance = [[XTDownloadSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+        config.HTTPMaximumConnectionsPerHost = 5;
+        _instance = [[XTDownloadSessionManager alloc] initWithSessionConfiguration:config];
         _instance.operationQueue.maxConcurrentOperationCount = 5;
     });
     return _instance;

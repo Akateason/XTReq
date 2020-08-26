@@ -13,7 +13,9 @@ static XTUploadSessionManager *_instance = nil;
 + (instancetype)shareInstance {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _instance = [[XTUploadSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+        config.HTTPMaximumConnectionsPerHost = 5;
+        _instance = [[XTUploadSessionManager alloc] initWithSessionConfiguration:config];
         _instance.operationQueue.maxConcurrentOperationCount = 5;
     });
     return _instance;
