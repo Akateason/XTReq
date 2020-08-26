@@ -11,6 +11,8 @@
 		8F19ECA22434C0F100AD65A3 /* XTReqTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F19ECA12434C0F100AD65A3 /* XTReqTask.m */; };
 		8F2BFD7C203EA8040013394D /* NSString+XTReq_Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */; };
 		8F2BFFCA203FC2670013394D /* XTRequest+UrlString.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2BFFC9203FC2670013394D /* XTRequest+UrlString.m */; };
+		8F397DD624F650A8008221B9 /* XTUploadSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F397DD524F650A8008221B9 /* XTUploadSessionManager.m */; };
+		8F397DDC24F650E6008221B9 /* XTDownloadSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F397DDB24F650E6008221B9 /* XTDownloadSessionManager.m */; };
 		8F44616821464F2C00A6D322 /* XTRequest+Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F44616721464F2C00A6D322 /* XTRequest+Reachability.m */; };
 		8F785BA81ECBDAE3005D5ECC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BA71ECBDAE3005D5ECC /* main.m */; };
 		8F785BAB1ECBDAE3005D5ECC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BAA1ECBDAE3005D5ECC /* AppDelegate.m */; };
@@ -41,6 +43,10 @@
 		8F2BFD7B203EA8040013394D /* NSString+XTReq_Extend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+XTReq_Extend.m"; sourceTree = "<group>"; };
 		8F2BFFC8203FC2670013394D /* XTRequest+UrlString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XTRequest+UrlString.h"; sourceTree = "<group>"; };
 		8F2BFFC9203FC2670013394D /* XTRequest+UrlString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "XTRequest+UrlString.m"; sourceTree = "<group>"; };
+		8F397DD424F650A8008221B9 /* XTUploadSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XTUploadSessionManager.h; sourceTree = "<group>"; };
+		8F397DD524F650A8008221B9 /* XTUploadSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XTUploadSessionManager.m; sourceTree = "<group>"; };
+		8F397DDA24F650E6008221B9 /* XTDownloadSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XTDownloadSessionManager.h; sourceTree = "<group>"; };
+		8F397DDB24F650E6008221B9 /* XTDownloadSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XTDownloadSessionManager.m; sourceTree = "<group>"; };
 		8F44616621464F2C00A6D322 /* XTRequest+Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XTRequest+Reachability.h"; sourceTree = "<group>"; };
 		8F44616721464F2C00A6D322 /* XTRequest+Reachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "XTRequest+Reachability.m"; sourceTree = "<group>"; };
 		8F785BA31ECBDAE3005D5ECC /* XTReq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XTReq.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +179,10 @@
 				8F2BFFC9203FC2670013394D /* XTRequest+UrlString.m */,
 				8F785BC31ECBDB07005D5ECC /* XTReqSessionManager.h */,
 				8F785BC41ECBDB07005D5ECC /* XTReqSessionManager.m */,
+				8F397DD424F650A8008221B9 /* XTUploadSessionManager.h */,
+				8F397DD524F650A8008221B9 /* XTUploadSessionManager.m */,
+				8F397DDA24F650E6008221B9 /* XTDownloadSessionManager.h */,
+				8F397DDB24F650E6008221B9 /* XTDownloadSessionManager.m */,
 				8FACF8702421D8E200A9AD3B /* Cache */,
 				8F19EC9F2434C0BB00AD65A3 /* Transport */,
 			);
@@ -369,6 +379,7 @@
 				8F785BCD1ECBDB07005D5ECC /* XTResponseDBModel.m in Sources */,
 				8F785BC91ECBDB07005D5ECC /* XTCacheRequest.m in Sources */,
 				8F2BFD7C203EA8040013394D /* NSString+XTReq_Extend.m in Sources */,
+				8F397DD624F650A8008221B9 /* XTUploadSessionManager.m in Sources */,
 				8FFAFFCA2431AA320061F450 /* XTUploadTask.m in Sources */,
 				8F785BAE1ECBDAE3005D5ECC /* ViewController.m in Sources */,
 				8F785BAB1ECBDAE3005D5ECC /* AppDelegate.m in Sources */,
@@ -381,6 +392,7 @@
 				8F44616821464F2C00A6D322 /* XTRequest+Reachability.m in Sources */,
 				8F19ECA22434C0F100AD65A3 /* XTReqTask.m in Sources */,
 				8F785BCB1ECBDB07005D5ECC /* XTReqSessionManager.m in Sources */,
+				8F397DDC24F650E6008221B9 /* XTDownloadSessionManager.m in Sources */,
 				8F86B81C240F457D000108FC /* XTRequest+RAC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

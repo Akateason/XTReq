@@ -11,6 +11,8 @@
 #import "YYModel.h"
 #import "XTReqConst.h"
 #import "XTRequest+UrlString.h"
+#import "XTUploadSessionManager.h"
+#import "XTDownloadSessionManager.h"
 
 @implementation XTRequest
 
@@ -264,10 +266,9 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     });
-
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager             = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    manager.operationQueue.maxConcurrentOperationCount = 5;
+        
+    XTUploadSessionManager *manager = [XTUploadSessionManager shareInstance];
+    
     NSURL *URL                               = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request             = [NSMutableURLRequest requestWithURL:URL];
     request.timeoutInterval = 60;
@@ -334,8 +335,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
         }
     }
     
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]] ;
-    manager.operationQueue.maxConcurrentOperationCount = 5;
+    XTUploadSessionManager *manager = [XTUploadSessionManager shareInstance];
     
     __block NSURLSessionUploadTask *uploadTask =
     [manager uploadTaskWithStreamedRequest:request
@@ -373,8 +373,9 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     });
-
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    XTDownloadSessionManager *manager = [XTDownloadSessionManager shareInstance];
+    
     NSURL *url                   = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     if (header) {
