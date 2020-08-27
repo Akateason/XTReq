@@ -25,6 +25,7 @@
 		8F785BCC1ECBDB07005D5ECC /* XTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BC61ECBDB07005D5ECC /* XTRequest.m */; };
 		8F785BCD1ECBDB07005D5ECC /* XTResponseDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F785BC81ECBDB07005D5ECC /* XTResponseDBModel.m */; };
 		8F86B81C240F457D000108FC /* XTRequest+RAC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F86B81B240F457D000108FC /* XTRequest+RAC.m */; };
+		8F95E2CF24F6AF3E006808F8 /* XTUploadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F95E2CE24F6AF3E006808F8 /* XTUploadOperation.m */; };
 		8FC2EE35241F718900029B52 /* XTDownloadTask+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC2EE34241F718900029B52 /* XTDownloadTask+Extension.m */; };
 		8FC5F4B321806754009B4042 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8FC5F4B221806753009B4042 /* Podfile */; };
 		8FC8214F20E737660068AE5E /* XTReq.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 8FC8214E20E737660068AE5E /* XTReq.podspec */; };
@@ -70,6 +71,8 @@
 		8F785BC81ECBDB07005D5ECC /* XTResponseDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTResponseDBModel.m; sourceTree = "<group>"; };
 		8F86B81A240F457D000108FC /* XTRequest+RAC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XTRequest+RAC.h"; sourceTree = "<group>"; };
 		8F86B81B240F457D000108FC /* XTRequest+RAC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "XTRequest+RAC.m"; sourceTree = "<group>"; };
+		8F95E2CD24F6AF3E006808F8 /* XTUploadOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XTUploadOperation.h; sourceTree = "<group>"; };
+		8F95E2CE24F6AF3E006808F8 /* XTUploadOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XTUploadOperation.m; sourceTree = "<group>"; };
 		8FC2EE33241F718900029B52 /* XTDownloadTask+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XTDownloadTask+Extension.h"; sourceTree = "<group>"; };
 		8FC2EE34241F718900029B52 /* XTDownloadTask+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "XTDownloadTask+Extension.m"; sourceTree = "<group>"; };
 		8FC5F2CF21775B7E009B4042 /* XTReqConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XTReqConst.h; sourceTree = "<group>"; };
@@ -183,6 +186,8 @@
 				8F397DD524F650A8008221B9 /* XTUploadSessionManager.m */,
 				8F397DDA24F650E6008221B9 /* XTDownloadSessionManager.h */,
 				8F397DDB24F650E6008221B9 /* XTDownloadSessionManager.m */,
+				8F95E2CD24F6AF3E006808F8 /* XTUploadOperation.h */,
+				8F95E2CE24F6AF3E006808F8 /* XTUploadOperation.m */,
 				8FACF8702421D8E200A9AD3B /* Cache */,
 				8F19EC9F2434C0BB00AD65A3 /* Transport */,
 			);
@@ -379,6 +384,7 @@
 				8F785BCD1ECBDB07005D5ECC /* XTResponseDBModel.m in Sources */,
 				8F785BC91ECBDB07005D5ECC /* XTCacheRequest.m in Sources */,
 				8F2BFD7C203EA8040013394D /* NSString+XTReq_Extend.m in Sources */,
+				8F95E2CF24F6AF3E006808F8 /* XTUploadOperation.m in Sources */,
 				8F397DD624F650A8008221B9 /* XTUploadSessionManager.m in Sources */,
 				8FFAFFCA2431AA320061F450 /* XTUploadTask.m in Sources */,
 				8F785BAE1ECBDAE3005D5ECC /* ViewController.m in Sources */,

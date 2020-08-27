@@ -11,6 +11,8 @@
 #import <YYModel/YYModel.h>
 #import "XTReqConst.h"
 #import <ReactiveObjC/ReactiveObjC.h>
+#import "XTUploadSessionManager.h"
+#import "XTUploadOperation.h"
 
 @implementation XTUploadTask
 
@@ -61,7 +63,10 @@
             XTREQLog(@"upload Fail! : %@\n%@",uTask.identifier,error);
         }
     }];
-            
+    
+    XTUploadOperation *operation = [XTUploadOperation operationWithURLSessionTask:uTask.sessionUploadTask];
+    [[XTUploadSessionManager shareInstance].uploadQueue addOperation:operation];
+    
     return uTask;
 }
 
@@ -117,6 +122,9 @@
         }
         
     }];
+    
+    XTUploadOperation *operation = [XTUploadOperation operationWithURLSessionTask:uTask.sessionUploadTask];
+    [[XTUploadSessionManager shareInstance].uploadQueue addOperation:operation];
             
     return uTask;
 }

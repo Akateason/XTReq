@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                  urlStr:(NSString *)urlStr
                                                  header:(NSDictionary *_Nullable)header
                                                 bodyDic:(NSDictionary *_Nullable)body
-                                               progress:(nullable void (^_Nullable)(float progressVal))progressValueBlock
+                                               progress:(void (^_Nullable)(float progressVal))progressValueBlock
                                                 success:(void (^)(NSURLResponse *response, id responseObject))success
                                                 failure:(void (^_Nullable)(NSURLSessionDataTask *task, NSError *error))fail ;
     

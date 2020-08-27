@@ -266,7 +266,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     });
-        
+    
     XTUploadSessionManager *manager = [XTUploadSessionManager shareInstance];
     
     NSURL *URL                               = [NSURL URLWithString:urlString];
@@ -286,7 +286,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
             }
         }
     }
-
+    
     __block NSURLSessionUploadTask *uploadTask =
         [manager uploadTaskWithRequest:request fromData:fileData progress:^(NSProgress *_Nonnull uploadProgress) {
             if (progressValueBlock) progressValueBlock(uploadProgress.fractionCompleted);
@@ -310,7 +310,7 @@ static inline dispatch_queue_t xt_getCompletionQueue() { return dispatch_queue_c
                                                  urlStr:(NSString *)urlStr
                                                  header:(NSDictionary *)header
                                                 bodyDic:(NSDictionary *)body
-                                               progress:(nullable void (^)(float progressVal))progressValueBlock
+                                               progress:(void (^)(float progressVal))progressValueBlock
                                                 success:(void (^)(NSURLResponse *response, id responseObject))success
                                                 failure:(void (^)(NSURLSessionDataTask *task, NSError *error))fail {
     
