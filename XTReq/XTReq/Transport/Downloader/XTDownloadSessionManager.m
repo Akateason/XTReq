@@ -14,9 +14,11 @@ static XTDownloadSessionManager *_instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-        config.HTTPMaximumConnectionsPerHost = 5;
         _instance = [[XTDownloadSessionManager alloc] initWithSessionConfiguration:config];
-        _instance.operationQueue.maxConcurrentOperationCount = 5;
+        //_instance.operationQueue.maxConcurrentOperationCount = 5; // 已失效
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        queue.maxConcurrentOperationCount = 5;
+        _instance.downloadQueue = queue;
     });
     return _instance;
 }

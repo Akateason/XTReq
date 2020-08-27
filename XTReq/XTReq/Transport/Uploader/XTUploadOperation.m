@@ -12,7 +12,7 @@
     BOOL executing;  // 系统的 finished 是只读的，不能修改，所以只能重写一个。
     BOOL finished;
 }
-@property (nonatomic, strong) NSURLSessionTask* task;
+@property (nonatomic, strong) XTUploadTask      *task;
 @property (nonatomic, assign) BOOL              isObserving;
 @end
 
@@ -20,8 +20,8 @@
 
 #pragma mark - Observe Task
 
-+ (instancetype)operationWithURLSessionTask:(NSURLSessionTask*)task {
-    XTUploadOperation* operation = [XTUploadOperation new];
++ (instancetype)operationWithURLSessionTask:(XTUploadTask *)task {
+    XTUploadOperation *operation = [XTUploadOperation new];
     operation.task = task;
     return operation;
 }
@@ -53,7 +53,7 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-    if (self.task.state == NSURLSessionTaskStateCanceling || self.task.state == NSURLSessionTaskStateCompleted) {
+    if (self.task.state == XTReqTaskStateCanceled || self.task.state == XTReqTaskStateFailed || self.task.state == XTReqTaskStateSuccessed) {
         [self stopObservingTask];
         [self completeOperation];
     }

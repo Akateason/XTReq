@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XTDownloadSessionManager : AFURLSessionManager
 + (instancetype)shareInstance;
+
+@property (strong, nonatomic) NSOperationQueue *downloadQueue;
 @end
 
 NS_ASSUME_NONNULL_END

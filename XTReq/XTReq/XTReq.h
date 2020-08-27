@@ -20,8 +20,10 @@
 #import "XTDownloadTask+Extension.h"
 #import "XTUploadTask.h"
 #import "XTRequest+UrlString.h"
-//#import "XTUploadSessionManager.h"
-//#import "XTDownloadSessionManager.h"
-//#import "XTUploadOperation.h"
+#import "XTUploadSessionManager.h"
+#import "XTDownloadSessionManager.h"
+#import "XTUploadOperation.h"
+#import "XTDownloadOperation.h"
+
 
 #endif /* XTReq_h */

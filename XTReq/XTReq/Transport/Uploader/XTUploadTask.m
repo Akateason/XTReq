@@ -64,9 +64,6 @@
         }
     }];
     
-    XTUploadOperation *operation = [XTUploadOperation operationWithURLSessionTask:uTask.sessionUploadTask];
-    [[XTUploadSessionManager shareInstance].uploadQueue addOperation:operation];
-    
     return uTask;
 }
 
@@ -123,9 +120,6 @@
         
     }];
     
-    XTUploadOperation *operation = [XTUploadOperation operationWithURLSessionTask:uTask.sessionUploadTask];
-    [[XTUploadSessionManager shareInstance].uploadQueue addOperation:operation];
-            
     return uTask;
 }
 
@@ -140,7 +134,7 @@
 - (void)resume {
     self.state = XTReqTaskStateDoing;
     [self.sessionUploadTask resume];
-    
+            
     XTREQLog(@"uploadTask: %@ RESUME",self.strURL);
 }
 
