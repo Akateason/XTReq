@@ -92,7 +92,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
             XTREQLog(@"🌞DownloadTaskID %@ complete : %@ \n\n error.Desc : %@\n\nerror: %@",self.strURL,response,error.localizedDescription, error);
             
             BOOL isComplete;
-            if (error && error.code == -1005) { // 网络中断
+            if (error) { 
                 isComplete = NO;
                 self.state = XTReqTaskStateFailed;
             }
@@ -109,9 +109,7 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
                     if (!isComplete) {
                         isComplete = statusCode == 200 || statusCode == 206 ;
                         if (isComplete && self.state != XTReqTaskStateSuccessed) self.state = XTReqTaskStateSuccessed;
-                    }
-                    
-                    
+                    }                                        
                 }
             }
                         
