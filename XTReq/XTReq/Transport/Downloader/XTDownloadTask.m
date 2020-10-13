@@ -118,7 +118,9 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
                 self.currentLength = 0;
                 self.fileLength = 0;
                 // close FileHandle
-                [self.fileHandle closeFile];
+                if (self.fileHandle != nil) {
+                    [self.fileHandle closeFile];
+                }
                 self.fileHandle = nil;
                 self.manager = nil;
             }
@@ -144,6 +146,14 @@ typedef void(^BlkDownloadTaskComplete)(XTDownloadTask *task, XTReqTaskState stat
         [self.manager setDataTaskDidReceiveDataBlock:^(NSURLSession * _Nonnull session, NSURLSessionDataTask * _Nonnull dataTask, NSData * _Nonnull data) {
             @strongify(self)
             // 指定数据的写入位置 -- 文件内容的最后面
+            if (!self.fileHandle) {
+                self.state = XTReqTaskStateFailed;
+                return;
+            }
+            
+            // Fatal Exception: NSFileHandleOperationException
+            //*** -[NSConcreteFileHandle seekToEndOfFile]: Resource temporarily unavailable
+            // __37-[XTDownloadTask sessionDownloadTask]_block_invoke.125
             [self.fileHandle seekToEndOfFile];
             [self.fileHandle writeData:data];
             
